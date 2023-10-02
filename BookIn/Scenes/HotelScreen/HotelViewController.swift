@@ -2,10 +2,20 @@ import UIKit
 
 class HotelViewController: UIViewController {
     
+    // MARK: - Classes:
+    private let hotelCollectionViewProvider = HotelCollectionViewProvider()
+    
     // MARK: - Constants and Variables:
     private let priceLabelsInset: CGFloat = 3
     
     // MARK: - UI:
+    private lazy var mainScreenScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
     private lazy var mainHotelInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -16,7 +26,7 @@ class HotelViewController: UIViewController {
     }()
     
     private lazy var hotelNameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 0
         label.font = .largeTitleFont
         label.textColor = .universalBlackPrimary
@@ -33,7 +43,7 @@ class HotelViewController: UIViewController {
     }()
     
     private lazy var priceLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .extraLargeBodyFont
         label.textColor = .universalBlackPrimary
         
@@ -41,15 +51,33 @@ class HotelViewController: UIViewController {
     }()
     
     private lazy var priceDescriptionLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .mediumBodyFont
         label.textColor = .universalGray
         label.textAlignment = .left
+        
         return label
     }()
     
+    private lazy var hotelDescriptionCollectionView: UICollectionView = {
+        let layout = CustomSelfSizeCollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        
+        return collectionView
+    }()
+    
+    private lazy var hotelTableView: UITableView = {
+        let tableView = UITableView()
+        
+        return tableView
+    }()
+    
     private lazy var customNavigationBar = CustomNavigationBar(title: L10n.HotelScreen.title, isBackButton: false)
-    private lazy var hotelBackgroundView = CustomBackgroundView(isRounded: false)
+    private lazy var hotelBackgroundView = CustomBackgroundView(isRounded: true)
+    private lazy var hotelDescriptionBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var customPresenterScrollView = CustomPresenterScrollView()
     private lazy var customHotelRateView = CustomHotelRateView()
     
@@ -58,6 +86,7 @@ class HotelViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupCollectionView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,6 +102,21 @@ class HotelViewController: UIViewController {
         priceLabel.text = "от 134 268 ₽"
         priceDescriptionLabel.text = "За тур с перелётом"
     }
+    
+    // MARK: - Private Methods:
+    private func setupCollectionView() {
+        hotelDescriptionCollectionView.register(HotelCollectionViewCell.self,
+                                                forCellWithReuseIdentifier: Resources.Identifiers.hotelCollectionViewCell)
+        hotelDescriptionCollectionView.register(HotelCollectionViewReusableView.self,
+                                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                                withReuseIdentifier: Resources.Identifiers.hotelCollectionViewHeader)
+        hotelDescriptionCollectionView.register(HotelCollectionViewReusableView.self,
+                                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                                withReuseIdentifier: Resources.Identifiers.hotelCollectionViewFooter)
+        
+        hotelDescriptionCollectionView.dataSource = hotelCollectionViewProvider
+        hotelDescriptionCollectionView.delegate = hotelCollectionViewProvider
+    }
 }
 
 // MARK: - Setup Views:
@@ -80,24 +124,37 @@ private extension HotelViewController {
     func setupViews() {
         view.backgroundColor = .universalGray
         
+        [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(mainHotelInfoStackView.addArrangedSubview)
-        [customNavigationBar, hotelBackgroundView, customPresenterScrollView,
-         mainHotelInfoStackView, priceLabel, priceDescriptionLabel].forEach(view.setupView)
+        [hotelBackgroundView, customPresenterScrollView,mainHotelInfoStackView, priceLabel,
+         priceDescriptionLabel,hotelDescriptionBackgroundView, hotelDescriptionCollectionView].forEach(mainScreenScrollView.setupView)
         
         customNavigationBar.setupNavigationBar()
     }
     
     func setupConstraints() {
+        setupMainScreenScrollView()
         setupHotelBackgroundViewConstraints()
         setupPhotosPresenterConstraints()
         setupMainHotelStackViewConstraints()
         setupPriceLabelConstraints()
         setupPriceDescriptionLabelConstraints()
+        setupHotelDescriptionViewConstraints()
+        setupHotelCollectionViewConstraints()
+    }
+    
+    func setupMainScreenScrollView() {
+        NSLayoutConstraint.activate([
+            mainScreenScrollView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor),
+            mainScreenScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainScreenScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mainScreenScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     func setupHotelBackgroundViewConstraints() {
         NSLayoutConstraint.activate([
-            hotelBackgroundView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor),
+            hotelBackgroundView.topAnchor.constraint(equalTo: mainScreenScrollView.topAnchor, constant: -UIConstants.sideInset),
             hotelBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hotelBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hotelBackgroundView.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: UIConstants.sideInset)
@@ -107,7 +164,7 @@ private extension HotelViewController {
     func setupPhotosPresenterConstraints() {
         NSLayoutConstraint.activate([
             customPresenterScrollView.heightAnchor.constraint(equalToConstant: UIConstants.viewHeight),
-            customPresenterScrollView.topAnchor.constraint(equalTo: hotelBackgroundView.topAnchor),
+            customPresenterScrollView.topAnchor.constraint(equalTo: hotelBackgroundView.topAnchor, constant: UIConstants.sideInset),
             customPresenterScrollView.leadingAnchor.constraint(equalTo: hotelBackgroundView.leadingAnchor),
             customPresenterScrollView.trailingAnchor.constraint(equalTo: hotelBackgroundView.trailingAnchor)
         ])
@@ -131,6 +188,25 @@ private extension HotelViewController {
             priceDescriptionLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: UIConstants.mediumInset),
             priceDescriptionLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: -priceLabelsInset),
             priceDescriptionLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -UIConstants.sideInset)
+        ])
+    }
+    
+    func setupHotelDescriptionViewConstraints() {
+        NSLayoutConstraint.activate([
+            hotelDescriptionBackgroundView.topAnchor.constraint(equalTo: hotelBackgroundView.bottomAnchor, constant: UIConstants.mediumInset),
+            hotelDescriptionBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hotelDescriptionBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hotelDescriptionBackgroundView.bottomAnchor.constraint(equalTo: hotelDescriptionCollectionView.bottomAnchor)
+        ])
+    }
+    
+    func setupHotelCollectionViewConstraints() {
+        NSLayoutConstraint.activate([
+            hotelDescriptionCollectionView.heightAnchor.constraint(equalToConstant: 300),
+            hotelDescriptionCollectionView.topAnchor.constraint(equalTo: hotelDescriptionBackgroundView.topAnchor, constant: UIConstants.sideInset),
+            hotelDescriptionCollectionView.leadingAnchor.constraint(equalTo: hotelDescriptionBackgroundView.leadingAnchor),
+            hotelDescriptionCollectionView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor, constant: UIConstants.sideInset),
+            hotelDescriptionCollectionView.trailingAnchor.constraint(equalTo: hotelDescriptionBackgroundView.trailingAnchor)
         ])
     }
 }

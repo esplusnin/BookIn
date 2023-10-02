@@ -6,6 +6,7 @@ final class CustomHotelRateView: UIView {
     private enum LocalUIConstants {
         static let smallInset: CGFloat = 2
         static let imageSide: CGFloat = 15
+        static let viewHeight: CGFloat = 29
     }
     
     // MARK: - UI:
@@ -47,7 +48,7 @@ private extension CustomHotelRateView {
     }
     
     func setupConstraints() {
-        heightAnchor.constraint(equalToConstant: 29).isActive = true
+        heightAnchor.constraint(equalToConstant: LocalUIConstants.viewHeight).isActive = true
         
         setupRatingImageViewConstraints()
         setupRatingLabelConstraints()
