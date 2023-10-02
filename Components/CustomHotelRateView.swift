@@ -47,6 +47,8 @@ private extension CustomHotelRateView {
     }
     
     func setupConstraints() {
+        heightAnchor.constraint(equalToConstant: 29).isActive = true
+        
         setupRatingImageViewConstraints()
         setupRatingLabelConstraints()
     }
@@ -55,7 +57,7 @@ private extension CustomHotelRateView {
         NSLayoutConstraint.activate([
             ratingImageView.heightAnchor.constraint(equalToConstant: LocalUIConstants.imageSide),
             ratingImageView.widthAnchor.constraint(equalToConstant: LocalUIConstants.imageSide),
-            ratingImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.mediumInset),
+            ratingImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.largeInset),
             ratingImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
@@ -64,7 +66,7 @@ private extension CustomHotelRateView {
         NSLayoutConstraint.activate([
             ratingLabel.centerYAnchor.constraint(equalTo: ratingImageView.centerYAnchor),
             ratingLabel.leadingAnchor.constraint(equalTo: ratingImageView.trailingAnchor, constant: LocalUIConstants.smallInset),
-            ratingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.mediumInset)
+            ratingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.largeInset)
         ])
     }
 }

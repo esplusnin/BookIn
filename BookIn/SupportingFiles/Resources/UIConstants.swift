@@ -3,7 +3,8 @@ import Foundation
 enum UIConstants {
     static let sideInset: CGFloat = 16
     static let smallInset: CGFloat = 5
-    static let mediumInset: CGFloat = 10
+    static let mediumInset: CGFloat = 8
+    static let largeInset: CGFloat = 10
     static let viewHeight: CGFloat = 257
 
     static let largeCornerRadius: CGFloat = 15

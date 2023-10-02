@@ -45,7 +45,7 @@ final class CustomPresenterScrollView: UIScrollView {
         guard let url = URL(string: urlString) else { return }
         let processor = RoundCornerImageProcessor(cornerRadius: UIConstants.largeCornerRadius)
         
-        imageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
+        imageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1)), .cacheOriginalImage])
         
         imageView.layer.cornerRadius = UIConstants.largeCornerRadius
         imageView.layer.masksToBounds = true
