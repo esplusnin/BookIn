@@ -22,6 +22,8 @@
 		7E0980142AC2D8D4002CC40A /* CustomPresenterScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */; };
 		7E0980162AC2DA49002CC40A /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0980152AC2DA49002CC40A /* UIConstants.swift */; };
 		7E0980192AC2DDD2002CC40A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E0980182AC2DDD2002CC40A /* Kingfisher */; };
+		7E2CF7482ACA9B1D008F3BA0 /* CustomHotelRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */; };
+		7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		7E09800F2AC2D442002CC40A /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresenterScrollView.swift; sourceTree = "<group>"; };
 		7E0980152AC2DA49002CC40A /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHotelRateView.swift; sourceTree = "<group>"; };
+		7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 			children = (
 				7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */,
 				7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */,
+				7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */,
+				7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -277,7 +283,9 @@
 			files = (
 				7E097FE82AC2C2D1002CC40A /* HotelViewController.swift in Sources */,
 				7E097FFB2AC2C7F7002CC40A /* UIColors + Extension.swift in Sources */,
+				7E2CF7482ACA9B1D008F3BA0 /* CustomHotelRateView.swift in Sources */,
 				7E0980072AC2CB4F002CC40A /* Strings+Generated.swift in Sources */,
+				7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */,
 				7E09800B2AC2CDD5002CC40A /* UIFonts + Extension.swift in Sources */,
 				7E0980142AC2D8D4002CC40A /* CustomPresenterScrollView.swift in Sources */,
 				7E09800D2AC2D1B5002CC40A /* CustomNavigationBar.swift in Sources */,

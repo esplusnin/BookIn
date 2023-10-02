@@ -4,8 +4,10 @@ class HotelViewController: UIViewController {
     
     // MARK: - UI:
     private lazy var customNavigationBar = CustomNavigationBar(title: L10n.HotelScreen.title, isBackButton: false)
+    private lazy var hotelBackgroundView = CustomBackgroundView(isRounded: false)
     private lazy var customPresenterScrollView = CustomPresenterScrollView()
-
+    private lazy var customHotelRateView = CustomHotelRateView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -18,6 +20,8 @@ class HotelViewController: UIViewController {
             "https://deluxe.voyage/useruploads/articles/The_Makadi_Spa_Hotel_02.jpg",
             "https://deluxe.voyage/useruploads/articles/article_1eb0a64d00.jpg"
         ])
+        
+        customHotelRateView.setupRatingInfo(with: 5, description: "Превосходно")
     }
 }
 
@@ -26,21 +30,30 @@ private extension HotelViewController {
     func setupViews() {
         view.backgroundColor = .universalGray
         
-        [customNavigationBar, customPresenterScrollView].forEach(view.setupView)
+        [customNavigationBar, hotelBackgroundView, customPresenterScrollView].forEach(view.setupView)
         
         customNavigationBar.setupNavigationBar()
     }
     
     func setupConstraints() {
+        setupHotelBackgroundViewConstraints()
         setupPhotosPresenterConstraints()
+    }
+    
+    func setupHotelBackgroundViewConstraints() {
+        NSLayoutConstraint.activate([
+            hotelBackgroundView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor),
+            hotelBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hotelBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     func setupPhotosPresenterConstraints() {
         NSLayoutConstraint.activate([
             customPresenterScrollView.heightAnchor.constraint(equalToConstant: UIConstants.viewHeight),
-            customPresenterScrollView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor),
-            customPresenterScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            customPresenterScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            customPresenterScrollView.topAnchor.constraint(equalTo: hotelBackgroundView.topAnchor),
+            customPresenterScrollView.leadingAnchor.constraint(equalTo: hotelBackgroundView.leadingAnchor),
+            customPresenterScrollView.trailingAnchor.constraint(equalTo: hotelBackgroundView.trailingAnchor)
         ])
     }
 }

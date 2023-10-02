@@ -3,7 +3,7 @@ import UIKit
 final class CustomNavigationBar: UIView {
     
     // MARK: - Constants and Variables:
-    private enum NavigationUIConstants {
+    private enum LocalUIConstants {
         static let barsHeight: CGFloat = 57
         static let navigationBarBackButtonSide: CGFloat = 32
         static let navigationBarBackButtonLeftInset: CGFloat = 10
@@ -47,7 +47,7 @@ final class CustomNavigationBar: UIView {
         NSLayoutConstraint.activate([
             topAnchor.constraint(equalTo: superview.topAnchor),
             leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: NavigationUIConstants.barsHeight),
+            bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: LocalUIConstants.barsHeight),
             trailingAnchor.constraint(equalTo: superview.trailingAnchor)
         ])
         
@@ -73,16 +73,16 @@ private extension CustomNavigationBar {
     
     func setupBackButtonConstraints(with view: UIView) {
         NSLayoutConstraint.activate([
-            backButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: NavigationUIConstants.barsHeight / 2),
-            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: NavigationUIConstants.navigationBarBackButtonLeftInset),
-            backButton.heightAnchor.constraint(equalToConstant: NavigationUIConstants.navigationBarBackButtonSide),
-            backButton.widthAnchor.constraint(equalToConstant: NavigationUIConstants.navigationBarBackButtonSide)
+            backButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LocalUIConstants.barsHeight / 2),
+            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: LocalUIConstants.navigationBarBackButtonLeftInset),
+            backButton.heightAnchor.constraint(equalToConstant: LocalUIConstants.navigationBarBackButtonSide),
+            backButton.widthAnchor.constraint(equalToConstant: LocalUIConstants.navigationBarBackButtonSide)
         ])
     }
     
     func setupTitleLabelConstraints(isButtonHidden: Bool, with view: UIView) {
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: NavigationUIConstants.barsHeight / 2),
+            titleLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LocalUIConstants.barsHeight / 2),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
