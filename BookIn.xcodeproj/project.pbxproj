@@ -19,7 +19,7 @@
 		7E09800B2AC2CDD5002CC40A /* UIFonts + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E09800A2AC2CDD5002CC40A /* UIFonts + Extension.swift */; };
 		7E09800D2AC2D1B5002CC40A /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */; };
 		7E0980102AC2D442002CC40A /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E09800F2AC2D442002CC40A /* UIView + Extension.swift */; };
-		7E0980142AC2D8D4002CC40A /* CustomImagesPresenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0980132AC2D8D4002CC40A /* CustomImagesPresenterView.swift */; };
+		7E0980142AC2D8D4002CC40A /* CustomPresenterScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */; };
 		7E0980162AC2DA49002CC40A /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0980152AC2DA49002CC40A /* UIConstants.swift */; };
 		7E0980192AC2DDD2002CC40A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E0980182AC2DDD2002CC40A /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		7E09800A2AC2CDD5002CC40A /* UIFonts + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFonts + Extension.swift"; sourceTree = "<group>"; };
 		7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		7E09800F2AC2D442002CC40A /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
-		7E0980132AC2D8D4002CC40A /* CustomImagesPresenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagesPresenterView.swift; sourceTree = "<group>"; };
+		7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresenterScrollView.swift; sourceTree = "<group>"; };
 		7E0980152AC2DA49002CC40A /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */,
-				7E0980132AC2D8D4002CC40A /* CustomImagesPresenterView.swift */,
+				7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 				7E097FFB2AC2C7F7002CC40A /* UIColors + Extension.swift in Sources */,
 				7E0980072AC2CB4F002CC40A /* Strings+Generated.swift in Sources */,
 				7E09800B2AC2CDD5002CC40A /* UIFonts + Extension.swift in Sources */,
-				7E0980142AC2D8D4002CC40A /* CustomImagesPresenterView.swift in Sources */,
+				7E0980142AC2D8D4002CC40A /* CustomPresenterScrollView.swift in Sources */,
 				7E09800D2AC2D1B5002CC40A /* CustomNavigationBar.swift in Sources */,
 				7E097FE42AC2C2D1002CC40A /* AppDelegate.swift in Sources */,
 				7E097FFE2AC2C838002CC40A /* Resources.swift in Sources */,
