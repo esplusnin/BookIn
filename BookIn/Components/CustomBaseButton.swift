@@ -12,6 +12,19 @@ final class CustomBaseButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Override Methods:
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        alpha = 0.9
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        transform = .identity
+        alpha = 1
+    }
 }
 
 // MARK: - Setup Views:
