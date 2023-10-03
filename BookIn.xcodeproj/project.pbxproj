@@ -37,6 +37,7 @@
 		7E2CF76A2ACC55E8008F3BA0 /* AboutHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7692ACC55E8008F3BA0 /* AboutHotel.swift */; };
 		7E2CF76D2ACC5724008F3BA0 /* HotelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF76C2ACC5724008F3BA0 /* HotelViewModel.swift */; };
 		7E2CF76F2ACC573B008F3BA0 /* HotelViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */; };
+		7E2CF7722ACC7352008F3BA0 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		7E2CF7692ACC55E8008F3BA0 /* AboutHotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHotel.swift; sourceTree = "<group>"; };
 		7E2CF76C2ACC5724008F3BA0 /* HotelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelViewModel.swift; sourceTree = "<group>"; };
 		7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelViewModelProtocol.swift; sourceTree = "<group>"; };
+		7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				7E097FFA2AC2C7F7002CC40A /* UIColors + Extension.swift */,
+				7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */,
 				7E09800A2AC2CDD5002CC40A /* UIFonts + Extension.swift */,
 				7E09800F2AC2D442002CC40A /* UIView + Extension.swift */,
 			);
@@ -402,6 +405,7 @@
 				7E2CF7582ACADDE2008F3BA0 /* HotelCollectionViewReusableView.swift in Sources */,
 				7E2CF76D2ACC5724008F3BA0 /* HotelViewModel.swift in Sources */,
 				7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */,
+				7E2CF7722ACC7352008F3BA0 /* UIViewController + Extension.swift in Sources */,
 				7E09800B2AC2CDD5002CC40A /* UIFonts + Extension.swift in Sources */,
 				7E2CF74C2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift in Sources */,
 				7E2CF75D2ACAFE26008F3BA0 /* HotelTableViewCell.swift in Sources */,

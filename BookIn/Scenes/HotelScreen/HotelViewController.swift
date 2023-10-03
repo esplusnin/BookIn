@@ -127,6 +127,7 @@ class HotelViewController: UIViewController {
         setupCollectionView()
         setupViewModelInProviders()
         
+        blockUI()
         bind()
         viewModel.fetchHotelModel()
     }
@@ -152,6 +153,7 @@ class HotelViewController: UIViewController {
             self.priceLabel.text = "\(model.minimalPrice)"
             self.priceDescriptionLabel.text = model.priceForIt
             self.refreshControl.endRefreshing()
+            self.unblockUI()
             
             if model.aboutTheHotel.peculiarities.count != self.hotelDescriptionCollectionView.visibleCells.count {
                 self.hotelDescriptionCollectionView.reloadData()
