@@ -1,8 +1,10 @@
 // MARK: - Hotel Screen:
 "hotelScreen.title" = "Отель";
+"hotelScreen.aboutHotel" = "Об отеле";
 "hotelScreen.tableView.facilities" = "Удобства";
 "hotelScreen.tableView.includes" = "Что включено";
 "hotelScreen.tableView.notIncludes" = "Что не включено";
 "hotelScreen.tableView.mostRequires" = "Самое необходимое";
 "hotelScreen.chooseRoomButton" = "К выбору номера";
+
 

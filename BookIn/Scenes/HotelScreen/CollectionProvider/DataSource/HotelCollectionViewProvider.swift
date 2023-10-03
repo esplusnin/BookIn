@@ -1,21 +1,30 @@
 import UIKit
 
 final class HotelCollectionViewProvider: NSObject {
-    var arrays = ["Бесплатный Wifi на всей территории отеля", "1 км до пляжа", "Бесплатный фитнес-клуб", "20 км до аэропорта"]
-    var footerText = "Отель VIP-класса с собственными гольф полями. Высокий уровнь сервиса. Рекомендуем для респектабельного отдыха. Отель принимает гостей от 18 лет!"
+    
+    // MARK: - Dependencies:
+    private var viewModel: HotelViewModelProtocol?
+    
+    // MARK: - Public Methods:
+    func setViewModel(from viewModel: HotelViewModelProtocol) {
+        self.viewModel = viewModel
+    }
 }
     // MARK: - UICollectionViewDataSource:
 extension HotelCollectionViewProvider: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        4
+        viewModel?.aboutTheHotel?.peculiarities.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Resources.Identifiers.hotelCollectionViewCell,
-            for: indexPath) as? HotelCollectionViewCell else { return UICollectionViewCell() }
+            for: indexPath) as? HotelCollectionViewCell,
+              let viewModel else { return UICollectionViewCell() }
         
-        cell.setupTitleLabel(with: arrays[indexPath.row])
+        if let peculiarities = viewModel.aboutTheHotel?.peculiarities {
+            cell.setupTitleLabel(with: peculiarities[indexPath.row])
+        }
         
         return cell
     }
@@ -27,10 +36,10 @@ extension HotelCollectionViewProvider: UICollectionViewDataSource {
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            text = "Об отеле"
+            text = L10n.HotelScreen.aboutHotel
             id = Resources.Identifiers.hotelCollectionViewHeader
         case UICollectionView.elementKindSectionFooter:
-            text = footerText
+            text = viewModel?.aboutTheHotel?.description
             id = Resources.Identifiers.hotelCollectionViewFooter
             isTitle = false
         default:

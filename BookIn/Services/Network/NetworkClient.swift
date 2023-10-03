@@ -13,8 +13,9 @@ final class NetworkClient: NetworkClientProtocol {
     let urlSession = URLSession.shared
     
     // MARK: - Public Methods:
-    func fetchData<T: Decodable>(with urlString: String, model: T, completion: @escaping (Result<T, Error>) -> Void) {
+    func fetchData<T: Decodable>(with urlString: String, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: urlString) else { return }
+
         let request = URLRequest(url: url)
         
         urlSession.dataTask(with: request) { data, response, error in
@@ -36,17 +37,18 @@ final class NetworkClient: NetworkClientProtocol {
                 completion(.failure(NetworkError.requestError(error)))
             }
         }
+        .resume()
     }
     
     // MARK: - Supporting Methods:
-    private func pars<T: Decodable>(to model: T, with data: Data, completion: @escaping (Result<T, Error>) -> Void) {
+    private func pars<T: Decodable>(to model: T.Type, with data: Data, completion: @escaping (Result<T, Error>) -> Void) {
         let decoder = JSONDecoder()
         
         do {
             let model = try decoder.decode(T.self, from: data)
             completion(.success(model))
         } catch {
-
+            completion(.failure(NetworkError.parsingError))
         }
     }
 }

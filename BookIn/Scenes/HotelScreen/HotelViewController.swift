@@ -1,6 +1,10 @@
+import Combine
 import UIKit
 
 class HotelViewController: UIViewController {
+    
+    // MARK: - Dependencies:
+    private let viewModel: HotelViewModelProtocol
     
     // MARK: - Classes:
     private let hotelCollectionViewProvider = HotelCollectionViewProvider()
@@ -17,6 +21,8 @@ class HotelViewController: UIViewController {
         static let chooseButtonHeight: CGFloat = 48
     }
     
+    private var cancellable = Set<AnyCancellable>()
+
     // MARK: - UI:
     private lazy var mainScreenScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -104,28 +110,60 @@ class HotelViewController: UIViewController {
     private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle:
+    init(viewModel: HotelViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupTargets()
         setupCollectionView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        customPresenterScrollView.setupImagesURLs(with: [
-            "https://www.atorus.ru/sites/default/files/upload/image/News/56149/Club_Priv%C3%A9_by_Belek_Club_House.jpg",
-            "https://deluxe.voyage/useruploads/articles/The_Makadi_Spa_Hotel_02.jpg",
-            "https://deluxe.voyage/useruploads/articles/article_1eb0a64d00.jpg"
-        ])
+        setupViewModelInProviders()
         
-        customHotelRateView.setupRatingInfo(with: 5, description: "Превосходно")
-        hotelNameLabel.text = "Лучший пятизвездочный отель в Хургаде, Египет"
-        hotelLocationButton.setTitle("Madinat Makadi, Safaga Road, Makadi Bay, Египет", for: .normal)
-        priceLabel.text = "от 134 268 ₽"
-        priceDescriptionLabel.text = "За тур с перелётом"
+        bind()
+        viewModel.fetchHotelModel()
     }
     
     // MARK: - Private Methods:
+    private func bind() {
+        viewModel.hotelModelPublisher
+            .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
+            .sink(receiveValue: { [weak self] model in
+                guard let self,
+                      let model else { return }
+                self.setHotelInfo(with: model)
+            })
+            .store(in: &cancellable)
+    }
+    
+    private func setHotelInfo(with model: Hotel) {
+        DispatchQueue.main.async {
+            self.customPresenterScrollView.setupImagesURLs(with: model.imageURLs)
+            self.customHotelRateView.setupRatingInfo(with: model.rating, description: model.ratingName)
+            self.hotelNameLabel.text = model.name
+            self.hotelLocationButton.setTitle(model.adress, for: .normal)
+            self.priceLabel.text = "\(model.minimalPrice)"
+            self.priceDescriptionLabel.text = model.priceForIt
+            self.refreshControl.endRefreshing()
+            
+            if model.aboutTheHotel.peculiarities.count != self.hotelDescriptionCollectionView.visibleCells.count {
+                self.hotelDescriptionCollectionView.reloadData()
+            }
+        }
+    }
+    
+    private func setupViewModelInProviders() {
+        hotelCollectionViewProvider.setViewModel(from: viewModel)
+        hotelTableViewProvider.setViewModel(from: viewModel)
+    }
+    
     private func setupCollectionView() {
         hotelDescriptionCollectionView.register(HotelCollectionViewCell.self,
                                                 forCellWithReuseIdentifier: Resources.Identifiers.hotelCollectionViewCell)
@@ -142,7 +180,7 @@ class HotelViewController: UIViewController {
     
     // MARK: - Objc Methods:
     @objc private func updateHotelInfo() {
-
+        viewModel.fetchHotelModel()
     }
 }
 

@@ -8,7 +8,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let viewController = HotelViewController()
+        let networkClient = NetworkClient()
+        let hotelViewModel = HotelViewModel(networkClient: networkClient)
+        let viewController = HotelViewController(viewModel: hotelViewModel)
+        
         window?.rootViewController = viewController
         
         window?.makeKeyAndVisible()

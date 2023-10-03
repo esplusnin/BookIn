@@ -11,6 +11,8 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum HotelScreen {
+    /// Об отеле
+    internal static let aboutHotel = L10n.tr("Localizable", "hotelScreen.aboutHotel", fallback: "Об отеле")
     /// К выбору номера
     internal static let chooseRoomButton = L10n.tr("Localizable", "hotelScreen.chooseRoomButton", fallback: "К выбору номера")
     /// Отель

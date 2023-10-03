@@ -35,6 +35,8 @@
 		7E2CF7652ACC5563008F3BA0 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7642ACC5563008F3BA0 /* NetworkClientProtocol.swift */; };
 		7E2CF7682ACC55D3008F3BA0 /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7672ACC55D3008F3BA0 /* Hotel.swift */; };
 		7E2CF76A2ACC55E8008F3BA0 /* AboutHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7692ACC55E8008F3BA0 /* AboutHotel.swift */; };
+		7E2CF76D2ACC5724008F3BA0 /* HotelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF76C2ACC5724008F3BA0 /* HotelViewModel.swift */; };
+		7E2CF76F2ACC573B008F3BA0 /* HotelViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		7E2CF7642ACC5563008F3BA0 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
 		7E2CF7672ACC55D3008F3BA0 /* Hotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
 		7E2CF7692ACC55E8008F3BA0 /* AboutHotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHotel.swift; sourceTree = "<group>"; };
+		7E2CF76C2ACC5724008F3BA0 /* HotelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelViewModel.swift; sourceTree = "<group>"; };
+		7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,8 +188,10 @@
 		7E0980122AC2D5C2002CC40A /* HotelScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7E2CF7702ACC5747008F3BA0 /* Protocols */,
 				7E2CF7502ACAD0C2008F3BA0 /* CollectionProvider */,
 				7E2CF75B2ACAFD9A008F3BA0 /* TableViewProvider */,
+				7E2CF76C2ACC5724008F3BA0 /* HotelViewModel.swift */,
 				7E097FE72AC2C2D1002CC40A /* HotelViewController.swift */,
 			);
 			path = HotelScreen;
@@ -203,8 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				7E2CF7532ACADC51008F3BA0 /* DataSource */,
-				7E2CF7512ACAD0D8008F3BA0 /* HotelCollectionViewCell.swift */,
 				7E2CF7572ACADDE2008F3BA0 /* HotelCollectionViewReusableView.swift */,
+				7E2CF7512ACAD0D8008F3BA0 /* HotelCollectionViewCell.swift */,
 			);
 			path = CollectionProvider;
 			sourceTree = "<group>";
@@ -220,8 +226,8 @@
 		7E2CF75B2ACAFD9A008F3BA0 /* TableViewProvider */ = {
 			isa = PBXGroup;
 			children = (
-				7E2CF75C2ACAFE26008F3BA0 /* HotelTableViewCell.swift */,
 				7E2CF7592ACAFD97008F3BA0 /* HotelTableViewProvider.swift */,
+				7E2CF75C2ACAFE26008F3BA0 /* HotelTableViewCell.swift */,
 			);
 			path = TableViewProvider;
 			sourceTree = "<group>";
@@ -254,10 +260,18 @@
 		7E2CF76B2ACC55FE008F3BA0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7E2CF7672ACC55D3008F3BA0 /* Hotel.swift */,
 				7E2CF7692ACC55E8008F3BA0 /* AboutHotel.swift */,
+				7E2CF7672ACC55D3008F3BA0 /* Hotel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7E2CF7702ACC5747008F3BA0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,6 +400,7 @@
 				7E2CF75F2ACC036A008F3BA0 /* CustomBaseButton.swift in Sources */,
 				7E0980072AC2CB4F002CC40A /* Strings+Generated.swift in Sources */,
 				7E2CF7582ACADDE2008F3BA0 /* HotelCollectionViewReusableView.swift in Sources */,
+				7E2CF76D2ACC5724008F3BA0 /* HotelViewModel.swift in Sources */,
 				7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */,
 				7E09800B2AC2CDD5002CC40A /* UIFonts + Extension.swift in Sources */,
 				7E2CF74C2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift in Sources */,
@@ -394,6 +409,7 @@
 				7E2CF7612ACC2960008F3BA0 /* NetworkClient.swift in Sources */,
 				7E09800D2AC2D1B5002CC40A /* CustomNavigationBar.swift in Sources */,
 				7E097FE42AC2C2D1002CC40A /* AppDelegate.swift in Sources */,
+				7E2CF76F2ACC573B008F3BA0 /* HotelViewModelProtocol.swift in Sources */,
 				7E097FFE2AC2C838002CC40A /* Resources.swift in Sources */,
 				7E2CF74F2ACAD00C008F3BA0 /* HotelCollectionViewProvider.swift in Sources */,
 				7E2CF7522ACAD0D8008F3BA0 /* HotelCollectionViewCell.swift in Sources */,

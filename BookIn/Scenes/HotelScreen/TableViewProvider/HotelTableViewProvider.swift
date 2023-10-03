@@ -2,28 +2,37 @@ import UIKit
 
 final class HotelTableViewProvider: NSObject {
     
-    private let cellHeight: CGFloat = 60
+    // MARK: - Dependencies:
+    private var viewModel: HotelViewModelProtocol?
     
-    var tableTitles = ["Удобства", "Что включено", "Что не включено"]
-    var images = [UIImage(named: "emoji-happy"), UIImage(named: "tick-square"), UIImage(named: "close-square")]
-    var descriptionText = "Самое необходимое"
+    // MARK: - Constants and Variables:
+    private let cellHeight: CGFloat = 60
+    private let viewWidth: CGFloat = 400
+    
+    // MARK: - Public Methods:
+    func setViewModel(from viewModel: HotelViewModelProtocol) {
+        self.viewModel = viewModel
+    }
 }
 
 // MARK: - UITableViewDataSource:
 extension HotelTableViewProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableTitles.count
+        viewModel?.tableTitles.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Resources.Identifiers.hotelTableViewCell, for: indexPath) as? HotelTableViewCell else { return UITableViewCell() }
+            withIdentifier: Resources.Identifiers.hotelTableViewCell, for: indexPath) as? HotelTableViewCell,
+              let viewModel else { return UITableViewCell() }
         
-        cell.setupCellInfo(with: tableTitles[indexPath.row], description: descriptionText, image: images[indexPath.row] ?? UIImage())
+        cell.setupCellInfo(with: viewModel.tableTitles[indexPath.row],
+                           description: viewModel.descriptionText,
+                           image: viewModel.tableViewImages[indexPath.row])
     
-        if indexPath.row == tableTitles.count - 1 {
+        if indexPath.row == viewModel.tableTitles.count - 1 {
             cell.separatorInset = UIEdgeInsets.init(
-                top: 0, left: 400,
+                top: 0, left: viewWidth,
                 bottom: 0, right: 0)
         }
         
