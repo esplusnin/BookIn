@@ -7,12 +7,21 @@ class HotelViewController: UIViewController {
     private let hotelTableViewProvider = HotelTableViewProvider()
     
     // MARK: - Constants and Variables:
-    private let priceLabelsInset: CGFloat = 3
+    private enum LocalUIConstants {
+        static let priceLabelsInset: CGFloat = 3
+        static let collectionHeight: CGFloat = 250
+        static let tableHeight: CGFloat = 180
+        static let buttonBackgroundViewTopInset: CGFloat = 12
+        static let buttonBackgroundViewHeight: CGFloat = 500
+        static let buttonBackgroundViewOutInset: CGFloat = 88
+        static let chooseButtonHeight: CGFloat = 48
+    }
     
     // MARK: - UI:
     private lazy var mainScreenScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.refreshControl = refreshControl
         
         return scrollView
     }()
@@ -72,6 +81,7 @@ class HotelViewController: UIViewController {
     
     private lazy var hotelTableView: UITableView = {
         let tableView = UITableView()
+        tableView.isScrollEnabled = false
         tableView.register(HotelTableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.hotelTableViewCell)
         tableView.dataSource = hotelTableViewProvider
         tableView.delegate = hotelTableViewProvider
@@ -87,8 +97,11 @@ class HotelViewController: UIViewController {
     private lazy var customNavigationBar = CustomNavigationBar(title: L10n.HotelScreen.title, isBackButton: false)
     private lazy var hotelBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var hotelDescriptionBackgroundView = CustomBackgroundView(isRounded: true)
+    private lazy var buttonBackgroundView = CustomBackgroundView(isRounded: false)
     private lazy var customPresenterScrollView = CustomPresenterScrollView()
     private lazy var customHotelRateView = CustomHotelRateView()
+    private lazy var chooseRoomButton = CustomBaseButton(with: L10n.HotelScreen.chooseRoomButton)
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle:
     override func viewDidLoad() {
@@ -126,17 +139,23 @@ class HotelViewController: UIViewController {
         hotelDescriptionCollectionView.dataSource = hotelCollectionViewProvider
         hotelDescriptionCollectionView.delegate = hotelCollectionViewProvider
     }
+    
+    // MARK: - Objc Methods:
+    @objc private func updateHotelInfo() {
+
+    }
 }
 
 // MARK: - Setup Views:
 private extension HotelViewController {
     func setupViews() {
-        view.backgroundColor = .universalGray
+        view.backgroundColor = .universalLightGray
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(mainHotelInfoStackView.addArrangedSubview)
         [hotelBackgroundView, customPresenterScrollView,mainHotelInfoStackView, priceLabel, priceDescriptionLabel,
-         hotelDescriptionBackgroundView, hotelDescriptionCollectionView, hotelTableView].forEach(mainScreenScrollView.setupView)
+         hotelDescriptionBackgroundView, hotelDescriptionCollectionView, hotelTableView,
+         buttonBackgroundView, chooseRoomButton].forEach(mainScreenScrollView.setupView)
         
         customNavigationBar.setupNavigationBar()
     }
@@ -151,6 +170,8 @@ private extension HotelViewController {
         setupHotelDescriptionViewConstraints()
         setupHotelCollectionViewConstraints()
         setupHotelTableViewConstraints()
+        setupButtonBackgroundViewConstraints()
+        setupChooseRoomButtonConstraints()
     }
     
     func setupMainScreenScrollView() {
@@ -196,7 +217,7 @@ private extension HotelViewController {
     func setupPriceDescriptionLabelConstraints() {
         NSLayoutConstraint.activate([
             priceDescriptionLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: UIConstants.mediumInset),
-            priceDescriptionLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: -priceLabelsInset),
+            priceDescriptionLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: -LocalUIConstants.priceLabelsInset),
             priceDescriptionLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -UIConstants.sideInset)
         ])
     }
@@ -212,7 +233,7 @@ private extension HotelViewController {
     
     func setupHotelCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            hotelDescriptionCollectionView.heightAnchor.constraint(equalToConstant: 250),
+            hotelDescriptionCollectionView.heightAnchor.constraint(equalToConstant: LocalUIConstants.collectionHeight),
             hotelDescriptionCollectionView.topAnchor.constraint(equalTo: hotelDescriptionBackgroundView.topAnchor, constant: UIConstants.sideInset),
             hotelDescriptionCollectionView.leadingAnchor.constraint(equalTo: hotelDescriptionBackgroundView.leadingAnchor),
             hotelDescriptionCollectionView.trailingAnchor.constraint(equalTo: hotelDescriptionBackgroundView.trailingAnchor)
@@ -221,11 +242,37 @@ private extension HotelViewController {
     
     func setupHotelTableViewConstraints() {
         NSLayoutConstraint.activate([
-            hotelTableView.heightAnchor.constraint(equalToConstant: 180),
+            hotelTableView.heightAnchor.constraint(equalToConstant: LocalUIConstants.tableHeight),
             hotelTableView.topAnchor.constraint(equalTo: hotelDescriptionCollectionView.bottomAnchor, constant: UIConstants.sideInset),
             hotelTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
             hotelTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset),
-            hotelTableView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor, constant: -UIConstants.sideInset)
+            hotelTableView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor, constant: -LocalUIConstants.buttonBackgroundViewOutInset)
         ])
+    }
+    
+    func setupButtonBackgroundViewConstraints() {
+        NSLayoutConstraint.activate([
+            buttonBackgroundView.heightAnchor.constraint(equalToConstant: LocalUIConstants.buttonBackgroundViewHeight),
+            buttonBackgroundView.topAnchor.constraint(equalTo: hotelDescriptionBackgroundView.bottomAnchor,
+                                                      constant: LocalUIConstants.buttonBackgroundViewTopInset),
+            buttonBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    func setupChooseRoomButtonConstraints() {
+        NSLayoutConstraint.activate([
+            chooseRoomButton.heightAnchor.constraint(equalToConstant: LocalUIConstants.chooseButtonHeight),
+            chooseRoomButton.topAnchor.constraint(equalTo: buttonBackgroundView.topAnchor, constant: LocalUIConstants.buttonBackgroundViewTopInset),
+            chooseRoomButton.leadingAnchor.constraint(equalTo: buttonBackgroundView.leadingAnchor, constant: UIConstants.sideInset),
+            chooseRoomButton.trailingAnchor.constraint(equalTo: buttonBackgroundView.trailingAnchor, constant: -UIConstants.sideInset)
+        ])
+    }
+}
+
+// MARK: - Setup Targets:
+extension HotelViewController {
+    private func setupTargets() {
+        refreshControl.addTarget(self, action: #selector(updateHotelInfo), for: .valueChanged)
     }
 }

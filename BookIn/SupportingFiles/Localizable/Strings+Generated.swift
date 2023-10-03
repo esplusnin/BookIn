@@ -11,8 +11,20 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum HotelScreen {
+    /// К выбору номера
+    internal static let chooseRoomButton = L10n.tr("Localizable", "hotelScreen.chooseRoomButton", fallback: "К выбору номера")
     /// Отель
     internal static let title = L10n.tr("Localizable", "hotelScreen.title", fallback: "Отель")
+    internal enum TableView {
+      /// Удобства
+      internal static let facilities = L10n.tr("Localizable", "hotelScreen.tableView.facilities", fallback: "Удобства")
+      /// Что включено
+      internal static let includes = L10n.tr("Localizable", "hotelScreen.tableView.includes", fallback: "Что включено")
+      /// Самое необходимое
+      internal static let mostRequires = L10n.tr("Localizable", "hotelScreen.tableView.mostRequires", fallback: "Самое необходимое")
+      /// Что не включено
+      internal static let notIncludes = L10n.tr("Localizable", "hotelScreen.tableView.notIncludes", fallback: "Что не включено")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
