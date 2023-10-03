@@ -207,8 +207,8 @@
 		7E2CF75B2ACAFD9A008F3BA0 /* TableViewProvider */ = {
 			isa = PBXGroup;
 			children = (
-				7E2CF7592ACAFD97008F3BA0 /* HotelTableViewProvider.swift */,
 				7E2CF75C2ACAFE26008F3BA0 /* HotelTableViewCell.swift */,
+				7E2CF7592ACAFD97008F3BA0 /* HotelTableViewProvider.swift */,
 			);
 			path = TableViewProvider;
 			sourceTree = "<group>";
