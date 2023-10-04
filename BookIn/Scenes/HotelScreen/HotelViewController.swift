@@ -4,6 +4,7 @@ import UIKit
 class HotelViewController: UIViewController {
     
     // MARK: - Dependencies:
+    private let coordinator: CoordinatorProtocol?
     private let viewModel: HotelViewModelProtocol
     
     // MARK: - Classes:
@@ -100,7 +101,7 @@ class HotelViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var customNavigationBar = CustomNavigationBar(title: L10n.HotelScreen.title, isBackButton: false)
+    private lazy var customNavigationBar = CustomNavigationBar(coordinator: coordinator, title: L10n.HotelScreen.title, isBackButton: false)
     private lazy var hotelBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var hotelDescriptionBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var buttonBackgroundView = CustomBackgroundView(isRounded: false)
@@ -110,7 +111,8 @@ class HotelViewController: UIViewController {
     private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle:
-    init(viewModel: HotelViewModelProtocol) {
+    init(coordinator: CoordinatorProtocol?, viewModel: HotelViewModelProtocol) {
+        self.coordinator = coordinator
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -167,12 +169,12 @@ class HotelViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        hotelDescriptionCollectionView.register(HotelCollectionViewCell.self,
+        hotelDescriptionCollectionView.register(CustomCollectionViewCell.self,
                                                 forCellWithReuseIdentifier: Resources.Identifiers.hotelCollectionViewCell)
-        hotelDescriptionCollectionView.register(HotelCollectionViewReusableView.self,
+        hotelDescriptionCollectionView.register(CustomCollectionViewReusableView.self,
                                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                                 withReuseIdentifier: Resources.Identifiers.hotelCollectionViewHeader)
-        hotelDescriptionCollectionView.register(HotelCollectionViewReusableView.self,
+        hotelDescriptionCollectionView.register(CustomCollectionViewReusableView.self,
                                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                                 withReuseIdentifier: Resources.Identifiers.hotelCollectionViewFooter)
         
@@ -184,11 +186,17 @@ class HotelViewController: UIViewController {
     @objc private func updateHotelInfo() {
         viewModel.fetchHotelModel()
     }
+    
+    @objc private func goToRoomViewController() {
+        let hotelName = hotelNameLabel.text ?? ""
+        coordinator?.goToRoomViewController(with: hotelName)
+    }
 }
 
 // MARK: - Setup Views:
 private extension HotelViewController {
     func setupViews() {
+        navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .universalLightGray
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
@@ -314,5 +322,6 @@ private extension HotelViewController {
 extension HotelViewController {
     private func setupTargets() {
         refreshControl.addTarget(self, action: #selector(updateHotelInfo), for: .valueChanged)
+        chooseRoomButton.addTarget(self, action: #selector(goToRoomViewController), for: .touchUpInside)
     }
 }

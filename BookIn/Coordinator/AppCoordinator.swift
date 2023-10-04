@@ -17,4 +17,13 @@ final class AppCoordinator: CoordinatorProtocol {
         let hotelViewController = viewControllerFactory.getHotelViewController()
         navigationController.pushViewController(hotelViewController, animated: true)
     }
+    
+    func goBack() {
+        navigationController.popViewController(animated: true)
+    }
+   
+    func goToRoomViewController(with hotelName: String) {
+        let roomViewController = viewControllerFactory.getRoomViewController(with: hotelName)
+        navigationController.pushViewController(roomViewController, animated: true)
+    }
 }

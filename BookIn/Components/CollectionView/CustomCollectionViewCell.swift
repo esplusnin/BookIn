@@ -1,6 +1,6 @@
 import UIKit
 
-final class HotelCollectionViewCell: UICollectionViewCell {
+final class CustomCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI:
     private lazy var titleLabel: UILabel = {
@@ -26,10 +26,15 @@ final class HotelCollectionViewCell: UICollectionViewCell {
     func setupTitleLabel(with name: String) {
         titleLabel.text = name
     }
+    
+    func setupLastCell() {
+        backgroundColor = .universalLightBlue
+        titleLabel.textColor = .universalBlue
+    }
 }
 
 // MARK: - Setup Views:
-private extension HotelCollectionViewCell {
+private extension CustomCollectionViewCell {
     func setupViews() {
         layer.cornerRadius = UIConstants.smallCornerRadius
         backgroundColor = .universalLightGray

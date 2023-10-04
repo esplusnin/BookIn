@@ -13,6 +13,10 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
     
     func getHotelViewController() -> HotelViewController {
         let viewModel = HotelViewModel(networkClient: networkClient)
-        return HotelViewController(viewModel: viewModel)
+        return HotelViewController(coordinator: coordinator, viewModel: viewModel)
+    }
+    
+    func getRoomViewController(with hotelName: String) -> RoomViewController {
+        return RoomViewController(coordinator: coordinator, hotelName: hotelName)
     }
 }

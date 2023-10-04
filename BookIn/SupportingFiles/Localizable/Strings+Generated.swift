@@ -28,6 +28,12 @@ internal enum L10n {
       internal static let notIncludes = L10n.tr("Localizable", "hotelScreen.tableView.notIncludes", fallback: "Что не включено")
     }
   }
+  internal enum RoomScreen {
+    /// Подробнее о номере
+    internal static let aboutTheRoom = L10n.tr("Localizable", "roomScreen.aboutTheRoom", fallback: "Подробнее о номере")
+    /// Выбрать номер
+    internal static let chooseTheRoom = L10n.tr("Localizable", "roomScreen.chooseTheRoom", fallback: "Выбрать номер")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

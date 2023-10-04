@@ -7,4 +7,6 @@
 "hotelScreen.tableView.mostRequires" = "Самое необходимое";
 "hotelScreen.chooseRoomButton" = "К выбору номера";
 
-
+// MARK: - Room Screen:
+"roomScreen.aboutTheRoom" = "Подробнее о номере";
+"roomScreen.chooseTheRoom" = "Выбрать номер";

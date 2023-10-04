@@ -2,6 +2,9 @@ import UIKit
 
 final class CustomNavigationBar: UIView {
     
+    // MARK: - Dependencies:
+    weak var coordinator: CoordinatorProtocol?
+    
     // MARK: - Constants and Variables:
     private enum LocalUIConstants {
         static let barsHeight: CGFloat = 57
@@ -12,6 +15,8 @@ final class CustomNavigationBar: UIView {
     // MARK: - UI:
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
         titleLabel.font = .mediumTitleFont
         titleLabel.textColor = .universalBlackPrimary
         return titleLabel
@@ -24,8 +29,9 @@ final class CustomNavigationBar: UIView {
     }()
     
     // MARK: - Lifecycle:
-    init(title: String, isBackButton: Bool) {
+    init(coordinator: CoordinatorProtocol?, title: String, isBackButton: Bool) {
         super.init(frame: .zero)
+        self.coordinator = coordinator
         self.titleLabel.text = title
         
         if !isBackButton {
@@ -52,6 +58,11 @@ final class CustomNavigationBar: UIView {
         ])
         
         setupConstraints()
+    }
+    
+    // MARK: - Objc Methods:
+    @objc private func goBack() {
+        coordinator?.goBack()
     }
 }
 
@@ -83,11 +94,12 @@ private extension CustomNavigationBar {
     func setupTitleLabelConstraints(isButtonHidden: Bool, with view: UIView) {
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LocalUIConstants.barsHeight / 2),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
         ])
     }
     
     func setupTargets() {
-       
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
 }

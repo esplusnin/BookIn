@@ -19,7 +19,7 @@ extension HotelCollectionViewProvider: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Resources.Identifiers.hotelCollectionViewCell,
-            for: indexPath) as? HotelCollectionViewCell,
+            for: indexPath) as? CustomCollectionViewCell,
               let viewModel else { return UICollectionViewCell() }
         
         if let peculiarities = viewModel.aboutTheHotel?.peculiarities {
@@ -49,7 +49,7 @@ extension HotelCollectionViewProvider: UICollectionViewDataSource {
         guard let reusableView = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
             withReuseIdentifier: id,
-            for: indexPath) as? HotelCollectionViewReusableView else { return UICollectionReusableView() }
+            for: indexPath) as? CustomCollectionViewReusableView else { return UICollectionReusableView() }
         reusableView.setupLabel(with: text ?? "", isTitle: isTitle)
         
         return reusableView

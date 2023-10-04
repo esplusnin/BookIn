@@ -1,6 +1,6 @@
 import UIKit
 
-final class HotelCollectionViewReusableView: UICollectionReusableView {
+final class CustomCollectionViewReusableView: UICollectionReusableView {
     
     // MARK: - UI:
     private lazy var titleLabel = UILabel()
@@ -31,7 +31,7 @@ final class HotelCollectionViewReusableView: UICollectionReusableView {
     }
 }
 
-private extension HotelCollectionViewReusableView {
+private extension CustomCollectionViewReusableView {
     func setupViews() {
         setupView(titleLabel)
     }

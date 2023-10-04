@@ -23,6 +23,7 @@ enum Resources {
         
         // TableViews
         static let hotelTableViewCell = "HotelTableViewCell"
+        static let roomTableViewCell = "RoomTableViewCell"
     }
     
     enum Network {
