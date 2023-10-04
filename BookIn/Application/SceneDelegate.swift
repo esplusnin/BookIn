@@ -8,12 +8,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
+        let navigationController = UINavigationController()
         let networkClient = NetworkClient()
-        let hotelViewModel = HotelViewModel(networkClient: networkClient)
-        let viewController = HotelViewController(viewModel: hotelViewModel)
-        
-        window?.rootViewController = viewController
-        
-        window?.makeKeyAndVisible()
+        let viewControllerFactory = ViewControllerFactory(networkClient: networkClient)
+        let coordinator = AppCoordinator(navigationController: navigationController, viewControllerFactory: viewControllerFactory)
+       
+        coordinator.start()
+
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()        
     }
 }
