@@ -13,3 +13,10 @@
 
 // MARK: - Reservation Screen:
 "reservationScreen.reservation" = "Бронирование";
+"reservationScreen.departureFrom" = "Вылет из";
+"reservationScreen.countryCity" = "Страна, город";
+"reservationScreen.dates" = "Даты";
+"reservationScreen.numberOfNights" = "Кол-во ночей";
+"reservationScreen.stackHotelName" = "Отель";
+"reservationScreen.roomName" = "Номер";
+"reservationScreen.nutrition" = "Питание";

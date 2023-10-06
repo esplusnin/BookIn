@@ -39,6 +39,7 @@
 		7E2CF76F2ACC573B008F3BA0 /* HotelViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */; };
 		7E2CF7722ACC7352008F3BA0 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */; };
 		7ED110692ACFD62000A1D1D6 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */; };
+		7ED1106C2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */; };
 		7EECCA2F2ACD38C800883A69 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA2E2ACD38C800883A69 /* ViewControllerFactory.swift */; };
 		7EECCA322ACD38E900883A69 /* ViewControllerFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA312ACD38E900883A69 /* ViewControllerFactoryProtocol.swift */; };
 		7EECCA352ACD393200883A69 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA342ACD393200883A69 /* AppCoordinator.swift */; };
@@ -86,6 +87,7 @@
 		7E2CF76E2ACC573B008F3BA0 /* HotelViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelViewModelProtocol.swift; sourceTree = "<group>"; };
 		7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTripInfoStackView.swift; sourceTree = "<group>"; };
 		7EECCA2E2ACD38C800883A69 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		7EECCA312ACD38E900883A69 /* ViewControllerFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryProtocol.swift; sourceTree = "<group>"; };
 		7EECCA342ACD393200883A69 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				7E2CF74D2ACACCD9008F3BA0 /* CollectionView */,
 				7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */,
+				7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */,
 				7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */,
 				7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */,
 				7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */,
@@ -486,6 +489,7 @@
 				7E097FFB2AC2C7F7002CC40A /* UIColors + Extension.swift in Sources */,
 				7E2CF76A2ACC55E8008F3BA0 /* AboutHotel.swift in Sources */,
 				7E2CF7682ACC55D3008F3BA0 /* Hotel.swift in Sources */,
+				7ED1106C2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift in Sources */,
 				7E2CF7482ACA9B1D008F3BA0 /* CustomHotelRateView.swift in Sources */,
 				7E2CF75F2ACC036A008F3BA0 /* CustomBaseButton.swift in Sources */,
 				7E0980072AC2CB4F002CC40A /* Strings+Generated.swift in Sources */,

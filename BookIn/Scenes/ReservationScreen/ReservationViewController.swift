@@ -32,8 +32,17 @@ final class ReservationViewController: UIViewController {
         return button
     }()
     
+    private lazy var tripInfoStackView: CustomTripInfoStackView = {
+       let stackView = CustomTripInfoStackView()
+        stackView.axis = .vertical
+        stackView.spacing = UIConstants.sideInset
+        
+        return stackView
+    }()
+    
     private lazy var customNavigationBar = CustomNavigationBar(coordinator: coordinator, title: L10n.ReservationScreen.reservation, isBackButton: true)
     private lazy var hotelInfoBackgroundView = CustomBackgroundView(isRounded: true)
+    private lazy var tripInfoBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var customHotelRateView = CustomHotelRateView()
     
     // MARK: - Lifecycle:
@@ -66,7 +75,8 @@ private extension ReservationViewController {
         view.backgroundColor = .univarsalViewBackground
         
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(hotelInfoStackView.addArrangedSubview)
-        [customNavigationBar, hotelInfoBackgroundView, hotelInfoStackView].forEach(view.setupView)
+        [customNavigationBar, hotelInfoBackgroundView, hotelInfoStackView, tripInfoBackgroundView,
+         tripInfoStackView].forEach(view.setupView)
         
         customNavigationBar.setupNavigationBar()
     }
@@ -74,6 +84,8 @@ private extension ReservationViewController {
     func setupConstraints() {
         setupHotelInfoBackgroundView()
         setupHotelInfoStackView()
+        setupTripInfoBackgroundInfo()
+        setupTripInfoStackView()
     }
     
     func setupHotelInfoBackgroundView() {
@@ -81,7 +93,7 @@ private extension ReservationViewController {
             hotelInfoBackgroundView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: UIConstants.mediumInset),
             hotelInfoBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hotelInfoBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hotelInfoBackgroundView.bottomAnchor.constraint(equalTo: hotelInfoStackView.bottomAnchor, constant: UIConstants.sideInset),
+            hotelInfoBackgroundView.bottomAnchor.constraint(equalTo: hotelInfoStackView.bottomAnchor, constant: UIConstants.sideInset)
         ])
     }
     
@@ -90,6 +102,23 @@ private extension ReservationViewController {
             hotelInfoStackView.topAnchor.constraint(equalTo: hotelInfoBackgroundView.topAnchor, constant: UIConstants.sideInset),
             hotelInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
             hotelInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
+        ])
+    }
+    
+    func setupTripInfoBackgroundInfo() {
+        NSLayoutConstraint.activate([
+            tripInfoBackgroundView.topAnchor.constraint(equalTo: hotelInfoBackgroundView.bottomAnchor, constant: UIConstants.mediumInset),
+            tripInfoBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tripInfoBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tripInfoBackgroundView.bottomAnchor.constraint(equalTo: tripInfoStackView.bottomAnchor, constant: UIConstants.sideInset)
+        ])
+    }
+    
+    func setupTripInfoStackView() {
+        NSLayoutConstraint.activate([
+            tripInfoStackView.topAnchor.constraint(equalTo: tripInfoBackgroundView.topAnchor, constant: UIConstants.sideInset),
+            tripInfoStackView.leadingAnchor.constraint(equalTo: tripInfoBackgroundView.leadingAnchor, constant: UIConstants.sideInset),
+            tripInfoStackView.trailingAnchor.constraint(equalTo: tripInfoBackgroundView.trailingAnchor, constant: -UIConstants.sideInset)
         ])
     }
 }

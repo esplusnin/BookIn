@@ -29,8 +29,22 @@ internal enum L10n {
     }
   }
   internal enum ReservationScreen {
+    /// Страна, город
+    internal static let countryCity = L10n.tr("Localizable", "reservationScreen.countryCity", fallback: "Страна, город")
+    /// Даты
+    internal static let dates = L10n.tr("Localizable", "reservationScreen.dates", fallback: "Даты")
+    /// Вылет из
+    internal static let departureFrom = L10n.tr("Localizable", "reservationScreen.departureFrom", fallback: "Вылет из")
+    /// Кол-во ночей
+    internal static let numberOfNights = L10n.tr("Localizable", "reservationScreen.numberOfNights", fallback: "Кол-во ночей")
+    /// Питание
+    internal static let nutrition = L10n.tr("Localizable", "reservationScreen.nutrition", fallback: "Питание")
     /// Бронирование
     internal static let reservation = L10n.tr("Localizable", "reservationScreen.reservation", fallback: "Бронирование")
+    /// Номер
+    internal static let roomName = L10n.tr("Localizable", "reservationScreen.roomName", fallback: "Номер")
+    /// Отель
+    internal static let stackHotelName = L10n.tr("Localizable", "reservationScreen.stackHotelName", fallback: "Отель")
   }
   internal enum RoomScreen {
     /// Подробнее о номере
