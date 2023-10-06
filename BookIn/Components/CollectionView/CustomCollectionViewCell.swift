@@ -2,6 +2,10 @@ import UIKit
 
 final class CustomCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Constants and Variables:
+    private let cellInset: CGFloat = 2
+    private let titleTrailingInset: CGFloat = 28
+    
     // MARK: - UI:
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -11,11 +15,17 @@ final class CustomCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var accessoryImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Resources.Images.tableViewCellAccesoryType.withTintColor(.universalBlue, renderingMode: .alwaysOriginal)
+        
+        return imageView
+    }()
+    
     // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        setupTitleLabelConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -25,11 +35,32 @@ final class CustomCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Methods:
     func setupTitleLabel(with name: String) {
         titleLabel.text = name
+        setupTitleLabelConstraints(isLastCell: false)
     }
     
     func setupLastCell() {
         backgroundColor = .universalLightBlue
+        titleLabel.text = L10n.RoomScreen.aboutTheRoom
         titleLabel.textColor = .universalBlue
+        
+        setupAccessoryImageView()
+        setupTitleLabelConstraints(isLastCell: true)
+    }
+    
+    // MARK: - Private Methods:
+    private func setupAccessoryImageView() {
+        setupView(accessoryImageView)
+        
+        accessoryImageView.image?.withTintColor(.universalBlue, renderingMode: .alwaysOriginal)
+        
+        NSLayoutConstraint.activate([
+            accessoryImageView.heightAnchor.constraint(equalToConstant: 20),
+            accessoryImageView.widthAnchor.constraint(equalToConstant: 12),
+            accessoryImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.largeInset)
+        ])
+        
+        layoutIfNeeded()
     }
 }
 
@@ -41,12 +72,13 @@ private extension CustomCollectionViewCell {
         contentView.setupView(titleLabel)
     }
     
-    func setupTitleLabelConstraints() {
+    func setupTitleLabelConstraints(isLastCell: Bool) {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: UIConstants.smallInset),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.largeInset),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIConstants.smallInset),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.largeInset)
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                 constant: isLastCell ? -titleTrailingInset : -UIConstants.largeInset)
         ])
     }
 }

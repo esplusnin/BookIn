@@ -138,11 +138,11 @@ class HotelViewController: UIViewController {
     private func bind() {
         viewModel.hotelModelPublisher
             .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
-            .sink(receiveValue: { [weak self] model in
+            .sink { [weak self] model in
                 guard let self,
                       let model else { return }
                 self.setHotelInfo(with: model)
-            })
+            }
             .store(in: &cancellable)
     }
     
@@ -310,7 +310,6 @@ private extension HotelViewController {
     
     func setupChooseRoomButtonConstraints() {
         NSLayoutConstraint.activate([
-            chooseRoomButton.heightAnchor.constraint(equalToConstant: LocalUIConstants.chooseButtonHeight),
             chooseRoomButton.topAnchor.constraint(equalTo: buttonBackgroundView.topAnchor, constant: LocalUIConstants.buttonBackgroundViewTopInset),
             chooseRoomButton.leadingAnchor.constraint(equalTo: buttonBackgroundView.leadingAnchor, constant: UIConstants.sideInset),
             chooseRoomButton.trailingAnchor.constraint(equalTo: buttonBackgroundView.trailingAnchor, constant: -UIConstants.sideInset)

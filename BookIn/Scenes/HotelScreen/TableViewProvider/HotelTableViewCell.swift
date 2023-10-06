@@ -30,7 +30,7 @@ final class HotelTableViewCell: UITableViewCell {
     
     private lazy var accessoryImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Resources.Images.tableViewCellAccesoryType
+        imageView.image = Resources.Images.tableViewCellAccesoryType.withTintColor(.universalBlackPrimary, renderingMode: .alwaysOriginal)
         
         return imageView
     }()

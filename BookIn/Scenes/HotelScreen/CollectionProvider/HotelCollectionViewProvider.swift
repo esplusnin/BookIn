@@ -50,6 +50,7 @@ extension HotelCollectionViewProvider: UICollectionViewDataSource {
             ofKind: kind,
             withReuseIdentifier: id,
             for: indexPath) as? CustomCollectionViewReusableView else { return UICollectionReusableView() }
+        
         reusableView.setupLabel(with: text ?? "", isTitle: isTitle)
         
         return reusableView

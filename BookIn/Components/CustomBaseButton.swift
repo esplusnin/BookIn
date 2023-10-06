@@ -2,11 +2,15 @@ import UIKit
 
 final class CustomBaseButton: UIButton {
     
+    // MARK: - Constants and Variables:
+    private let buttonHeight: CGFloat = 48
+    
     // MARK: - Lifecycle:
     init(with text: String) {
         super.init(frame: .zero)
         setTitle(text, for: .normal)
         setupViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -28,11 +32,15 @@ final class CustomBaseButton: UIButton {
 }
 
 // MARK: - Setup Views:
-extension CustomBaseButton {
-    private func setupViews() {
+private extension CustomBaseButton {
+    func setupViews() {
         layer.cornerRadius = UIConstants.largeCornerRadius
         backgroundColor = .universalBlue
         titleLabel?.textColor = .universalWhite
         titleLabel?.font = .smallTitleFont
+    }
+    
+    func setupConstraints() {
+        heightAnchor.constraint(equalToConstant: buttonHeight).isActive = true
     }
 }

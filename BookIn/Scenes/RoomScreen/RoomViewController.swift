@@ -1,14 +1,24 @@
+import Combine
 import UIKit
 
 final class RoomViewController: UIViewController {
     
     // MARK: - Dependencies:
     private let coordinator: CoordinatorProtocol?
+    private let viewModel: RoomViewModelProtocol
+    
+    // MARK: - Classes:
+    private let roomTableViewProvider = RoomTableViewProvider()
+    
+    // MARK: - Constants and Variables:
+    private var cancellable = Set<AnyCancellable>()
     
     // MARK: - UI:
     private lazy var roomsTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(RoomTableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.roomTableViewCell)
+        tableView.dataSource = roomTableViewProvider
+        tableView.delegate = roomTableViewProvider
         tableView.backgroundColor = .clear
         
         return tableView
@@ -17,8 +27,9 @@ final class RoomViewController: UIViewController {
     private var customNavigationBar: CustomNavigationBar
     
     // MARK: - Lifecycle:
-    init(coordinator: CoordinatorProtocol?, hotelName: String) {
+    init(coordinator: CoordinatorProtocol?, viewModel: RoomViewModelProtocol, hotelName: String) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         self.customNavigationBar = CustomNavigationBar(coordinator: coordinator, title: hotelName, isBackButton: true)
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,6 +42,29 @@ final class RoomViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        
+        bind()
+        viewModel.getAccomodationModel()
+    }
+    
+    // MARK: - Private Methods:
+    private func bind() {
+        viewModel.accomodationPublisher
+            .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
+            .sink { [weak self] accomodation in
+                guard let self,
+                      let accomodation else { return }
+                self.updateRoomsInfo(with: accomodation)
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func updateRoomsInfo(with model: Accomodation) {
+        DispatchQueue.main.async {
+            self.roomTableViewProvider.setupAccomodation(model: model)
+            self.roomsTableView.reloadData()
+            self.unblockUI()
+        }
     }
 }
 
@@ -48,7 +82,7 @@ private extension RoomViewController {
         NSLayoutConstraint.activate([
             roomsTableView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor),
             roomsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            roomsTableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            roomsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             roomsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }

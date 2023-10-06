@@ -17,6 +17,7 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
     }
     
     func getRoomViewController(with hotelName: String) -> RoomViewController {
-        return RoomViewController(coordinator: coordinator, hotelName: hotelName)
+        let viewModel = RoomViewModel(networkClient: networkClient)
+        return RoomViewController(coordinator: coordinator,viewModel: viewModel, hotelName: hotelName)
     }
 }

@@ -7,6 +7,7 @@ final class RoomTableViewCell: UITableViewCell {
     
     // MARK: - Constants and Variables:
     private let priceLabelsInset: CGFloat = 3
+    private let collectionHeight: CGFloat = 120
     
     private var roomModel: Room? {
         didSet {
@@ -20,6 +21,15 @@ final class RoomTableViewCell: UITableViewCell {
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CustomCollectionViewCell.self,
+                                forCellWithReuseIdentifier: Resources.Identifiers.roomCollectionViewCell)
+        collectionView.register(CustomCollectionViewReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: Resources.Identifiers.roomCollectionViewHeader)
+        collectionView.dataSource = roomTableViewCellCollectionViewProvider
+        collectionView.delegate = roomTableViewCellCollectionViewProvider
+        collectionView.isScrollEnabled = false
+        collectionView.backgroundColor = .clear
         
         return collectionView
     }()
@@ -56,6 +66,11 @@ final class RoomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        guard let lastCell = roomCollectionView.visibleCells.last else { return }
+        priceLabel.topAnchor.constraint(equalTo: lastCell.bottomAnchor, constant: UIConstants.sideInset).isActive = true
+    }
+    
     // MARK: - Public Methods:
     func setupRoom(model: Room) {
         self.roomModel = model
@@ -67,16 +82,17 @@ final class RoomTableViewCell: UITableViewCell {
         
         roomTableViewCellCollectionViewProvider.setupRoomModel(with: roomModel)
         customPresenterScrollView.setupImagesURLs(with: roomModel.imageURLs)
+        
+        priceLabel.text = "\(roomModel.price)"
+        priceDescriptionLabel.text = roomModel.pricePer
     }
 }
 
 // MARK: - Setup Views:
 private extension RoomTableViewCell {
     func setupViews() {
-        backgroundColor = .clear
-        
         [customBackgroundView, customPresenterScrollView, roomCollectionView,
-         priceLabel, priceDescriptionLabel].forEach(contentView.setupView)
+         priceLabel, priceDescriptionLabel, chooseRoomButton].forEach(contentView.setupView)
     }
     
     func setupConstraints() {
@@ -85,13 +101,15 @@ private extension RoomTableViewCell {
         setupRoomCollectionViewConstraints()
         setupPriceLabelConstraints()
         setupPriceDescriptionLabelConstraints()
+        setupChooseRoomButtonConstraints()
     }
     
     func setupBackgroundViewConstraints() {
         NSLayoutConstraint.activate([
             customBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: UIConstants.mediumInset),
-            customBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            customBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            customBackgroundView.leadingAnchor.constraint(equalTo:  leadingAnchor),
+            customBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            customBackgroundView.bottomAnchor.constraint(equalTo: chooseRoomButton.bottomAnchor, constant: UIConstants.sideInset)
         ])
     }
     
@@ -99,14 +117,14 @@ private extension RoomTableViewCell {
         NSLayoutConstraint.activate([
             customPresenterScrollView.heightAnchor.constraint(equalToConstant: UIConstants.viewHeight),
             customPresenterScrollView.topAnchor.constraint(equalTo: customBackgroundView.topAnchor, constant: UIConstants.sideInset),
-            customPresenterScrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            customPresenterScrollView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            customPresenterScrollView.leadingAnchor.constraint(equalTo: customBackgroundView.leadingAnchor),
+            customPresenterScrollView.trailingAnchor.constraint(equalTo: customBackgroundView.trailingAnchor)
         ])
     }
     
     func setupRoomCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            roomCollectionView.heightAnchor.constraint(equalToConstant: 50),
+            roomCollectionView.heightAnchor.constraint(equalToConstant: collectionHeight),
             roomCollectionView.topAnchor.constraint(equalTo: customPresenterScrollView.bottomAnchor, constant: UIConstants.mediumInset),
             roomCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             roomCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
@@ -123,6 +141,14 @@ private extension RoomTableViewCell {
             priceDescriptionLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: UIConstants.mediumInset),
             priceDescriptionLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: -priceLabelsInset),
             priceDescriptionLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -UIConstants.sideInset)
+        ])
+    }
+    
+    func setupChooseRoomButtonConstraints() {
+        NSLayoutConstraint.activate([
+            chooseRoomButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: UIConstants.sideInset),
+            chooseRoomButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.sideInset),
+            chooseRoomButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.sideInset)
         ])
     }
 }

@@ -22,19 +22,18 @@ final class CustomPresenterScrollView: UIScrollView {
     private func setupScrollView() {
         guard let imagesURLs,
               let superview else { return }
-        
         setupViews()
         
         let viewWidth = Int(superview.frame.width)
         let sidesInsets = Int(UIConstants.sideInset * 2)
         
         contentSize = CGSize(width: CGFloat(viewWidth) * CGFloat(imagesURLs.count), height: bounds.height)
-        
+
         for number in 0..<imagesURLs.count {
             let photoImageView = UIImageView(frame: CGRect(x: viewWidth * number + Int(UIConstants.sideInset),
                                                            y: 0,
                                                            width: viewWidth - sidesInsets,
-                                                           height: Int(bounds.height)))
+                                                           height: Int(UIConstants.viewHeight)))
             addSubview(photoImageView)
             
             downloadPhotoImageView(with: imagesURLs[number], in: photoImageView)

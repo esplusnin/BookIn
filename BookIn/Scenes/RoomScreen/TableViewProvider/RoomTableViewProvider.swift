@@ -5,7 +5,7 @@ final class RoomTableViewProvider: NSObject {
     // MARK: - Constants and Variables:
     private var accomodation: Accomodation?
     
-    private let cellHeight: CGFloat = 539
+    private let cellHeight: CGFloat = 560
     
     // MARK: - Public Methods:
     func setupAccomodation(model: Accomodation) {
