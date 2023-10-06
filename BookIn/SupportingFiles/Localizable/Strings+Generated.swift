@@ -28,6 +28,10 @@ internal enum L10n {
       internal static let notIncludes = L10n.tr("Localizable", "hotelScreen.tableView.notIncludes", fallback: "Что не включено")
     }
   }
+  internal enum ReservationScreen {
+    /// Бронирование
+    internal static let reservation = L10n.tr("Localizable", "reservationScreen.reservation", fallback: "Бронирование")
+  }
   internal enum RoomScreen {
     /// Подробнее о номере
     internal static let aboutTheRoom = L10n.tr("Localizable", "roomScreen.aboutTheRoom", fallback: "Подробнее о номере")

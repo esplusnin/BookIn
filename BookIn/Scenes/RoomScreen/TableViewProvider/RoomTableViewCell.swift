@@ -2,6 +2,9 @@ import UIKit
 
 final class RoomTableViewCell: UITableViewCell {
     
+    // MARK: - Dependencies:
+    private var coordinator: CoordinatorProtocol?
+    
     // MARK: - Classes:
     private let roomTableViewCellCollectionViewProvider = RoomTableViewCellCollectionViewProvider()
     
@@ -60,6 +63,7 @@ final class RoomTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
+        setupTargets()
     }
        
     required init?(coder: NSCoder) {
@@ -72,6 +76,10 @@ final class RoomTableViewCell: UITableViewCell {
     }
     
     // MARK: - Public Methods:
+    func setupCoordinator(from coordinator: CoordinatorProtocol?) {
+        self.coordinator = coordinator
+    }
+
     func setupRoom(model: Room) {
         self.roomModel = model
     }
@@ -85,6 +93,11 @@ final class RoomTableViewCell: UITableViewCell {
         
         priceLabel.text = "\(roomModel.price)"
         priceDescriptionLabel.text = roomModel.pricePer
+    }
+    
+    // MARK: - Objc Methods:
+    @objc private func goToReservationViewController() {
+        coordinator?.goToReservationViewController()
     }
 }
 
@@ -150,5 +163,12 @@ private extension RoomTableViewCell {
             chooseRoomButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.sideInset),
             chooseRoomButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.sideInset)
         ])
+    }
+}
+
+// MARK: - Setup Targets:
+extension RoomTableViewCell {
+    private func setupTargets() {
+        chooseRoomButton.addTarget(self, action: #selector(goToReservationViewController), for: .touchUpInside)
     }
 }

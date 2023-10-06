@@ -58,7 +58,7 @@ final class HotelTableViewCell: UITableViewCell {
 // MARK: - Setup Views:
 private extension HotelTableViewCell {
     func setupViews() {
-        backgroundColor = .universalLightGray
+        backgroundColor = .univarsalViewBackground
         isUserInteractionEnabled = false
         
         [cellImageView, titleLabel, descriptionLabel, accessoryImageView].forEach(contentView.setupView)

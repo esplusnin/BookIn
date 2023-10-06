@@ -95,7 +95,7 @@ class HotelViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: UIConstants.sideInset, bottom: 0, right: UIConstants.sideInset)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-        tableView.backgroundColor = .universalLightGray
+        tableView.backgroundColor = .univarsalViewBackground
         tableView.layer.cornerRadius = UIConstants.largeCornerRadius
         
         return tableView
@@ -137,7 +137,6 @@ class HotelViewController: UIViewController {
     // MARK: - Private Methods:
     private func bind() {
         viewModel.hotelModelPublisher
-            .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
             .sink { [weak self] model in
                 guard let self,
                       let model else { return }
@@ -197,7 +196,7 @@ class HotelViewController: UIViewController {
 private extension HotelViewController {
     func setupViews() {
         navigationController?.navigationBar.isHidden = true
-        view.backgroundColor = .universalLightGray
+        view.backgroundColor = .univarsalViewBackground
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(mainHotelInfoStackView.addArrangedSubview)

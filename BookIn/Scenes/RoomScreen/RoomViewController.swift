@@ -50,7 +50,6 @@ final class RoomViewController: UIViewController {
     // MARK: - Private Methods:
     private func bind() {
         viewModel.accomodationPublisher
-            .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
             .sink { [weak self] accomodation in
                 guard let self,
                       let accomodation else { return }
@@ -62,6 +61,7 @@ final class RoomViewController: UIViewController {
     private func updateRoomsInfo(with model: Accomodation) {
         DispatchQueue.main.async {
             self.roomTableViewProvider.setupAccomodation(model: model)
+            self.roomTableViewProvider.setupCoordinator(from: self.coordinator)
             self.roomsTableView.reloadData()
             self.unblockUI()
         }
@@ -71,7 +71,7 @@ final class RoomViewController: UIViewController {
 // MARK: - Setup Views:
 private extension RoomViewController {
     func setupViews() {
-        view.backgroundColor = .universalLightGray
+        view.backgroundColor = .univarsalViewBackground
         
         [customNavigationBar, roomsTableView].forEach(view.setupView)
         

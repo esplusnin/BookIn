@@ -14,8 +14,8 @@ final class AppCoordinator: CoordinatorProtocol {
     
     // MARK: - Public Methods:
     func start() {
-        let hotelViewController = viewControllerFactory.getHotelViewController()
-        navigationController.pushViewController(hotelViewController, animated: true)
+        let viewController = viewControllerFactory.getHotelViewController()
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func goBack() {
@@ -23,7 +23,12 @@ final class AppCoordinator: CoordinatorProtocol {
     }
    
     func goToRoomViewController(with hotelName: String) {
-        let roomViewController = viewControllerFactory.getRoomViewController(with: hotelName)
-        navigationController.pushViewController(roomViewController, animated: true)
+        let viewController = viewControllerFactory.getRoomViewController(with: hotelName)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToReservationViewController() {
+        let viewController = viewControllerFactory.getReservationViewController()
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

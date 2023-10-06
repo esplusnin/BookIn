@@ -2,6 +2,9 @@ import UIKit
 
 final class RoomTableViewProvider: NSObject {
     
+    // MARK: - Dependencies:
+    private var coordinator: CoordinatorProtocol?
+    
     // MARK: - Constants and Variables:
     private var accomodation: Accomodation?
     
@@ -10,6 +13,10 @@ final class RoomTableViewProvider: NSObject {
     // MARK: - Public Methods:
     func setupAccomodation(model: Accomodation) {
         accomodation = model
+    }
+    
+    func setupCoordinator(from coordinator: CoordinatorProtocol?) {
+        self.coordinator = coordinator
     }
 }
 
@@ -25,6 +32,7 @@ extension RoomTableViewProvider: UITableViewDataSource {
             for: indexPath) as? RoomTableViewCell else { return UITableViewCell() }
         
         if let accomodation {
+            cell.setupCoordinator(from: coordinator)
             cell.setupRoom(model: accomodation.rooms[indexPath.row])
         }
         

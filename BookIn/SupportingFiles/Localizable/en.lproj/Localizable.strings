@@ -10,3 +10,6 @@
 // MARK: - Room Screen:
 "roomScreen.aboutTheRoom" = "Подробнее о номере";
 "roomScreen.chooseTheRoom" = "Выбрать номер";
+
+// MARK: - Reservation Screen:
+"reservationScreen.reservation" = "Бронирование";

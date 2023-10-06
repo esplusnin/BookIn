@@ -20,4 +20,8 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
         let viewModel = RoomViewModel(networkClient: networkClient)
         return RoomViewController(coordinator: coordinator,viewModel: viewModel, hotelName: hotelName)
     }
+    
+    func getReservationViewController() -> ReservationViewController {
+        ReservationViewController(coordinator: coordinator)
+    }
 }
