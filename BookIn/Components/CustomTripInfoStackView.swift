@@ -3,6 +3,11 @@ import UIKit
 final class CustomTripInfoStackView: UIStackView {
     
     // MARK: - Constants and Variables:
+    private var tripModel: Trip? {
+        didSet {
+            setupTripInfo()
+        }
+    }
     
     // MARK: - UI:
     private lazy var departureFromLabel: UILabel = {
@@ -70,6 +75,24 @@ final class CustomTripInfoStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public Methods:
+    func setupTrip(with model: Trip) {
+        tripModel = model
+    }
+    
+    // MARK: - Private Methods:
+    private func setupTripInfo() {
+        guard let tripModel else { return }
+        
+        departureFromFormLabel.text = tripModel.departure
+        countryCityFormLabel.text = tripModel.arrivalCountry
+        datesFormLabel.text = tripModel.tourDateStart + " – " + tripModel.tourDateStop
+        numberOfNightsFormLabell.text = "\(tripModel.numberOfNights)" + L10n.ReservationScreen.numberOfNightsForm
+        stackHotelNameFormLabell.text = tripModel.hotelName
+        roomNameFormLabel.text = tripModel.room
+        nutritionFormLabel.text = tripModel.nutrition
+    }
 }
 
 // MARK: - Setup Views:
@@ -85,12 +108,14 @@ private extension CustomTripInfoStackView {
          for index in 0..<leftSideLabels.count {
              let stackView = UIStackView()
              stackView.axis = .horizontal
+             stackView.distribution = .fillEqually
              
              leftSideLabels[index].textColor = .universalGray
-             leftSideLabels[index].font = .smallTitleFont
+             leftSideLabels[index].font = .mediumBodyFont
              
              rightSideLabels[index].textColor = .universalBlackPrimary
-             rightSideLabels[index].font = .smallTitleFont
+             rightSideLabels[index].font = .mediumBodyFont
+             rightSideLabels[index].numberOfLines = 0
              
              stackView.addArrangedSubview(leftSideLabels[index])
              stackView.addArrangedSubview(rightSideLabels[index])

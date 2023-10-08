@@ -95,7 +95,7 @@ class HotelViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: UIConstants.sideInset, bottom: 0, right: UIConstants.sideInset)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-        tableView.backgroundColor = .univarsalViewBackground
+        tableView.backgroundColor = .universalGrayBackground
         tableView.layer.cornerRadius = UIConstants.largeCornerRadius
         
         return tableView

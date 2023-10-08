@@ -31,12 +31,16 @@ internal enum L10n {
   internal enum ReservationScreen {
     /// Страна, город
     internal static let countryCity = L10n.tr("Localizable", "reservationScreen.countryCity", fallback: "Страна, город")
+    /// Информация о покупателе
+    internal static let customerInfo = L10n.tr("Localizable", "reservationScreen.customerInfo", fallback: "Информация о покупателе")
     /// Даты
     internal static let dates = L10n.tr("Localizable", "reservationScreen.dates", fallback: "Даты")
     /// Вылет из
     internal static let departureFrom = L10n.tr("Localizable", "reservationScreen.departureFrom", fallback: "Вылет из")
     /// Кол-во ночей
     internal static let numberOfNights = L10n.tr("Localizable", "reservationScreen.numberOfNights", fallback: "Кол-во ночей")
+    ///  ночей
+    internal static let numberOfNightsForm = L10n.tr("Localizable", "reservationScreen.numberOfNightsForm", fallback: " ночей")
     /// Питание
     internal static let nutrition = L10n.tr("Localizable", "reservationScreen.nutrition", fallback: "Питание")
     /// Бронирование
@@ -45,6 +49,28 @@ internal enum L10n {
     internal static let roomName = L10n.tr("Localizable", "reservationScreen.roomName", fallback: "Номер")
     /// Отель
     internal static let stackHotelName = L10n.tr("Localizable", "reservationScreen.stackHotelName", fallback: "Отель")
+    internal enum Customer {
+      /// Граждансво
+      internal static let citizenship = L10n.tr("Localizable", "reservationScreen.customer.citizenship", fallback: "Граждансво")
+      /// Дата рождения
+      internal static let dateOfBirhtday = L10n.tr("Localizable", "reservationScreen.customer.dateOfBirhtday", fallback: "Дата рождения")
+      /// Почта
+      internal static let email = L10n.tr("Localizable", "reservationScreen.customer.email", fallback: "Почта")
+      /// Имя
+      internal static let name = L10n.tr("Localizable", "reservationScreen.customer.name", fallback: "Имя")
+      /// Срок действия загранпаспорта
+      internal static let passportDuration = L10n.tr("Localizable", "reservationScreen.customer.passportDuration", fallback: "Срок действия загранпаспорта")
+      /// Номер загранпаспорта
+      internal static let passportNumber = L10n.tr("Localizable", "reservationScreen.customer.passportNumber", fallback: "Номер загранпаспорта")
+      /// Номер телефона
+      internal static let phoneNumber = L10n.tr("Localizable", "reservationScreen.customer.phoneNumber", fallback: "Номер телефона")
+      /// Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту
+      internal static let privacy = L10n.tr("Localizable", "reservationScreen.customer.privacy", fallback: "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту")
+      /// Фамилия
+      internal static let surname = L10n.tr("Localizable", "reservationScreen.customer.surname", fallback: "Фамилия")
+      /// турист
+      internal static let tourist = L10n.tr("Localizable", "reservationScreen.customer.tourist", fallback: "турист")
+    }
   }
   internal enum RoomScreen {
     /// Подробнее о номере

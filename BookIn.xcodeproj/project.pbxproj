@@ -40,6 +40,8 @@
 		7E2CF7722ACC7352008F3BA0 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */; };
 		7ED110692ACFD62000A1D1D6 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */; };
 		7ED1106C2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */; };
+		7ED1106E2AD005FF00A1D1D6 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1106D2AD005FF00A1D1D6 /* Trip.swift */; };
+		7ED110742AD014D200A1D1D6 /* CustomInputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED110732AD014D200A1D1D6 /* CustomInputFormView.swift */; };
 		7EECCA2F2ACD38C800883A69 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA2E2ACD38C800883A69 /* ViewControllerFactory.swift */; };
 		7EECCA322ACD38E900883A69 /* ViewControllerFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA312ACD38E900883A69 /* ViewControllerFactoryProtocol.swift */; };
 		7EECCA352ACD393200883A69 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA342ACD393200883A69 /* AppCoordinator.swift */; };
@@ -88,6 +90,8 @@
 		7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTripInfoStackView.swift; sourceTree = "<group>"; };
+		7ED1106D2AD005FF00A1D1D6 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		7ED110732AD014D200A1D1D6 /* CustomInputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputFormView.swift; sourceTree = "<group>"; };
 		7EECCA2E2ACD38C800883A69 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		7EECCA312ACD38E900883A69 /* ViewControllerFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryProtocol.swift; sourceTree = "<group>"; };
 		7EECCA342ACD393200883A69 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -207,13 +211,12 @@
 		7E09800E2AC2D1B8002CC40A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7ED110712AD013F500A1D1D6 /* Buttons */,
 				7E2CF74D2ACACCD9008F3BA0 /* CollectionView */,
-				7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */,
+				7ED1106F2AD013CE00A1D1D6 /* Navigation */,
+				7ED110702AD013E300A1D1D6 /* ScrollView */,
+				7ED110722AD013FA00A1D1D6 /* View */,
 				7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */,
-				7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */,
-				7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */,
-				7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */,
-				7E2CF75E2ACC036A008F3BA0 /* CustomBaseButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				7E2CF7692ACC55E8008F3BA0 /* AboutHotel.swift */,
 				7E2CF7672ACC55D3008F3BA0 /* Hotel.swift */,
 				7EECCA412ACD51B600883A69 /* Rooms.swift */,
+				7ED1106D2AD005FF00A1D1D6 /* Trip.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +310,40 @@
 				7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */,
 			);
 			path = ReservationScreen;
+			sourceTree = "<group>";
+		};
+		7ED1106F2AD013CE00A1D1D6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				7E09800C2AC2D1B5002CC40A /* CustomNavigationBar.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		7ED110702AD013E300A1D1D6 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		7ED110712AD013F500A1D1D6 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				7E2CF75E2ACC036A008F3BA0 /* CustomBaseButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		7ED110722AD013FA00A1D1D6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */,
+				7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */,
+				7ED110732AD014D200A1D1D6 /* CustomInputFormView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		7EECCA302ACD38DD00883A69 /* Coordinator */ = {
@@ -484,6 +522,7 @@
 			files = (
 				7E097FE82AC2C2D1002CC40A /* HotelViewController.swift in Sources */,
 				7EECCA2F2ACD38C800883A69 /* ViewControllerFactory.swift in Sources */,
+				7ED1106E2AD005FF00A1D1D6 /* Trip.swift in Sources */,
 				7EECCA322ACD38E900883A69 /* ViewControllerFactoryProtocol.swift in Sources */,
 				7EECCA372ACD394C00883A69 /* CoordinatorProtocol.swift in Sources */,
 				7E097FFB2AC2C7F7002CC40A /* UIColors + Extension.swift in Sources */,
@@ -505,6 +544,7 @@
 				7E2CF74C2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift in Sources */,
 				7EECCA3F2ACD4F8A00883A69 /* RoomTableViewCell.swift in Sources */,
 				7E2CF75D2ACAFE26008F3BA0 /* HotelTableViewCell.swift in Sources */,
+				7ED110742AD014D200A1D1D6 /* CustomInputFormView.swift in Sources */,
 				7E0980142AC2D8D4002CC40A /* CustomPresenterScrollView.swift in Sources */,
 				7ED110692ACFD62000A1D1D6 /* ReservationViewController.swift in Sources */,
 				7E2CF7612ACC2960008F3BA0 /* NetworkClient.swift in Sources */,
