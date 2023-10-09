@@ -5,6 +5,9 @@ final class ReservationViewController: UIViewController {
     // MARK: - Dependencies:
     private let coordinator: CoordinatorProtocol?
     
+    // MARK: - Classes:
+    private let touristsTableViewProvider = TouristsTableViewProvider()
+    
     // MARK: - Constants and Variables:
     private let aboutCustomerInset: CGFloat = 20
     
@@ -78,10 +81,24 @@ final class ReservationViewController: UIViewController {
         return stackView
     }()
     
+    private lazy var touristsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(TouristsTableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.touristsTableViewCell)
+        tableView.register(ExpandableTableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: Resources.Identifiers.reservationTableView)
+        tableView.dataSource = touristsTableViewProvider
+        tableView.delegate = touristsTableViewProvider
+        tableView.isScrollEnabled = false
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        
+        return tableView
+    }()
+    
     private lazy var customNavigationBar = CustomNavigationBar(coordinator: coordinator, title: L10n.ReservationScreen.reservation, isBackButton: true)
     private lazy var hotelInfoBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var tripInfoBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var customerInfoBackgroundView = CustomBackgroundView(isRounded: true)
+    private lazy var totalCostBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var customHotelRateView = CustomHotelRateView()
     private lazy var customerPhoneNumberView = CustomInputFormView(state: .number, with: L10n.ReservationScreen.Customer.phoneNumber)
     private lazy var customerEmailView = CustomInputFormView(state: .email, with: L10n.ReservationScreen.Customer.email)
@@ -104,6 +121,7 @@ final class ReservationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        touristsTableViewProvider.viewController = self
         customHotelRateView.setupRatingInfo(with: 5, description: "Превосходно")
         hotelNameLabel.text = "Лучший пятизвездочный отель в Хургаде, Египет"
         hotelLocationButton.setTitle("Madinat Makadi, Safaga Road, Makadi Bay, Египет", for: .normal)
@@ -125,7 +143,36 @@ final class ReservationViewController: UIViewController {
     }
 }
 
-// MARK: - SetupViews:
+// MARK: - ExpandableTableViewHeaderFooterViewDelegate:
+extension ReservationViewController: ExpandableTableViewHeaderFooterViewDelegate {
+    func toggleHeaderView(from section: Int) {
+        switch touristsTableViewProvider.tourists[section].status {
+        case .created:
+            touristsTableViewProvider.tourists[section].changeStatus(to: .wrapped)
+            touristsTableViewProvider.tourists.append(ExpandableMenu(name: "Добавить туриста", status: .created))
+            touristsTableView.insertSections([touristsTableViewProvider.tourists.count - 1], with: .automatic)
+        case .wrapped:
+            touristsTableViewProvider.tourists[section].changeStatus(to: .unwrapped)
+        case .unwrapped:
+            touristsTableViewProvider.tourists[section].changeStatus(to: .wrapped)
+        }
+        
+        touristsTableView.performBatchUpdates { [weak self] in
+            guard let self,
+                  let headerView = self.touristsTableView.headerView(
+                    forSection: section) as? ExpandableTableViewHeaderFooterView else { return }
+            
+            self.touristsTableView.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
+            
+            let name = touristsTableViewProvider.tourists[section].name
+            let status = touristsTableViewProvider.tourists[section].status
+            
+            headerView.setupHeaderView(with: name, state: status, from: section)
+        }
+    }
+}
+
+// MARK: - Setup Views:
 private extension ReservationViewController {
     func setupViews() {
         view.backgroundColor = .univarsalViewBackground
@@ -134,8 +181,8 @@ private extension ReservationViewController {
         [customerPhoneNumberView, customerEmailView, privacyLabel].forEach(aboutCustomerStackView.addArrangedSubview)
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
-        [hotelInfoBackgroundView, hotelInfoStackView, tripInfoBackgroundView,
-         tripInfoStackView, customerInfoBackgroundView, aboutCustomerLabel, aboutCustomerStackView].forEach(mainScreenScrollView.setupView)
+        [hotelInfoBackgroundView, hotelInfoStackView, tripInfoBackgroundView, tripInfoStackView, customerInfoBackgroundView,
+         aboutCustomerLabel, aboutCustomerStackView, touristsTableView, totalCostBackgroundView].forEach(mainScreenScrollView.setupView)
         
         customNavigationBar.setupNavigationBar()
     }
@@ -149,6 +196,8 @@ private extension ReservationViewController {
         setupCustomerInfoBackgroundView()
         setupAboutCustomerLabelConstraints()
         setupAboutCustomerStackViewConstraints()
+        setupTouristsTableViewConstraints()
+        setupTotalCostBackgroundViewConstraints()
     }
     
     func setupMainScreenScrollView() {
@@ -199,7 +248,7 @@ private extension ReservationViewController {
             customerInfoBackgroundView.topAnchor.constraint(equalTo: tripInfoBackgroundView.bottomAnchor, constant: UIConstants.mediumInset),
             customerInfoBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             customerInfoBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            customerInfoBackgroundView.bottomAnchor.constraint(equalTo: aboutCustomerStackView.bottomAnchor, constant: -UIConstants.sideInset)
+            customerInfoBackgroundView.bottomAnchor.constraint(equalTo: aboutCustomerStackView.bottomAnchor, constant: UIConstants.sideInset)
         ])
     }
     
@@ -215,8 +264,26 @@ private extension ReservationViewController {
         NSLayoutConstraint.activate([
             aboutCustomerStackView.topAnchor.constraint(equalTo: aboutCustomerLabel.bottomAnchor, constant: aboutCustomerInset),
             aboutCustomerStackView.leadingAnchor.constraint(equalTo: customerInfoBackgroundView.leadingAnchor, constant: UIConstants.sideInset),
-            aboutCustomerStackView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor, constant: -UIConstants.sideInset),
             aboutCustomerStackView.trailingAnchor.constraint(equalTo: customerInfoBackgroundView.trailingAnchor, constant: -UIConstants.sideInset)
+        ])
+    }
+    
+    func setupTouristsTableViewConstraints() {
+        NSLayoutConstraint.activate([
+            touristsTableView.heightAnchor.constraint(equalToConstant: 800),
+            touristsTableView.topAnchor.constraint(equalTo: customerInfoBackgroundView.bottomAnchor, constant: UIConstants.mediumInset),
+            touristsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            touristsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    func setupTotalCostBackgroundViewConstraints() {
+        NSLayoutConstraint.activate([
+            totalCostBackgroundView.heightAnchor.constraint(equalToConstant: 200),
+            totalCostBackgroundView.topAnchor.constraint(equalTo: touristsTableView.bottomAnchor, constant: UIConstants.mediumInset),
+            totalCostBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.mediumInset),
+            totalCostBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.mediumInset),
+            totalCostBackgroundView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor)
         ])
     }
 }

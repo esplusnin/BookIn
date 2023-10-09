@@ -11,6 +11,16 @@ enum Resources {
         static let tableViewHappyImage = UIImage(named: "emoji-happy") ?? UIImage()
         static let tableViewTickImage = UIImage(named: "tick-square") ?? UIImage()
         static let tableViewCancelImage = UIImage(named: "close-square") ?? UIImage()
+        
+        static let wrappedHeaderViewImage = UIImage(systemName: "chevron.down")?.withTintColor(
+            .universalBlue,
+            renderingMode: .alwaysOriginal) ?? UIImage()
+        static let unwrappedHeaderViewImage = UIImage(systemName: "chevron.up")?.withTintColor(
+            .universalBlue,
+            renderingMode: .alwaysOriginal) ?? UIImage()
+        static let createdHeaderViewImage = UIImage(systemName: "plus")?.withTintColor(
+            .universalWhite,
+            renderingMode: .alwaysOriginal) ?? UIImage()
     }
     
     enum Identifiers {
@@ -25,6 +35,8 @@ enum Resources {
         // TableViews
         static let hotelTableViewCell = "HotelTableViewCell"
         static let roomTableViewCell = "RoomTableViewCell"
+        static let reservationTableView = "ReservationTableView"
+        static let touristsTableViewCell = "TouristsTableViewCell"
     }
     
     enum Network {
