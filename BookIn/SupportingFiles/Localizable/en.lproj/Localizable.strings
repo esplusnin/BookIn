@@ -34,3 +34,9 @@
 "reservationScreen.customer.passportNumber" = "Номер загранпаспорта";
 "reservationScreen.customer.passportDuration" = "Срок действия загранпаспорта";
 
+"reservationScreen.totalSum.tourPrice" = "Тур";
+"reservationScreen.totalSum.fuelFee" = "Топливный сбор";
+"reservationScreen.totalSum.serviceFee" = "Сервисный сбор";
+"reservationScreen.totalSum.sum" = "К оплате";
+"reservationScreen.totalSum.pay" = "Оплатить";
+

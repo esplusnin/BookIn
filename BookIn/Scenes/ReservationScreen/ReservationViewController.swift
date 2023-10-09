@@ -9,7 +9,13 @@ final class ReservationViewController: UIViewController {
     private let touristsTableViewProvider = TouristsTableViewProvider()
     
     // MARK: - Constants and Variables:
-    private let aboutCustomerInset: CGFloat = 20
+    private enum LocalUIConstants {
+        static let aboutCustomerInset: CGFloat = 20
+        static let bottomInset: CGFloat = 10
+        static let mediumInset: CGFloat = 12
+        static let buttonBackgroundViewHeight: CGFloat = 500
+        static let buttonBackgroundViewOutInset: CGFloat = 88
+    }
     
     // MARK: - UI:
     private lazy var mainScreenScrollView: UIScrollView = {
@@ -81,13 +87,15 @@ final class ReservationViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var touristsTableView: UITableView = {
-        let tableView = UITableView()
+    private lazy var touristsTableView: ContentSizedTableView = {
+        let tableView = ContentSizedTableView()
         tableView.register(TouristsTableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.touristsTableViewCell)
         tableView.register(ExpandableTableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: Resources.Identifiers.reservationTableView)
         tableView.dataSource = touristsTableViewProvider
         tableView.delegate = touristsTableViewProvider
+        tableView.sectionHeaderTopPadding = UIConstants.mediumInset
         tableView.isScrollEnabled = false
+        tableView.contentMode = .top
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         
@@ -98,10 +106,13 @@ final class ReservationViewController: UIViewController {
     private lazy var hotelInfoBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var tripInfoBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var customerInfoBackgroundView = CustomBackgroundView(isRounded: true)
-    private lazy var totalCostBackgroundView = CustomBackgroundView(isRounded: true)
+    private lazy var totalSumOfTripBackgroundView = CustomBackgroundView(isRounded: true)
+    private lazy var toPayButtonBackgroundView = CustomBackgroundView(isRounded: false)
     private lazy var customHotelRateView = CustomHotelRateView()
     private lazy var customerPhoneNumberView = CustomInputFormView(state: .number, with: L10n.ReservationScreen.Customer.phoneNumber)
     private lazy var customerEmailView = CustomInputFormView(state: .email, with: L10n.ReservationScreen.Customer.email)
+    private lazy var customTotalSumOfTripStackView = CustomTotalSumOfTripStackView()
+    private lazy var toPayButton = CustomBaseButton(with: L10n.ReservationScreen.TotalSum.pay)
     
     // MARK: - Lifecycle:
     init(coordinator: CoordinatorProtocol?) {
@@ -125,21 +136,23 @@ final class ReservationViewController: UIViewController {
         customHotelRateView.setupRatingInfo(with: 5, description: "Превосходно")
         hotelNameLabel.text = "Лучший пятизвездочный отель в Хургаде, Египет"
         hotelLocationButton.setTitle("Madinat Makadi, Safaga Road, Makadi Bay, Египет", for: .normal)
+        let trip = Trip(id: 1,
+                        hotelName: "Лучший пятизвездочный отель в Хургаде, Египет",
+                        hotelAdress: "Madinat Makadi, Safaga Road, Makadi Bay, Египет",
+                        horating: 1,
+                        ratingName: "5",
+                        departure: "Россия, Москва",
+                        arrivalCountry: "Египет",
+                        tourDateStart: "19.02.2023",
+                        tourDateStop: "25.02.2023",
+                        numberOfNights: 6, room: "Luxe title",
+                        nutrition: "Все включено",
+                        tourPrice: 186600,
+                        fuelCharge: 9300,
+                        serviceCharge: 2136)
+        tripInfoStackView.setupTrip(with: trip)
+        customTotalSumOfTripStackView.setupTripCostInfo(from: trip)
         
-        tripInfoStackView.setupTrip(with: Trip(id: 1,
-                                               hotelName: "Лучший пятизвездочный отель в Хургаде, Египет",
-                                               hotelAdress: "Madinat Makadi, Safaga Road, Makadi Bay, Египет",
-                                               horating: 1,
-                                               ratingName: "5",
-                                               departure: "Россия, Москва",
-                                               arrivalCountry: "Египет",
-                                               tourDateStart: "19.02.2023",
-                                               tourDateStop: "25.02.2023",
-                                               numberOfNights: 6, room: "Luxe title",
-                                               nutrition: "Все включено",
-                                               tourPrice: 123123112,
-                                               fuelCharge: 12311,
-                                               serviceCharge: 123))
     }
 }
 
@@ -182,7 +195,8 @@ private extension ReservationViewController {
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
         [hotelInfoBackgroundView, hotelInfoStackView, tripInfoBackgroundView, tripInfoStackView, customerInfoBackgroundView,
-         aboutCustomerLabel, aboutCustomerStackView, touristsTableView, totalCostBackgroundView].forEach(mainScreenScrollView.setupView)
+         aboutCustomerLabel, aboutCustomerStackView, touristsTableView, totalSumOfTripBackgroundView,
+         customTotalSumOfTripStackView, toPayButtonBackgroundView, toPayButton].forEach(mainScreenScrollView.setupView)
         
         customNavigationBar.setupNavigationBar()
     }
@@ -197,7 +211,10 @@ private extension ReservationViewController {
         setupAboutCustomerLabelConstraints()
         setupAboutCustomerStackViewConstraints()
         setupTouristsTableViewConstraints()
-        setupTotalCostBackgroundViewConstraints()
+        setupTotalSumOfTripBackgroundViewConstraints()
+        setupTotalSumOfTripStackView()
+        setupToPayButtonBackgroundViewConstraints()
+        setupToPayButtonConstraints()
     }
     
     func setupMainScreenScrollView() {
@@ -262,7 +279,7 @@ private extension ReservationViewController {
     
     func setupAboutCustomerStackViewConstraints() {
         NSLayoutConstraint.activate([
-            aboutCustomerStackView.topAnchor.constraint(equalTo: aboutCustomerLabel.bottomAnchor, constant: aboutCustomerInset),
+            aboutCustomerStackView.topAnchor.constraint(equalTo: aboutCustomerLabel.bottomAnchor, constant: LocalUIConstants.aboutCustomerInset),
             aboutCustomerStackView.leadingAnchor.constraint(equalTo: customerInfoBackgroundView.leadingAnchor, constant: UIConstants.sideInset),
             aboutCustomerStackView.trailingAnchor.constraint(equalTo: customerInfoBackgroundView.trailingAnchor, constant: -UIConstants.sideInset)
         ])
@@ -270,20 +287,44 @@ private extension ReservationViewController {
     
     func setupTouristsTableViewConstraints() {
         NSLayoutConstraint.activate([
-            touristsTableView.heightAnchor.constraint(equalToConstant: 800),
             touristsTableView.topAnchor.constraint(equalTo: customerInfoBackgroundView.bottomAnchor, constant: UIConstants.mediumInset),
             touristsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             touristsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
-    func setupTotalCostBackgroundViewConstraints() {
+    func setupTotalSumOfTripBackgroundViewConstraints() {
         NSLayoutConstraint.activate([
-            totalCostBackgroundView.heightAnchor.constraint(equalToConstant: 200),
-            totalCostBackgroundView.topAnchor.constraint(equalTo: touristsTableView.bottomAnchor, constant: UIConstants.mediumInset),
-            totalCostBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.mediumInset),
-            totalCostBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.mediumInset),
-            totalCostBackgroundView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor)
+            totalSumOfTripBackgroundView.topAnchor.constraint(equalTo: touristsTableView.bottomAnchor, constant: UIConstants.mediumInset),
+            totalSumOfTripBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            totalSumOfTripBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            totalSumOfTripBackgroundView.bottomAnchor.constraint(equalTo: customTotalSumOfTripStackView.bottomAnchor, constant: UIConstants.sideInset),
+            totalSumOfTripBackgroundView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor, constant: -LocalUIConstants.buttonBackgroundViewOutInset)
+        ])
+    }
+    
+    func setupTotalSumOfTripStackView() {
+        NSLayoutConstraint.activate([
+            customTotalSumOfTripStackView.topAnchor.constraint(equalTo: totalSumOfTripBackgroundView.topAnchor, constant: UIConstants.sideInset),
+            customTotalSumOfTripStackView.leadingAnchor.constraint(equalTo: totalSumOfTripBackgroundView.leadingAnchor, constant: UIConstants.sideInset),
+            customTotalSumOfTripStackView.trailingAnchor.constraint(equalTo: totalSumOfTripBackgroundView.trailingAnchor, constant: -UIConstants.sideInset)
+        ])
+    }
+    
+    func setupToPayButtonBackgroundViewConstraints() {
+        NSLayoutConstraint.activate([
+            toPayButtonBackgroundView.heightAnchor.constraint(equalToConstant: LocalUIConstants.buttonBackgroundViewHeight),
+            toPayButtonBackgroundView.topAnchor.constraint(equalTo: totalSumOfTripBackgroundView.bottomAnchor, constant: LocalUIConstants.bottomInset),
+            toPayButtonBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toPayButtonBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    func setupToPayButtonConstraints() {
+        NSLayoutConstraint.activate([
+            toPayButton.topAnchor.constraint(equalTo: toPayButtonBackgroundView.topAnchor, constant: LocalUIConstants.mediumInset),
+            toPayButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
+            toPayButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
         ])
     }
 }

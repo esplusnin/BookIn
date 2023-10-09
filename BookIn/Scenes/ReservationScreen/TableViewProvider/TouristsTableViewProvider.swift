@@ -4,9 +4,11 @@ final class TouristsTableViewProvider: NSObject {
     
     // MARK: - Constants and Variables:
     private let headerViewHeight: CGFloat = 58
+    private let cellHeight: CGFloat = 368
+    
     var viewController: ReservationViewController?
     var tourists = [
-        ExpandableMenu(name: "Первый турист", status: .wrapped),
+        ExpandableMenu(name: "Первый турист", status: .unwrapped),
         ExpandableMenu(name: "Второй турист", status: .wrapped),
         ExpandableMenu(name: "Добавить туриста", status: .created)
     ]
@@ -31,13 +33,9 @@ extension TouristsTableViewProvider: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        headerViewHeight
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tourists[indexPath.section].status == .unwrapped {
-            return 430
+            return cellHeight
         } else {
             return 0
         }
@@ -55,5 +53,13 @@ extension TouristsTableViewProvider: UITableViewDelegate {
         headerView.setupHeaderView(with: tourists[section].name, state: tourists[section].status, from: section)
         
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        headerViewHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        .leastNormalMagnitude
     }
 }

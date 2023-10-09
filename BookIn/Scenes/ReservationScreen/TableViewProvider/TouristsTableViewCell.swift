@@ -34,12 +34,13 @@ final class TouristsTableViewCell: UITableViewCell {
 // MARK: - Setup Views:
 private extension TouristsTableViewCell {
     func setupViews() {
+        selectionStyle = .none
         backgroundColor = .universalWhite
         
         [nameInputView, surnameInputView, birthdayInputView, citizenshipInputView, passportNumberInputView,
          passportDurationInputView].forEach(cellStackView.addArrangedSubview)
         
-        setupView(cellStackView)
+        contentView.setupView(cellStackView)
     }
     
     func setupConstraints() {
@@ -47,7 +48,7 @@ private extension TouristsTableViewCell {
             cellStackView.topAnchor.constraint(equalTo: topAnchor),
             cellStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.sideInset),
             cellStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.sideInset),
-            cellStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            cellStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIConstants.sideInset)
         ])
         
         [nameInputView, surnameInputView, birthdayInputView, citizenshipInputView, passportNumberInputView,

@@ -43,6 +43,7 @@ final class RoomViewController: UIViewController {
         setupViews()
         setupConstraints()
         
+        blockUI()
         bind()
         viewModel.getAccomodationModel()
     }

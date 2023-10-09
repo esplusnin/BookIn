@@ -274,7 +274,9 @@ private extension HotelViewController {
             hotelDescriptionBackgroundView.topAnchor.constraint(equalTo: hotelBackgroundView.bottomAnchor, constant: UIConstants.mediumInset),
             hotelDescriptionBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hotelDescriptionBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hotelDescriptionBackgroundView.bottomAnchor.constraint(equalTo: hotelTableView.bottomAnchor, constant: UIConstants.sideInset)
+            hotelDescriptionBackgroundView.bottomAnchor.constraint(equalTo: hotelTableView.bottomAnchor, constant: UIConstants.sideInset),
+            hotelDescriptionBackgroundView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor,
+                                                                   constant: -LocalUIConstants.buttonBackgroundViewOutInset)
         ])
     }
     
@@ -292,8 +294,7 @@ private extension HotelViewController {
             hotelTableView.heightAnchor.constraint(equalToConstant: LocalUIConstants.tableHeight),
             hotelTableView.topAnchor.constraint(equalTo: hotelDescriptionCollectionView.bottomAnchor, constant: UIConstants.sideInset),
             hotelTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
-            hotelTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset),
-            hotelTableView.bottomAnchor.constraint(equalTo: mainScreenScrollView.bottomAnchor, constant: -LocalUIConstants.buttonBackgroundViewOutInset)
+            hotelTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
         ])
     }
     

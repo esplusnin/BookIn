@@ -71,6 +71,18 @@ internal enum L10n {
       /// турист
       internal static let tourist = L10n.tr("Localizable", "reservationScreen.customer.tourist", fallback: "турист")
     }
+    internal enum TotalSum {
+      /// Топливный сбор
+      internal static let fuelFee = L10n.tr("Localizable", "reservationScreen.totalSum.fuelFee", fallback: "Топливный сбор")
+      /// Оплатить
+      internal static let pay = L10n.tr("Localizable", "reservationScreen.totalSum.pay", fallback: "Оплатить")
+      /// Сервисный сбор
+      internal static let serviceFee = L10n.tr("Localizable", "reservationScreen.totalSum.serviceFee", fallback: "Сервисный сбор")
+      /// К оплате
+      internal static let sum = L10n.tr("Localizable", "reservationScreen.totalSum.sum", fallback: "К оплате")
+      /// Тур
+      internal static let tourPrice = L10n.tr("Localizable", "reservationScreen.totalSum.tourPrice", fallback: "Тур")
+    }
   }
   internal enum RoomScreen {
     /// Подробнее о номере

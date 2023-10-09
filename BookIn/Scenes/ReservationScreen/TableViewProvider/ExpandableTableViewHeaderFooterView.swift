@@ -114,7 +114,6 @@ private extension ExpandableTableViewHeaderFooterView {
 // MARK: - Setup Targets:
 extension ExpandableTableViewHeaderFooterView {
     private func setupTargets() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(headerViewDidClicked))
-        addGestureRecognizer(gesture)
+        actionButton.addTarget(self, action: #selector(headerViewDidClicked), for: .touchUpInside)
     }
 }
