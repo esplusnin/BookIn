@@ -61,10 +61,17 @@ final class CustomTotalSumOfTripStackView: UIStackView {
     
     // MARK: - Public Methods:
     func setupTripCostInfo(from model: Trip) {
-        tourPriceValueLabel.text = "\(model.tourPrice)"
-        fuelFeeValueLabel.text = "\(model.fuelCharge)"
-        serviceFeeValueLabel.text = "\(model.serviceCharge)"
-        toPayValueLabel.text = "\(model.tourPrice + model.fuelCharge + model.serviceCharge)"
+        let currencyFormattedService = CurrencyFormatterService()
+        
+        let tourPriceString = currencyFormattedService.getCurrencyString(from: model.tourPrice)
+        let fuelChargeString = currencyFormattedService.getCurrencyString(from: model.fuelCharge)
+        let serviceChargeString = currencyFormattedService.getCurrencyString(from: model.serviceCharge)
+        let totalCostString = currencyFormattedService.getCurrencyString(from: model.tourPrice + model.fuelCharge + model.serviceCharge)
+        
+        tourPriceValueLabel.text = tourPriceString
+        fuelFeeValueLabel.text = fuelChargeString
+        serviceFeeValueLabel.text = serviceChargeString
+        toPayValueLabel.text = totalCostString
     }
 }
 

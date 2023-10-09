@@ -87,11 +87,12 @@ final class RoomTableViewCell: UITableViewCell {
     // MARK: - Private Methods:
     private func setupRoomInfo() {
         guard let roomModel else { return }
+        let formattedCurrencyString = CurrencyFormatterService().getCurrencyString(from: roomModel.price)
         
         roomTableViewCellCollectionViewProvider.setupRoomModel(with: roomModel)
         customPresenterScrollView.setupImagesURLs(with: roomModel.imageURLs)
         
-        priceLabel.text = "\(roomModel.price)"
+        priceLabel.text = formattedCurrencyString
         priceDescriptionLabel.text = roomModel.pricePer
     }
     

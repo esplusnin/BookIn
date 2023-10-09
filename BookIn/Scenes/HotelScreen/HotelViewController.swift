@@ -146,12 +146,14 @@ class HotelViewController: UIViewController {
     }
     
     private func setHotelInfo(with model: Hotel) {
+        let formattedCurrencyString = CurrencyFormatterService().getCurrencyString(from: model.minimalPrice)
+        
         DispatchQueue.main.async {
             self.customPresenterScrollView.setupImagesURLs(with: model.imageURLs)
             self.customHotelRateView.setupRatingInfo(with: model.rating, description: model.ratingName)
             self.hotelNameLabel.text = model.name
             self.hotelLocationButton.setTitle(model.adress, for: .normal)
-            self.priceLabel.text = "\(model.minimalPrice)"
+            self.priceLabel.text = L10n.HotelScreen.priceFrom + formattedCurrencyString
             self.priceDescriptionLabel.text = model.priceForIt
             self.refreshControl.endRefreshing()
             self.unblockUI()

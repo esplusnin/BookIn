@@ -19,6 +19,7 @@
 "hotelScreen.tableView.notIncludes" = "Что не включено";
 "hotelScreen.tableView.mostRequires" = "Самое необходимое";
 "hotelScreen.chooseRoomButton" = "К выбору номера";
+"hotelScreen.priceFrom" = "от ";
 
 // MARK: - Room Screen:
 "roomScreen.aboutTheRoom" = "Подробнее о номере";

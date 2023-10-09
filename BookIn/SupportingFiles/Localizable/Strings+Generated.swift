@@ -15,6 +15,8 @@ internal enum L10n {
     internal static let aboutHotel = L10n.tr("Localizable", "hotelScreen.aboutHotel", fallback: "Об отеле")
     /// К выбору номера
     internal static let chooseRoomButton = L10n.tr("Localizable", "hotelScreen.chooseRoomButton", fallback: "К выбору номера")
+    /// от 
+    internal static let priceFrom = L10n.tr("Localizable", "hotelScreen.priceFrom", fallback: "от ")
     /// Отель
     internal static let title = L10n.tr("Localizable", "hotelScreen.title", fallback: "Отель")
     internal enum TableView {
