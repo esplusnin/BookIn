@@ -1,9 +1,11 @@
+import Combine
 import UIKit
 
 final class ReservationViewController: UIViewController {
     
     // MARK: - Dependencies:
     private let coordinator: CoordinatorProtocol?
+    private let viewModel: ReservationViewModelProtocol?
     
     // MARK: - Classes:
     private let touristsTableViewProvider = TouristsTableViewProvider()
@@ -16,6 +18,8 @@ final class ReservationViewController: UIViewController {
         static let buttonBackgroundViewHeight: CGFloat = 500
         static let buttonBackgroundViewOutInset: CGFloat = 88
     }
+    
+    private var cancellable = Set<AnyCancellable>()
     
     // MARK: - UI:
     private lazy var mainScreenScrollView: UIScrollView = {
@@ -115,8 +119,9 @@ final class ReservationViewController: UIViewController {
     private lazy var toPayButton = CustomBaseButton(with: L10n.ReservationScreen.TotalSum.pay)
     
     // MARK: - Lifecycle:
-    init(coordinator: CoordinatorProtocol?) {
+    init(coordinator: CoordinatorProtocol?, viewModel: ReservationViewModelProtocol?) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -128,31 +133,35 @@ final class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        
+        touristsTableViewProvider.setupViewModel(from: viewModel)
+        touristsTableViewProvider.setupHeaderViewDelegate(self)
+        
+        blockUI()
+        bind()
+        viewModel?.fetchTripData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        touristsTableViewProvider.viewController = self
-        customHotelRateView.setupRatingInfo(with: 5, description: "Превосходно")
-        hotelNameLabel.text = "Лучший пятизвездочный отель в Хургаде, Египет"
-        hotelLocationButton.setTitle("Madinat Makadi, Safaga Road, Makadi Bay, Египет", for: .normal)
-        let trip = Trip(id: 1,
-                        hotelName: "Лучший пятизвездочный отель в Хургаде, Египет",
-                        hotelAdress: "Madinat Makadi, Safaga Road, Makadi Bay, Египет",
-                        horating: 1,
-                        ratingName: "5",
-                        departure: "Россия, Москва",
-                        arrivalCountry: "Египет",
-                        tourDateStart: "19.02.2023",
-                        tourDateStop: "25.02.2023",
-                        numberOfNights: 6, room: "Luxe title",
-                        nutrition: "Все включено",
-                        tourPrice: 186600,
-                        fuelCharge: 9300,
-                        serviceCharge: 2136)
-        tripInfoStackView.setupTrip(with: trip)
-        customTotalSumOfTripStackView.setupTripCostInfo(from: trip)
-        
+    // MARK: - Private Methods:
+    private func bind() {
+        viewModel?.tripPublisher
+            .sink { [weak self] trip in
+                guard let self,
+                      let trip else { return }
+                DispatchQueue.main.async {
+                    self.updateTripInfo(with: trip)
+                    self.unblockUI()
+                }
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func updateTripInfo(with model: Trip) {
+        customHotelRateView.setupRatingInfo(with: model.horating, description: model.ratingName)
+        hotelNameLabel.text = model.hotelName
+        hotelLocationButton.setTitle(model.hotelAdress, for: .normal)
+        tripInfoStackView.setupTrip(with: model)
+        customTotalSumOfTripStackView.setupTripCostInfo(from: model)
     }
 }
 
@@ -161,13 +170,13 @@ extension ReservationViewController: ExpandableTableViewHeaderFooterViewDelegate
     func toggleHeaderView(from section: Int) {
         switch touristsTableViewProvider.tourists[section].status {
         case .created:
-            touristsTableViewProvider.tourists[section].changeStatus(to: .wrapped)
-            touristsTableViewProvider.tourists.append(ExpandableMenu(name: "Добавить туриста", status: .created))
+            viewModel?.changeTouristHeaderViewStatus(from: section, to: .wrapped)
+            viewModel?.appendNewHeaderView()
             touristsTableView.insertSections([touristsTableViewProvider.tourists.count - 1], with: .automatic)
         case .wrapped:
-            touristsTableViewProvider.tourists[section].changeStatus(to: .unwrapped)
+            viewModel?.changeTouristHeaderViewStatus(from: section, to: .unwrapped)
         case .unwrapped:
-            touristsTableViewProvider.tourists[section].changeStatus(to: .wrapped)
+            viewModel?.changeTouristHeaderViewStatus(from: section, to: .wrapped)
         }
         
         touristsTableView.performBatchUpdates { [weak self] in

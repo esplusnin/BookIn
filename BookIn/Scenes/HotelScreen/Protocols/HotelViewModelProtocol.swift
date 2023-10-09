@@ -6,5 +6,5 @@ protocol HotelViewModelProtocol: AnyObject {
     var tableViewImages: [UIImage] { get }
     var descriptionText: String { get }
     var tableTitles: [String] { get }
-    func fetchHotelModel()
+    func fetchHotelData()
 }

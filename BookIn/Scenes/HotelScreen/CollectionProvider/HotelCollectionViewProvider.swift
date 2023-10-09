@@ -6,7 +6,7 @@ final class HotelCollectionViewProvider: NSObject {
     private var viewModel: HotelViewModelProtocol?
     
     // MARK: - Public Methods:
-    func setViewModel(from viewModel: HotelViewModelProtocol) {
+    func setupViewModel(from viewModel: HotelViewModelProtocol) {
         self.viewModel = viewModel
     }
 }

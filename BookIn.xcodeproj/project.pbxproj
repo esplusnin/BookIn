@@ -40,6 +40,8 @@
 		7E2CF7722ACC7352008F3BA0 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */; };
 		7ECDDF122AD3D72A009C1014 /* CustomTotalSumOfTripStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDDF112AD3D72A009C1014 /* CustomTotalSumOfTripStackView.swift */; };
 		7ECDDF152AD3EEC2009C1014 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDDF142AD3EEC2009C1014 /* ContentSizedTableView.swift */; };
+		7ECDDF182AD3FE55009C1014 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDDF172AD3FE55009C1014 /* ReservationViewModel.swift */; };
+		7ECDDF1A2AD3FE73009C1014 /* ReservationViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDDF192AD3FE73009C1014 /* ReservationViewModelProtocol.swift */; };
 		7ED110692ACFD62000A1D1D6 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */; };
 		7ED1106C2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */; };
 		7ED1106E2AD005FF00A1D1D6 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1106D2AD005FF00A1D1D6 /* Trip.swift */; };
@@ -55,7 +57,7 @@
 		7EECCA472ACD5A2600883A69 /* RoomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA462ACD5A2600883A69 /* RoomTableViewProvider.swift */; };
 		7EECCA492ACD6D0600883A69 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA482ACD6D0600883A69 /* RoomViewModel.swift */; };
 		7EECCA4B2ACD6D2200883A69 /* RoomViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA4A2ACD6D2200883A69 /* RoomViewModelProtocol.swift */; };
-		7EFA4B2B2AD2FC500003AA19 /* ExpandableMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B2A2AD2FC500003AA19 /* ExpandableMenu.swift */; };
+		7EFA4B2B2AD2FC500003AA19 /* ExpandableTouristMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */; };
 		7EFA4B2E2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B2D2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift */; };
 		7EFA4B312AD300A00003AA19 /* ExpandableTableViewHeaderFooterViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B302AD300A00003AA19 /* ExpandableTableViewHeaderFooterViewDelegate.swift */; };
 		7EFA4B342AD311EA0003AA19 /* TouristsTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B332AD311EA0003AA19 /* TouristsTableViewProvider.swift */; };
@@ -97,6 +99,8 @@
 		7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7ECDDF112AD3D72A009C1014 /* CustomTotalSumOfTripStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTotalSumOfTripStackView.swift; sourceTree = "<group>"; };
 		7ECDDF142AD3EEC2009C1014 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
+		7ECDDF172AD3FE55009C1014 /* ReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
+		7ECDDF192AD3FE73009C1014 /* ReservationViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewModelProtocol.swift; sourceTree = "<group>"; };
 		7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		7ED1106B2ACFFEE500A1D1D6 /* CustomTripInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTripInfoStackView.swift; sourceTree = "<group>"; };
 		7ED1106D2AD005FF00A1D1D6 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -112,7 +116,7 @@
 		7EECCA462ACD5A2600883A69 /* RoomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewProvider.swift; sourceTree = "<group>"; };
 		7EECCA482ACD6D0600883A69 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		7EECCA4A2ACD6D2200883A69 /* RoomViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModelProtocol.swift; sourceTree = "<group>"; };
-		7EFA4B2A2AD2FC500003AA19 /* ExpandableMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMenu.swift; sourceTree = "<group>"; };
+		7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTouristMenu.swift; sourceTree = "<group>"; };
 		7EFA4B2D2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		7EFA4B302AD300A00003AA19 /* ExpandableTableViewHeaderFooterViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeaderFooterViewDelegate.swift; sourceTree = "<group>"; };
 		7EFA4B332AD311EA0003AA19 /* TouristsTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristsTableViewProvider.swift; sourceTree = "<group>"; };
@@ -337,11 +341,21 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		7ECDDF1B2AD3FE76009C1014 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7ECDDF192AD3FE73009C1014 /* ReservationViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		7ED1106A2ACFDB7500A1D1D6 /* ReservationScreen */ = {
 			isa = PBXGroup;
 			children = (
 				7EFA4B2F2AD2FDA00003AA19 /* TableViewProvider */,
+				7ECDDF172AD3FE55009C1014 /* ReservationViewModel.swift */,
 				7ED110682ACFD62000A1D1D6 /* ReservationViewController.swift */,
+				7ECDDF1B2AD3FE76009C1014 /* Protocols */,
 			);
 			path = ReservationScreen;
 			sourceTree = "<group>";
@@ -439,7 +453,7 @@
 		7EFA4B2C2AD2FC7A0003AA19 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				7EFA4B2A2AD2FC500003AA19 /* ExpandableMenu.swift */,
+				7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -608,18 +622,20 @@
 				7E2CF74C2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift in Sources */,
 				7EECCA3F2ACD4F8A00883A69 /* RoomTableViewCell.swift in Sources */,
 				7E2CF75D2ACAFE26008F3BA0 /* HotelTableViewCell.swift in Sources */,
+				7ECDDF1A2AD3FE73009C1014 /* ReservationViewModelProtocol.swift in Sources */,
 				7ED110742AD014D200A1D1D6 /* CustomInputFormView.swift in Sources */,
 				7E0980142AC2D8D4002CC40A /* CustomPresenterScrollView.swift in Sources */,
 				7ED110692ACFD62000A1D1D6 /* ReservationViewController.swift in Sources */,
 				7E2CF7612ACC2960008F3BA0 /* NetworkClient.swift in Sources */,
 				7E09800D2AC2D1B5002CC40A /* CustomNavigationBar.swift in Sources */,
 				7E097FE42AC2C2D1002CC40A /* AppDelegate.swift in Sources */,
+				7ECDDF182AD3FE55009C1014 /* ReservationViewModel.swift in Sources */,
 				7EECCA422ACD51B600883A69 /* Rooms.swift in Sources */,
 				7E2CF76F2ACC573B008F3BA0 /* HotelViewModelProtocol.swift in Sources */,
 				7E097FFE2AC2C838002CC40A /* Resources.swift in Sources */,
 				7E2CF74F2ACAD00C008F3BA0 /* HotelCollectionViewProvider.swift in Sources */,
 				7E2CF7522ACAD0D8008F3BA0 /* CustomCollectionViewCell.swift in Sources */,
-				7EFA4B2B2AD2FC500003AA19 /* ExpandableMenu.swift in Sources */,
+				7EFA4B2B2AD2FC500003AA19 /* ExpandableTouristMenu.swift in Sources */,
 				7EECCA4B2ACD6D2200883A69 /* RoomViewModelProtocol.swift in Sources */,
 				7E0980162AC2DA49002CC40A /* UIConstants.swift in Sources */,
 				7EFA4B2E2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift in Sources */,

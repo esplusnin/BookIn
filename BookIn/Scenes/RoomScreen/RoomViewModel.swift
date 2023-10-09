@@ -4,7 +4,7 @@ import Foundation
 final class RoomViewModel: RoomViewModelProtocol {
     
     // MARK: - Dependencies:
-    private let networkClient: NetworkClientProtocol
+    private let networkClient: NetworkClientProtocol?
     
     // MARK: - Publishers:
     var accomodationPublisher: Published<Accomodation?>.Publisher {
@@ -20,8 +20,8 @@ final class RoomViewModel: RoomViewModelProtocol {
     }
     
     // MARK: - Public Methods:
-    func getAccomodationModel() {
-        networkClient.fetchData(with: Resources.Network.roomsLink,
+    func getAccomodationData() {
+        networkClient?.fetchData(with: Resources.Network.roomsLink,
                                 model: Accomodation.self) { [weak self] result in
             guard let self else { return }
             

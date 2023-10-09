@@ -1,17 +1,43 @@
+import Combine
 import UIKit
 
 final class TouristsTableViewProvider: NSObject {
     
+    // MARK: - Dependencies:
+    private var viewModel: ReservationViewModelProtocol? {
+        didSet {
+            tourists = viewModel?.getCurrentTouristModel() ?? []
+            bind()
+        }
+    }
+    
+    private var viewController: ReservationViewController?
+    
     // MARK: - Constants and Variables:
+    private(set) var tourists: [ExpandableTouristMenu] = []
+    private var cancellable = Set<AnyCancellable>()
+    
     private let headerViewHeight: CGFloat = 58
     private let cellHeight: CGFloat = 368
     
-    var viewController: ReservationViewController?
-    var tourists = [
-        ExpandableMenu(name: "Первый турист", status: .unwrapped),
-        ExpandableMenu(name: "Второй турист", status: .wrapped),
-        ExpandableMenu(name: "Добавить туриста", status: .created)
-    ]
+    // MARK: - Public Methods:
+    func setupViewModel(from model: ReservationViewModelProtocol?) {
+        viewModel = model
+    }
+    
+    func setupHeaderViewDelegate(_ viewController: ReservationViewController) {
+        self.viewController = viewController
+    }
+    
+    // MARK: - Private Methods:
+    private func bind() {
+        viewModel?.touristsPublisher
+            .sink { [weak self] tourists in
+                guard let self else { return }
+                self.tourists = tourists
+            }
+            .store(in: &cancellable)
+    }
 }
 
 // MARK: - UITableViewDataSource:
@@ -50,16 +76,14 @@ extension TouristsTableViewProvider: UITableViewDelegate {
               let viewController else { return UIView() }
 
         headerView.delegate = viewController
-        headerView.setupHeaderView(with: tourists[section].name, state: tourists[section].status, from: section)
+        headerView.setupHeaderView(with: tourists[section].name,
+                                   state: tourists[section].status,
+                                   from: section)
         
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         headerViewHeight
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        .leastNormalMagnitude
     }
 }

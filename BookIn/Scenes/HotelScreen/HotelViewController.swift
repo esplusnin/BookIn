@@ -131,7 +131,7 @@ class HotelViewController: UIViewController {
         
         blockUI()
         bind()
-        viewModel.fetchHotelModel()
+        viewModel.fetchHotelData()
     }
     
     // MARK: - Private Methods:
@@ -163,7 +163,7 @@ class HotelViewController: UIViewController {
     }
     
     private func setupViewModelInProviders() {
-        hotelCollectionViewProvider.setViewModel(from: viewModel)
+        hotelCollectionViewProvider.setupViewModel(from: viewModel)
         hotelTableViewProvider.setViewModel(from: viewModel)
     }
     
@@ -183,7 +183,7 @@ class HotelViewController: UIViewController {
     
     // MARK: - Objc Methods:
     @objc private func updateHotelInfo() {
-        viewModel.fetchHotelModel()
+        viewModel.fetchHotelData()
     }
     
     @objc private func goToRoomViewController() {

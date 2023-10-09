@@ -6,7 +6,7 @@ enum ExpandableMenuStatus {
     case created
 }
 
-struct ExpandableMenu {
+struct ExpandableTouristMenu {
     var name: String
     var status: ExpandableMenuStatus
     

@@ -22,6 +22,7 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
     }
     
     func getReservationViewController() -> ReservationViewController {
-        ReservationViewController(coordinator: coordinator)
+        let viewModel = ReservationViewModel(networkClient: networkClient)
+        return ReservationViewController(coordinator: coordinator, viewModel: viewModel)
     }
 }

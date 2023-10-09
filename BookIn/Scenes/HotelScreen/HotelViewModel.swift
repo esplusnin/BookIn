@@ -4,7 +4,7 @@ import Foundation
 final class HotelViewModel: HotelViewModelProtocol {
     
     // MARK: - Dependencies:
-    private let networkClient: NetworkClientProtocol
+    private let networkClient: NetworkClientProtocol?
     
     // MARK: - Publishers:
     var hotelModelPublisher: Published<Hotel?>.Publisher {
@@ -35,8 +35,9 @@ final class HotelViewModel: HotelViewModelProtocol {
     }
     
     // MARK: Public Methods:
-    func fetchHotelModel() {
-        networkClient.fetchData(with: Resources.Network.hotelLink, model: Hotel.self) { [weak self] result in
+    func fetchHotelData() {
+        networkClient?.fetchData(with: Resources.Network.hotelLink,
+                                 model: Hotel.self) { [weak self] result in
             guard let self else { return }
 
             switch result {

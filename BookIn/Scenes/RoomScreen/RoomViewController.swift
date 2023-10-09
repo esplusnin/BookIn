@@ -45,7 +45,7 @@ final class RoomViewController: UIViewController {
         
         blockUI()
         bind()
-        viewModel.getAccomodationModel()
+        viewModel.getAccomodationData()
     }
     
     // MARK: - Private Methods:
