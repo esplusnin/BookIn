@@ -170,7 +170,6 @@ extension ReservationViewController: ExpandableTableViewHeaderFooterViewDelegate
     func toggleHeaderView(from section: Int) {
         switch touristsTableViewProvider.tourists[section].status {
         case .created:
-            viewModel?.changeTouristHeaderViewStatus(from: section, to: .wrapped)
             viewModel?.appendNewHeaderView()
             touristsTableView.insertSections([touristsTableViewProvider.tourists.count - 1], with: .automatic)
         case .wrapped:

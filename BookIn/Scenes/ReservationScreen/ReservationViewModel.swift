@@ -20,9 +20,9 @@ final class ReservationViewModel: ReservationViewModelProtocol {
     
     @Published
     private(set) var tourists: [ExpandableTouristMenu] = [
-        ExpandableTouristMenu(name: "Первый турист", status: .unwrapped),
-        ExpandableTouristMenu(name: "Второй турист", status: .wrapped),
-        ExpandableTouristMenu(name: "Добавить туриста", status: .created)
+        ExpandableTouristMenu(name: L10n.Numbers._1 + L10n.ReservationScreen.Customer.tourist, status: .unwrapped),
+        ExpandableTouristMenu(name: L10n.Numbers._2 + L10n.ReservationScreen.Customer.tourist, status: .wrapped),
+        ExpandableTouristMenu(name: L10n.ReservationScreen.Customer.addTourist, status: .created)
     ]
     
     // MARK: - Lifecycle:
@@ -50,7 +50,11 @@ final class ReservationViewModel: ReservationViewModelProtocol {
     }
     
     func appendNewHeaderView() {
-        tourists.append(ExpandableTouristMenu(name: "Добавить туриста", status: .created))
+        let numberString = NumberTransferService().numberToAdjective(tourists.count)
+        let indexToInsert = tourists.count - 1
+        
+        tourists.insert(ExpandableTouristMenu(name: numberString + L10n.ReservationScreen.Customer.tourist,
+                                              status: .wrapped), at: indexToInsert)
     }
     
     func getCurrentTouristModel() -> [ExpandableTouristMenu] {

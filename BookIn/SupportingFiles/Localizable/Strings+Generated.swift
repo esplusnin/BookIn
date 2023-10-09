@@ -28,6 +28,30 @@ internal enum L10n {
       internal static let notIncludes = L10n.tr("Localizable", "hotelScreen.tableView.notIncludes", fallback: "Что не включено")
     }
   }
+  internal enum Numbers {
+    /// Первый 
+    internal static let _1 = L10n.tr("Localizable", "numbers.1", fallback: "Первый ")
+    /// Десятый 
+    internal static let _10 = L10n.tr("Localizable", "numbers.10", fallback: "Десятый ")
+    /// Второй 
+    internal static let _2 = L10n.tr("Localizable", "numbers.2", fallback: "Второй ")
+    /// Третий 
+    internal static let _3 = L10n.tr("Localizable", "numbers.3", fallback: "Третий ")
+    /// Четвертый 
+    internal static let _4 = L10n.tr("Localizable", "numbers.4", fallback: "Четвертый ")
+    /// Пятый 
+    internal static let _5 = L10n.tr("Localizable", "numbers.5", fallback: "Пятый ")
+    /// Шестой 
+    internal static let _6 = L10n.tr("Localizable", "numbers.6", fallback: "Шестой ")
+    /// Седьмой 
+    internal static let _7 = L10n.tr("Localizable", "numbers.7", fallback: "Седьмой ")
+    /// Восьмой 
+    internal static let _8 = L10n.tr("Localizable", "numbers.8", fallback: "Восьмой ")
+    /// Девятый 
+    internal static let _9 = L10n.tr("Localizable", "numbers.9", fallback: "Девятый ")
+    /// Лишний 
+    internal static let x = L10n.tr("Localizable", "numbers.x", fallback: "Лишний ")
+  }
   internal enum ReservationScreen {
     /// Страна, город
     internal static let countryCity = L10n.tr("Localizable", "reservationScreen.countryCity", fallback: "Страна, город")
@@ -50,6 +74,8 @@ internal enum L10n {
     /// Отель
     internal static let stackHotelName = L10n.tr("Localizable", "reservationScreen.stackHotelName", fallback: "Отель")
     internal enum Customer {
+      /// Добавить туриста
+      internal static let addTourist = L10n.tr("Localizable", "reservationScreen.customer.addTourist", fallback: "Добавить туриста")
       /// Граждансво
       internal static let citizenship = L10n.tr("Localizable", "reservationScreen.customer.citizenship", fallback: "Граждансво")
       /// Дата рождения

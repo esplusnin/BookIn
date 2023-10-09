@@ -1,3 +1,16 @@
+// MARK: - Numbers:
+"numbers.1" = "Первый ";
+"numbers.2" = "Второй ";
+"numbers.3" = "Третий ";
+"numbers.4" = "Четвертый ";
+"numbers.5" = "Пятый ";
+"numbers.6" = "Шестой ";
+"numbers.7" = "Седьмой ";
+"numbers.8" = "Восьмой ";
+"numbers.9" = "Девятый ";
+"numbers.10" = "Десятый ";
+"numbers.x" = "Лишний ";
+
 // MARK: - Hotel Screen:
 "hotelScreen.title" = "Отель";
 "hotelScreen.aboutHotel" = "Об отеле";
@@ -33,6 +46,7 @@
 "reservationScreen.customer.citizenship" = "Граждансво";
 "reservationScreen.customer.passportNumber" = "Номер загранпаспорта";
 "reservationScreen.customer.passportDuration" = "Срок действия загранпаспорта";
+"reservationScreen.customer.addTourist" = "Добавить туриста";
 
 "reservationScreen.totalSum.tourPrice" = "Тур";
 "reservationScreen.totalSum.fuelFee" = "Топливный сбор";

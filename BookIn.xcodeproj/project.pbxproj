@@ -57,6 +57,7 @@
 		7EECCA472ACD5A2600883A69 /* RoomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA462ACD5A2600883A69 /* RoomTableViewProvider.swift */; };
 		7EECCA492ACD6D0600883A69 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA482ACD6D0600883A69 /* RoomViewModel.swift */; };
 		7EECCA4B2ACD6D2200883A69 /* RoomViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA4A2ACD6D2200883A69 /* RoomViewModelProtocol.swift */; };
+		7EF27E462AD457B500D00194 /* NumberTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF27E452AD457B500D00194 /* NumberTransferService.swift */; };
 		7EFA4B2B2AD2FC500003AA19 /* ExpandableTouristMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */; };
 		7EFA4B2E2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B2D2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift */; };
 		7EFA4B312AD300A00003AA19 /* ExpandableTableViewHeaderFooterViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B302AD300A00003AA19 /* ExpandableTableViewHeaderFooterViewDelegate.swift */; };
@@ -116,6 +117,7 @@
 		7EECCA462ACD5A2600883A69 /* RoomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewProvider.swift; sourceTree = "<group>"; };
 		7EECCA482ACD6D0600883A69 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		7EECCA4A2ACD6D2200883A69 /* RoomViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModelProtocol.swift; sourceTree = "<group>"; };
+		7EF27E452AD457B500D00194 /* NumberTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTransferService.swift; sourceTree = "<group>"; };
 		7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTouristMenu.swift; sourceTree = "<group>"; };
 		7EFA4B2D2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		7EFA4B302AD300A00003AA19 /* ExpandableTableViewHeaderFooterViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeaderFooterViewDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				7E2CF7622ACC2967008F3BA0 /* Network */,
+				7EF27E452AD457B500D00194 /* NumberTransferService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E097FE82AC2C2D1002CC40A /* HotelViewController.swift in Sources */,
+				7EF27E462AD457B500D00194 /* NumberTransferService.swift in Sources */,
 				7EECCA2F2ACD38C800883A69 /* ViewControllerFactory.swift in Sources */,
 				7ED1106E2AD005FF00A1D1D6 /* Trip.swift in Sources */,
 				7EECCA322ACD38E900883A69 /* ViewControllerFactoryProtocol.swift in Sources */,
