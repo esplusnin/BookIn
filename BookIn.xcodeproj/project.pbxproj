@@ -58,6 +58,7 @@
 		7EECCA472ACD5A2600883A69 /* RoomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA462ACD5A2600883A69 /* RoomTableViewProvider.swift */; };
 		7EECCA492ACD6D0600883A69 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA482ACD6D0600883A69 /* RoomViewModel.swift */; };
 		7EECCA4B2ACD6D2200883A69 /* RoomViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECCA4A2ACD6D2200883A69 /* RoomViewModelProtocol.swift */; };
+		7EEECA7A2AD580B800F3B089 /* UIResponder + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEECA792AD580B800F3B089 /* UIResponder + Extension.swift */; };
 		7EF27E462AD457B500D00194 /* NumberTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF27E452AD457B500D00194 /* NumberTransferService.swift */; };
 		7EF27E482AD45D4A00D00194 /* CurrencyFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF27E472AD45D4A00D00194 /* CurrencyFormatterService.swift */; };
 		7EFA4B2B2AD2FC500003AA19 /* ExpandableTouristMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */; };
@@ -120,6 +121,7 @@
 		7EECCA462ACD5A2600883A69 /* RoomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewProvider.swift; sourceTree = "<group>"; };
 		7EECCA482ACD6D0600883A69 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		7EECCA4A2ACD6D2200883A69 /* RoomViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModelProtocol.swift; sourceTree = "<group>"; };
+		7EEECA792AD580B800F3B089 /* UIResponder + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder + Extension.swift"; sourceTree = "<group>"; };
 		7EF27E452AD457B500D00194 /* NumberTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTransferService.swift; sourceTree = "<group>"; };
 		7EF27E472AD45D4A00D00194 /* CurrencyFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatterService.swift; sourceTree = "<group>"; };
 		7EFA4B2A2AD2FC500003AA19 /* ExpandableTouristMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTouristMenu.swift; sourceTree = "<group>"; };
@@ -199,7 +201,7 @@
 				7E0980122AC2D5C2002CC40A /* HotelScreen */,
 				7EECCA3D2ACD40B800883A69 /* RoomScreen */,
 				7ED1106A2ACFDB7500A1D1D6 /* ReservationScreen */,
-				7E6D0D272AD53C6A00922F7B /* PaymentSuccesViewController.swift */,
+				7EEECA7B2AD580DD00F3B089 /* PaymentScreen */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -209,6 +211,7 @@
 			children = (
 				7E097FFA2AC2C7F7002CC40A /* UIColors + Extension.swift */,
 				7E2CF7712ACC7352008F3BA0 /* UIViewController + Extension.swift */,
+				7EEECA792AD580B800F3B089 /* UIResponder + Extension.swift */,
 				7E09800A2AC2CDD5002CC40A /* UIFonts + Extension.swift */,
 				7E09800F2AC2D442002CC40A /* UIView + Extension.swift */,
 			);
@@ -459,6 +462,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		7EEECA7B2AD580DD00F3B089 /* PaymentScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7E6D0D272AD53C6A00922F7B /* PaymentSuccesViewController.swift */,
+			);
+			path = PaymentScreen;
+			sourceTree = "<group>";
+		};
 		7EFA4B2C2AD2FC7A0003AA19 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +617,7 @@
 			files = (
 				7E097FE82AC2C2D1002CC40A /* HotelViewController.swift in Sources */,
 				7EF27E462AD457B500D00194 /* NumberTransferService.swift in Sources */,
+				7EEECA7A2AD580B800F3B089 /* UIResponder + Extension.swift in Sources */,
 				7EF27E482AD45D4A00D00194 /* CurrencyFormatterService.swift in Sources */,
 				7EECCA2F2ACD38C800883A69 /* ViewControllerFactory.swift in Sources */,
 				7ED1106E2AD005FF00A1D1D6 /* Trip.swift in Sources */,
