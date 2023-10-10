@@ -53,7 +53,7 @@ class HotelViewController: UIViewController {
     
     private lazy var hotelLocationButton: UIButton = {
         let button = UIButton(type: .system)
-        button.titleLabel?.font = .smallBodyFont
+        button.titleLabel?.font = .smallRegularBodyFont
         button.titleLabel?.textColor = .universalBlue
         
         return button
@@ -69,7 +69,7 @@ class HotelViewController: UIViewController {
     
     private lazy var priceDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.textAlignment = .left
         

@@ -5,7 +5,7 @@ final class CustomTotalSumOfTripStackView: UIStackView {
     // MARK: - UI:
     private lazy var tourPriceLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.text = L10n.ReservationScreen.TotalSum.tourPrice
         
@@ -14,7 +14,7 @@ final class CustomTotalSumOfTripStackView: UIStackView {
     
     private lazy var fuelFeeLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.text = L10n.ReservationScreen.TotalSum.fuelFee
         
@@ -23,7 +23,7 @@ final class CustomTotalSumOfTripStackView: UIStackView {
     
     private lazy var serviceFeeLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.text = L10n.ReservationScreen.TotalSum.serviceFee
         
@@ -32,7 +32,7 @@ final class CustomTotalSumOfTripStackView: UIStackView {
     
     private lazy var toPayLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.text = L10n.ReservationScreen.TotalSum.sum
         
@@ -93,7 +93,7 @@ extension CustomTotalSumOfTripStackView {
         }
         
         [tourPriceValueLabel, fuelFeeValueLabel, serviceFeeValueLabel, toPayValueLabel].forEach { label in
-            label.font = .mediumBodyFont
+            label.font = .regularBodyFont
             label.textColor = .universalBlackPrimary
             label.textAlignment = .right
         }

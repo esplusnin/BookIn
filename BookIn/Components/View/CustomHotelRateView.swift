@@ -12,7 +12,7 @@ final class CustomHotelRateView: UIView {
     // MARK: - UI:
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
-        label.font = .smallTitleFont
+        label.font = .mediumTitleFont
         label.textColor = .universalOrange
         
         return label

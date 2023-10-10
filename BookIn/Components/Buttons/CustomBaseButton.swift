@@ -37,7 +37,7 @@ private extension CustomBaseButton {
         layer.cornerRadius = UIConstants.largeCornerRadius
         backgroundColor = .universalBlue
         titleLabel?.textColor = .universalWhite
-        titleLabel?.font = .smallTitleFont
+        titleLabel?.font = .mediumBodyFont
     }
     
     func setupConstraints() {

@@ -34,10 +34,11 @@ final class CustomInputFormView: UIView {
     
     private lazy var enterInfoTextField: UITextField = {
         let textField = UITextField()
+        textField.delegate = self
         textField.attributedPlaceholder = NSAttributedString(
             string: "",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.universalLightGray.withAlphaComponent(1)])
-        textField.font = .mediumBodyFont
+        textField.font = .regularBodyFont
         textField.textColor = .universalBlackPrimary
         
         return textField
@@ -56,13 +57,40 @@ final class CustomInputFormView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public Methods:
-    
     // MARK: - Private Methods:
     private func setupNewPlaceholder(with text: String) {
         enterInfoTextField.attributedPlaceholder = NSAttributedString(
             string: text,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.universalLightGray.withAlphaComponent(1)])
+    }
+    
+    private func addTitleToStackView() {
+        topStackAnchor?.isActive = false
+        bottomStackAnchor?.isActive = false
+        
+        infoStackView.insertArrangedSubview(titleLabel, at: 0)
+        titleLabel.text = enterInfoTextField.placeholder
+        
+        topStackAnchor = infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: UIConstants.largeInset)
+        bottomStackAnchor = infoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIConstants.largeInset)
+        
+        topStackAnchor?.isActive = true
+        bottomStackAnchor?.isActive = true
+    }
+}
+
+// MARK: - UITextFieldDelegate:
+extension CustomInputFormView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text?.count != 0 {
+            addTitleToStackView()
+        } else {
+            titleLabel.removeFromSuperview()
+        }
     }
 }
 

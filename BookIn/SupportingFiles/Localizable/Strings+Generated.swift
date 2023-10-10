@@ -91,8 +91,8 @@ internal enum L10n {
     internal enum Customer {
       /// Добавить туриста
       internal static let addTourist = L10n.tr("Localizable", "reservationScreen.customer.addTourist", fallback: "Добавить туриста")
-      /// Граждансво
-      internal static let citizenship = L10n.tr("Localizable", "reservationScreen.customer.citizenship", fallback: "Граждансво")
+      /// Гражданство
+      internal static let citizenship = L10n.tr("Localizable", "reservationScreen.customer.citizenship", fallback: "Гражданство")
       /// Дата рождения
       internal static let dateOfBirhtday = L10n.tr("Localizable", "reservationScreen.customer.dateOfBirhtday", fallback: "Дата рождения")
       /// Почта

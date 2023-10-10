@@ -28,7 +28,7 @@ final class PaymentSuccesViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.text = L10n.PaymentSuccesScreen.orderConfirm + generateRandomNumber() + L10n.PaymentSuccesScreen.orderText
         

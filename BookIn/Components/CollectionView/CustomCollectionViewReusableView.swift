@@ -25,7 +25,7 @@ final class CustomCollectionViewReusableView: UICollectionReusableView {
             titleLabel.font = .largeTitleFont
             titleLabel.textColor = .universalBlackPrimary
         } else {
-            titleLabel.font = .mediumBodyFont
+            titleLabel.font = .regularBodyFont
             titleLabel.textColor = .universalBlackPrimary.withAlphaComponent(0.9)
         }
     }

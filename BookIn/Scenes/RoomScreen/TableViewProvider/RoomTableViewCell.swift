@@ -47,7 +47,7 @@ final class RoomTableViewCell: UITableViewCell {
     
     private lazy var priceDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .regularBodyFont
         label.textColor = .universalGray
         label.textAlignment = .left
         

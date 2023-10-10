@@ -49,7 +49,7 @@ final class ReservationViewController: UIViewController {
     
     private lazy var hotelLocationButton: UIButton = {
         let button = UIButton(type: .system)
-        button.titleLabel?.font = .smallBodyFont
+        button.titleLabel?.font = .smallRegularBodyFont
         button.titleLabel?.textColor = .universalBlue
         
         return button
@@ -75,7 +75,7 @@ final class ReservationViewController: UIViewController {
     private lazy var privacyLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 0
-        label.font = .smallBodyFont
+        label.font = .smallRegularBodyFont
         label.textColor = .universalGray
         label.text = L10n.ReservationScreen.Customer.privacy
         
@@ -134,6 +134,7 @@ final class ReservationViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupTargets()
+        setupObservers()
         
         touristsTableViewProvider.setupViewModel(from: viewModel)
         touristsTableViewProvider.setupHeaderViewDelegate(self)
@@ -141,6 +142,10 @@ final class ReservationViewController: UIViewController {
         blockUI()
         bind()
         viewModel?.fetchTripData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Private Methods:

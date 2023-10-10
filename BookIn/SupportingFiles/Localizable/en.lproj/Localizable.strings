@@ -44,7 +44,7 @@
 "reservationScreen.customer.name" = "Имя";
 "reservationScreen.customer.surname" = "Фамилия";
 "reservationScreen.customer.dateOfBirhtday" = "Дата рождения";
-"reservationScreen.customer.citizenship" = "Граждансво";
+"reservationScreen.customer.citizenship" = "Гражданство";
 "reservationScreen.customer.passportNumber" = "Номер загранпаспорта";
 "reservationScreen.customer.passportDuration" = "Срок действия загранпаспорта";
 "reservationScreen.customer.addTourist" = "Добавить туриста";

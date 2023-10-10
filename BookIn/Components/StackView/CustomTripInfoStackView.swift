@@ -111,10 +111,10 @@ private extension CustomTripInfoStackView {
              stackView.distribution = .fillEqually
              
              leftSideLabels[index].textColor = .universalGray
-             leftSideLabels[index].font = .mediumBodyFont
+             leftSideLabels[index].font = .regularBodyFont
              
              rightSideLabels[index].textColor = .universalBlackPrimary
-             rightSideLabels[index].font = .mediumBodyFont
+             rightSideLabels[index].font = .regularBodyFont
              rightSideLabels[index].numberOfLines = 0
              
              stackView.addArrangedSubview(leftSideLabels[index])

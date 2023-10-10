@@ -10,7 +10,7 @@ extension UIViewController {
     private var blurVisualView: UIView? {
         view.subviews.first { $0 is UIVisualEffectView }
     }
-
+    
     func blockUI() {
         view.isUserInteractionEnabled = false
         showActivityIndicator()
@@ -49,13 +49,13 @@ extension UIViewController {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         
         view.setupView(blurEffectView)
-       
+        
         NSLayoutConstraint.activate([
             blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
             blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
+        ])
     }
     
     private func setupActivityIndicator() {
@@ -70,5 +70,57 @@ extension UIViewController {
         ])
         
         indicator.startAnimating()
+    }
+}
+
+    // MARK: - Keyboard Settings:
+extension UIViewController {
+    // Preset ViewControllers:
+    func setupObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    private func addkeyboardHider() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        
+        self.view.addGestureRecognizer(gesture)
+    }
+    
+    // Objc Methods:
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func keyboardDidShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+              let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
+        
+        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+        let keyboardFrameInView = view.convert(keyboardFrame.cgRectValue, from: nil)
+        let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+        
+        if textFieldBottomY > keyboardTopY {
+            let newY = view.frame.origin.y - keyboardFrameInView.size.height
+            
+            if newY < 0 {
+                view.frame.origin.y = newY
+            }
+        }
+        
+        addkeyboardHider()
+    }
+    
+    @objc private func keyboardDidHide() {
+        view.frame.origin.y = 0
+        view.gestureRecognizers?.removeAll()
     }
 }

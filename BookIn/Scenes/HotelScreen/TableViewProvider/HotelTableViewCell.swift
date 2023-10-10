@@ -14,7 +14,7 @@ final class HotelTableViewCell: UITableViewCell {
     // MARK: - UI:
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumBodyFont
+        label.font = .mediumTitleFont
         label.textColor = .universalBlackPrimary
         
         return label
@@ -22,7 +22,7 @@ final class HotelTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .smallBodyFont
+        label.font = .smallMediumBodyFont
         label.textColor = .universalGray
         
         return label
