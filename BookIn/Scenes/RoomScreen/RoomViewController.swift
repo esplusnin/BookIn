@@ -72,7 +72,7 @@ final class RoomViewController: UIViewController {
 // MARK: - Setup Views:
 private extension RoomViewController {
     func setupViews() {
-        view.backgroundColor = .univarsalViewBackground
+        view.backgroundColor = .universalViewBackground
         
         [customNavigationBar, roomsTableView].forEach(view.setupView)
         

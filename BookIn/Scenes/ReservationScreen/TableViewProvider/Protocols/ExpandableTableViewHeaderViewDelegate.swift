@@ -1,5 +1,5 @@
 import Foundation
 
-protocol ExpandableTableViewHeaderFooterViewDelegate: AnyObject {
+protocol ExpandableTableViewHeaderViewDelegate: AnyObject {
     func toggleHeaderView(from section: Int)
 }

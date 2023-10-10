@@ -68,7 +68,7 @@ final class CustomCollectionViewCell: UICollectionViewCell {
 private extension CustomCollectionViewCell {
     func setupViews() {
         layer.cornerRadius = UIConstants.smallCornerRadius
-        backgroundColor = .univarsalViewBackground
+        backgroundColor = .universalViewBackground
         contentView.setupView(titleLabel)
     }
     

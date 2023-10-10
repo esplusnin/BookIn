@@ -54,6 +54,19 @@ internal enum L10n {
     /// Лишний 
     internal static let x = L10n.tr("Localizable", "numbers.x", fallback: "Лишний ")
   }
+  internal enum PaymentSuccesScreen {
+    /// Супер!
+    internal static let completeButton = L10n.tr("Localizable", "paymentSuccesScreen.completeButton", fallback: "Супер!")
+    /// Заказ принят в работу
+    internal static let orderApprove = L10n.tr("Localizable", "paymentSuccesScreen.orderApprove", fallback: "Заказ принят в работу")
+    /// Подтверждение заказа 
+    internal static let orderConfirm = L10n.tr("Localizable", "paymentSuccesScreen.orderConfirm", fallback: "Подтверждение заказа ")
+    ///  может занять некоторое время (от 1 часа до суток).
+    /// Как только мы получим ответ от туроперетора, вам на почту придет уведомление
+    internal static let orderText = L10n.tr("Localizable", "paymentSuccesScreen.orderText", fallback: " может занять некоторое время (от 1 часа до суток).\nКак только мы получим ответ от туроперетора, вам на почту придет уведомление")
+    /// Заказ оплачен
+    internal static let title = L10n.tr("Localizable", "paymentSuccesScreen.title", fallback: "Заказ оплачен")
+  }
   internal enum ReservationScreen {
     /// Страна, город
     internal static let countryCity = L10n.tr("Localizable", "reservationScreen.countryCity", fallback: "Страна, город")

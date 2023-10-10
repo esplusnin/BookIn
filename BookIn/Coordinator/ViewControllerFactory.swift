@@ -25,4 +25,8 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
         let viewModel = ReservationViewModel(networkClient: networkClient)
         return ReservationViewController(coordinator: coordinator, viewModel: viewModel)
     }
+    
+    func getPaymentSuccesViewController() -> PaymentSuccesViewController {
+        PaymentSuccesViewController(coordinator: coordinator)
+    }
 }

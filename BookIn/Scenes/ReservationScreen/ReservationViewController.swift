@@ -133,6 +133,7 @@ final class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupTargets()
         
         touristsTableViewProvider.setupViewModel(from: viewModel)
         touristsTableViewProvider.setupHeaderViewDelegate(self)
@@ -163,10 +164,15 @@ final class ReservationViewController: UIViewController {
         tripInfoStackView.setupTrip(with: model)
         customTotalSumOfTripStackView.setupTripCostInfo(from: model)
     }
+    
+    // MARK: - Objc Methods:
+    @objc private func goToPaymentSuccesScreen() {
+        coordinator?.goToPaymentSuccesViewController()
+    }
 }
 
 // MARK: - ExpandableTableViewHeaderFooterViewDelegate:
-extension ReservationViewController: ExpandableTableViewHeaderFooterViewDelegate {
+extension ReservationViewController: ExpandableTableViewHeaderViewDelegate {
     func toggleHeaderView(from section: Int) {
         switch touristsTableViewProvider.tourists[section].status {
         case .created:
@@ -196,7 +202,7 @@ extension ReservationViewController: ExpandableTableViewHeaderFooterViewDelegate
 // MARK: - Setup Views:
 private extension ReservationViewController {
     func setupViews() {
-        view.backgroundColor = .univarsalViewBackground
+        view.backgroundColor = .universalViewBackground
         
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(hotelInfoStackView.addArrangedSubview)
         [customerPhoneNumberView, customerEmailView, privacyLabel].forEach(aboutCustomerStackView.addArrangedSubview)
@@ -334,5 +340,12 @@ private extension ReservationViewController {
             toPayButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
             toPayButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
         ])
+    }
+}
+
+// MARK: - Add Targets:
+extension ReservationViewController {
+    private func setupTargets() {
+        toPayButton.addTarget(self, action: #selector(goToPaymentSuccesScreen), for: .touchUpInside)
     }
 }

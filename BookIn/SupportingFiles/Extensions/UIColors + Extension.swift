@@ -7,7 +7,7 @@ extension UIColor {
     static let universalGray = UIColor(named: "UniversalGray") ?? .gray
     static let universalLightGray = UIColor(named: "UniversalLightGray") ?? .lightGray
     static let universalGrayBackground = UIColor(named: "UniversalGrayBackground") ?? .gray
-    static let univarsalViewBackground = UIColor(named: "UnivarsalViewBackground") ?? .lightGray
+    static let universalViewBackground = UIColor(named: "UniversalViewBackground") ?? .lightGray
     static let universalLightOrange = UIColor(named: "UniversalLightOrange") ?? .orange.withAlphaComponent(0.2)
     static let universalOrange = UIColor(named: "UniversalOrange") ?? .orange
     static let universalWhite = UIColor(named: "UniversalWhite") ?? .white

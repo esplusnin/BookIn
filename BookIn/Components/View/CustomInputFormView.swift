@@ -69,7 +69,7 @@ final class CustomInputFormView: UIView {
 // MARK: - Setup Views:
 private extension CustomInputFormView {
     func setupViews() {
-        backgroundColor = .univarsalViewBackground
+        backgroundColor = .universalViewBackground
         layer.cornerRadius = UIConstants.mediumCornerRadius
         
         infoStackView.addArrangedSubview(enterInfoTextField)

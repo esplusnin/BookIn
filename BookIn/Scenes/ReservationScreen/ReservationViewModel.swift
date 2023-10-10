@@ -31,9 +31,7 @@ final class ReservationViewModel: ReservationViewModelProtocol {
     }
     
     // MARK: - Public Methods:
-    func fetchTripData() {
-        let currencyFormattedService = CurrencyFormatterService()
-        
+    func fetchTripData() {        
         networkClient?.fetchData(with: Resources.Network.tripLink,
                                  model: Trip.self) { [weak self] result in
             guard let self else { return }

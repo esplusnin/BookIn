@@ -55,3 +55,10 @@
 "reservationScreen.totalSum.sum" = "К оплате";
 "reservationScreen.totalSum.pay" = "Оплатить";
 
+// MARK: - PaymentSucces Screen:
+"paymentSuccesScreen.title" = "Заказ оплачен";
+"paymentSuccesScreen.orderApprove" = "Заказ принят в работу";
+"paymentSuccesScreen.orderConfirm" = "Подтверждение заказа ";
+"paymentSuccesScreen.orderText" = " может занять некоторое время (от 1 часа до суток).\nКак только мы получим ответ от туроперетора, вам на почту придет уведомление";
+"paymentSuccesScreen.completeButton" = "Супер!";
+

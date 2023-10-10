@@ -31,4 +31,13 @@ final class AppCoordinator: CoordinatorProtocol {
         let viewController = viewControllerFactory.getReservationViewController()
         navigationController.pushViewController(viewController, animated: true)
     }
+    
+    func goToPaymentSuccesViewController() {
+        let viewController = viewControllerFactory.getPaymentSuccesViewController()
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToRootViewController() {
+        navigationController.popToRootViewController(animated: true)
+    }
 }

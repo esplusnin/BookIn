@@ -3,7 +3,7 @@ import UIKit
 final class ExpandableTableViewHeaderFooterView: UITableViewHeaderFooterView {
     
     // MARK: - Dependencies:
-    weak var delegate: ExpandableTableViewHeaderFooterViewDelegate?
+    weak var delegate: ExpandableTableViewHeaderViewDelegate?
     
     // MARK: - Constants and Variables:
     private (set) var headerViewStatus: ExpandableMenuStatus? {

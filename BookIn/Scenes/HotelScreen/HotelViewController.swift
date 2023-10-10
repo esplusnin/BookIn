@@ -198,7 +198,7 @@ class HotelViewController: UIViewController {
 private extension HotelViewController {
     func setupViews() {
         navigationController?.navigationBar.isHidden = true
-        view.backgroundColor = .univarsalViewBackground
+        view.backgroundColor = .universalViewBackground
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(mainHotelInfoStackView.addArrangedSubview)

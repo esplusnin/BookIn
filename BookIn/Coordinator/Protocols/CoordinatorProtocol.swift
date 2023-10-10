@@ -5,4 +5,6 @@ protocol CoordinatorProtocol: AnyObject {
     func goBack()
     func goToRoomViewController(with hotelName: String)
     func goToReservationViewController()
+    func goToPaymentSuccesViewController()
+    func goToRootViewController()
 }
