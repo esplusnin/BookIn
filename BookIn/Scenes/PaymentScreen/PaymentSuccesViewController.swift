@@ -5,10 +5,21 @@ final class PaymentSuccesViewController: UIViewController {
     // MARK: - Dependencies:
     private let coordinator: CoordinatorProtocol?
     
+    // MARK: - Constants and Variables:
+    private enum LocalUIConstants {
+        static let imageSide: CGFloat = 94
+        static let labelSide: CGFloat = 42
+        static let imageTopInset: CGFloat = 122
+        static let orderLabelTopInset: CGFloat = 32
+        static let descriptionInset: CGFloat = 20
+        static let backgroundViewHeight: CGFloat = 88
+        static let buttonTopAnchor: CGFloat = 12
+    }
+    
     // MARK: - UI:
     private lazy var succesImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 47
+        imageView.layer.cornerRadius = LocalUIConstants.imageSide / 2
         imageView.backgroundColor = .universalViewBackground
         
         return imageView
@@ -36,7 +47,7 @@ final class PaymentSuccesViewController: UIViewController {
     }()
     
     private lazy var succesEmojiLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 42, height: 42))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: LocalUIConstants.labelSide, height: LocalUIConstants.labelSide))
         label.text = "🎉"
         label.font = .systemFont(ofSize: 42)
         
@@ -98,10 +109,10 @@ final class PaymentSuccesViewController: UIViewController {
         
         func setupSuccesImageViewConstraints() {
             NSLayoutConstraint.activate([
-                succesImageView.heightAnchor.constraint(equalToConstant: 94),
-                succesImageView.widthAnchor.constraint(equalToConstant: 94),
+                succesImageView.heightAnchor.constraint(equalToConstant: LocalUIConstants.imageSide),
+                succesImageView.widthAnchor.constraint(equalToConstant: LocalUIConstants.imageSide),
                 succesImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                succesImageView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: 122)
+                succesImageView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: LocalUIConstants.imageTopInset)
             ])
         }
         
@@ -112,7 +123,7 @@ final class PaymentSuccesViewController: UIViewController {
         
         func setupOrderInProcessLabelConstraints() {
             NSLayoutConstraint.activate([
-                orderInProcessLabel.topAnchor.constraint(equalTo: succesImageView.bottomAnchor, constant: 32),
+                orderInProcessLabel.topAnchor.constraint(equalTo: succesImageView.bottomAnchor, constant: LocalUIConstants.orderLabelTopInset),
                 orderInProcessLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
                 orderInProcessLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
             ])
@@ -120,15 +131,15 @@ final class PaymentSuccesViewController: UIViewController {
         
         func setupOrderDescriptionLabelConstraints() {
             NSLayoutConstraint.activate([
-                orderDescriptionLabel.topAnchor.constraint(equalTo: orderInProcessLabel.bottomAnchor, constant: 20),
-                orderDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                orderDescriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+                orderDescriptionLabel.topAnchor.constraint(equalTo: orderInProcessLabel.bottomAnchor, constant: LocalUIConstants.descriptionInset),
+                orderDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LocalUIConstants.descriptionInset),
+                orderDescriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LocalUIConstants.descriptionInset)
             ])
         }
         
         func setupCompleteButtonBackgroundView() {
             NSLayoutConstraint.activate([
-                completeButtonBackgroundView.heightAnchor.constraint(equalToConstant: 88),
+                completeButtonBackgroundView.heightAnchor.constraint(equalToConstant: LocalUIConstants.backgroundViewHeight),
                 completeButtonBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 completeButtonBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 completeButtonBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -137,7 +148,7 @@ final class PaymentSuccesViewController: UIViewController {
         
         func setupCompleteButtonConstraints() {
             NSLayoutConstraint.activate([
-                completeButton.topAnchor.constraint(equalTo: completeButtonBackgroundView.topAnchor, constant: 12),
+                completeButton.topAnchor.constraint(equalTo: completeButtonBackgroundView.topAnchor, constant: LocalUIConstants.buttonTopAnchor),
                 completeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.sideInset),
                 completeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset)
             ])

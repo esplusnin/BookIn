@@ -11,4 +11,5 @@ extension UIColor {
     static let universalLightOrange = UIColor(named: "UniversalLightOrange") ?? .orange.withAlphaComponent(0.2)
     static let universalOrange = UIColor(named: "UniversalOrange") ?? .orange
     static let universalWhite = UIColor(named: "UniversalWhite") ?? .white
+    static let universalErrorColor = UIColor(named: "UniversalErrorColor") ?? .red
 }

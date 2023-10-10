@@ -19,7 +19,6 @@ final class CustomInputFormView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
-        stackView.alignment = .leading
         
         return stackView
     }()
@@ -38,6 +37,7 @@ final class CustomInputFormView: UIView {
         textField.attributedPlaceholder = NSAttributedString(
             string: "",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.universalLightGray.withAlphaComponent(1)])
+        textField.clearButtonMode = .whileEditing
         textField.font = .regularBodyFont
         textField.textColor = .universalBlackPrimary
         
@@ -55,6 +55,20 @@ final class CustomInputFormView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Public Methods:
+    func isViewFilled() -> Bool {
+        if enterInfoTextField.hasText {
+            return true
+        } else {
+            
+            return false
+        }
+    }
+    
+    func changeViewState(isError: Bool) {
+        backgroundColor = isError ? .universalErrorColor : .universalViewBackground
     }
     
     // MARK: - Private Methods:
@@ -88,6 +102,10 @@ extension CustomInputFormView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text?.count != 0 {
             addTitleToStackView()
+            
+            if viewState == .email {
+                enterInfoTextField.text = enterInfoTextField.text?.lowercased() ?? ""
+            }
         } else {
             titleLabel.removeFromSuperview()
         }
