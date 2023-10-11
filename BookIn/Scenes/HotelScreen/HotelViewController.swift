@@ -23,7 +23,7 @@ class HotelViewController: UIViewController {
     }
     
     private var cancellable = Set<AnyCancellable>()
-
+    
     // MARK: - UI:
     private lazy var mainScreenScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -33,6 +33,13 @@ class HotelViewController: UIViewController {
         return scrollView
     }()
     
+    private lazy var customPresenterScrollView: CustomPresenterScrollView = {
+        let scrollView = CustomPresenterScrollView()
+        scrollView.delegate = self
+        
+        return scrollView
+    }()
+
     private lazy var mainHotelInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -102,10 +109,10 @@ class HotelViewController: UIViewController {
     }()
     
     private lazy var customNavigationBar = CustomNavigationBar(coordinator: coordinator, title: L10n.HotelScreen.title, isBackButton: false)
+    private lazy var customPageControlView = CustomPageControlView()
     private lazy var hotelBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var hotelDescriptionBackgroundView = CustomBackgroundView(isRounded: true)
     private lazy var buttonBackgroundView = CustomBackgroundView(isRounded: false)
-    private lazy var customPresenterScrollView = CustomPresenterScrollView()
     private lazy var customHotelRateView = CustomHotelRateView()
     private lazy var chooseRoomButton = CustomBaseButton(with: L10n.HotelScreen.chooseRoomButton)
     private lazy var refreshControl = UIRefreshControl()
@@ -150,6 +157,8 @@ class HotelViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.customPresenterScrollView.setupImagesURLs(with: model.imageURLs)
+            self.customPageControlView.setupStackViewPages(with: model.imageURLs.count)
+            self.setupCustomPageControlViewConstraints(with: model.imageURLs.count)
             self.customHotelRateView.setupRatingInfo(with: model.rating, description: model.ratingName)
             self.hotelNameLabel.text = model.name
             self.hotelLocationButton.setTitle(model.adress, for: .normal)
@@ -194,6 +203,14 @@ class HotelViewController: UIViewController {
     }
 }
 
+// MARK: - UIScrollViewDelegate:
+extension HotelViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = scrollView.contentOffset.x / view.frame.width
+        customPageControlView.selectPage(with: Int(page))
+    }
+}
+
 // MARK: - Setup Views:
 private extension HotelViewController {
     func setupViews() {
@@ -202,8 +219,8 @@ private extension HotelViewController {
         
         [customNavigationBar, mainScreenScrollView].forEach(view.setupView)
         [customHotelRateView, hotelNameLabel, hotelLocationButton].forEach(mainHotelInfoStackView.addArrangedSubview)
-        [hotelBackgroundView, customPresenterScrollView,mainHotelInfoStackView, priceLabel, priceDescriptionLabel,
-         hotelDescriptionBackgroundView, hotelDescriptionCollectionView, hotelTableView,
+        [hotelBackgroundView, customPresenterScrollView, customPageControlView, mainHotelInfoStackView, priceLabel,
+         priceDescriptionLabel, hotelDescriptionBackgroundView, hotelDescriptionCollectionView, hotelTableView,
          buttonBackgroundView, chooseRoomButton].forEach(mainScreenScrollView.setupView)
         
         customNavigationBar.setupNavigationBar()
@@ -247,6 +264,15 @@ private extension HotelViewController {
             customPresenterScrollView.topAnchor.constraint(equalTo: hotelBackgroundView.topAnchor, constant: UIConstants.sideInset),
             customPresenterScrollView.leadingAnchor.constraint(equalTo: hotelBackgroundView.leadingAnchor),
             customPresenterScrollView.trailingAnchor.constraint(equalTo: hotelBackgroundView.trailingAnchor)
+        ])
+    }
+    
+    func setupCustomPageControlViewConstraints(with number: Int) {
+        NSLayoutConstraint.activate([
+            customPageControlView.heightAnchor.constraint(equalToConstant: 17),
+            customPageControlView.widthAnchor.constraint(equalToConstant: CGFloat(number * (7 + 5) + 15)),
+            customPageControlView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            customPageControlView.bottomAnchor.constraint(equalTo: customPresenterScrollView.bottomAnchor, constant: -UIConstants.mediumInset)
         ])
     }
     

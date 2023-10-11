@@ -19,6 +19,13 @@ final class RoomTableViewCell: UITableViewCell {
     }
     
     // MARK: - UI:
+    private lazy var customPresenterScrollView: CustomPresenterScrollView = {
+        let scrollView = CustomPresenterScrollView()
+        scrollView.delegate = self
+        
+        return scrollView
+    }()
+    
     private lazy var roomCollectionView: UICollectionView = {
         let layout = CustomSelfSizeCollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -55,7 +62,7 @@ final class RoomTableViewCell: UITableViewCell {
     }()
     
     private lazy var customBackgroundView = CustomBackgroundView(isRounded: true)
-    private lazy var customPresenterScrollView = CustomPresenterScrollView()
+    private lazy var customPageControlView = CustomPageControlView()
     private lazy var chooseRoomButton = CustomBaseButton(with: L10n.RoomScreen.chooseTheRoom)
     
     // MARK: - Lifecycle:
@@ -65,7 +72,7 @@ final class RoomTableViewCell: UITableViewCell {
         setupConstraints()
         setupTargets()
     }
-       
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -79,7 +86,7 @@ final class RoomTableViewCell: UITableViewCell {
     func setupCoordinator(from coordinator: CoordinatorProtocol?) {
         self.coordinator = coordinator
     }
-
+    
     func setupRoom(model: Room) {
         self.roomModel = model
     }
@@ -91,6 +98,8 @@ final class RoomTableViewCell: UITableViewCell {
         
         roomTableViewCellCollectionViewProvider.setupRoomModel(with: roomModel)
         customPresenterScrollView.setupImagesURLs(with: roomModel.imageURLs)
+        customPageControlView.setupStackViewPages(with: roomModel.imageURLs.count)
+        setupCustomPageControlViewConstraints(with: roomModel.imageURLs.count)
         
         priceLabel.text = formattedCurrencyString
         priceDescriptionLabel.text = roomModel.pricePer
@@ -102,10 +111,18 @@ final class RoomTableViewCell: UITableViewCell {
     }
 }
 
+// MARK: - UIScrollViewDelegate:
+extension RoomTableViewCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = scrollView.contentOffset.x / frame.width
+        customPageControlView.selectPage(with: Int(page))
+    }
+}
+
 // MARK: - Setup Views:
 private extension RoomTableViewCell {
     func setupViews() {
-        [customBackgroundView, customPresenterScrollView, roomCollectionView,
+        [customBackgroundView, customPresenterScrollView, customPageControlView, roomCollectionView,
          priceLabel, priceDescriptionLabel, chooseRoomButton].forEach(contentView.setupView)
     }
     
@@ -133,6 +150,15 @@ private extension RoomTableViewCell {
             customPresenterScrollView.topAnchor.constraint(equalTo: customBackgroundView.topAnchor, constant: UIConstants.sideInset),
             customPresenterScrollView.leadingAnchor.constraint(equalTo: customBackgroundView.leadingAnchor),
             customPresenterScrollView.trailingAnchor.constraint(equalTo: customBackgroundView.trailingAnchor)
+        ])
+    }
+    
+    func setupCustomPageControlViewConstraints(with number: Int) {
+        NSLayoutConstraint.activate([
+            customPageControlView.heightAnchor.constraint(equalToConstant: 17),
+            customPageControlView.widthAnchor.constraint(equalToConstant: CGFloat(number * (7 + 5) + 15)),
+            customPageControlView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            customPageControlView.bottomAnchor.constraint(equalTo: customPresenterScrollView.bottomAnchor, constant: -UIConstants.mediumInset)
         ])
     }
     

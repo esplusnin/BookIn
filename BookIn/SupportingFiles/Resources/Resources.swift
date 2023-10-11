@@ -11,6 +11,7 @@ enum Resources {
         static let tableViewHappyImage = UIImage(named: "emoji-happy") ?? UIImage()
         static let tableViewTickImage = UIImage(named: "tick-square") ?? UIImage()
         static let tableViewCancelImage = UIImage(named: "close-square") ?? UIImage()
+        static let wrongURL = UIImage(named: "WrongURL") ?? UIImage()
         
         static let wrappedHeaderViewImage = UIImage(systemName: "chevron.down")?.withTintColor(
             .universalBlue,

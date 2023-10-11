@@ -10,9 +10,6 @@ final class CustomPresenterScrollView: UIScrollView {
         }
     }
     
-    // MARK: - UI:
-    private lazy var pageControl = UIPageControl()
-    
     // MARK: - Public Methods:
     func setupImagesURLs(with strings: [String]) {
         imagesURLs = strings
@@ -28,7 +25,7 @@ final class CustomPresenterScrollView: UIScrollView {
         let sidesInsets = Int(UIConstants.sideInset * 2)
         
         contentSize = CGSize(width: CGFloat(viewWidth) * CGFloat(imagesURLs.count), height: bounds.height)
-
+        
         for number in 0..<imagesURLs.count {
             let photoImageView = UIImageView(frame: CGRect(x: viewWidth * number + Int(UIConstants.sideInset),
                                                            y: 0,
@@ -38,6 +35,7 @@ final class CustomPresenterScrollView: UIScrollView {
             
             downloadPhotoImageView(with: imagesURLs[number], in: photoImageView)
         }
+        
     }
     
     private func downloadPhotoImageView(with urlString: String, in imageView: UIImageView) {
@@ -45,7 +43,17 @@ final class CustomPresenterScrollView: UIScrollView {
         let processor = RoundCornerImageProcessor(cornerRadius: UIConstants.largeCornerRadius)
         
         imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1)), .cacheOriginalImage])
+        imageView.kf.setImage(
+            with: url,
+            options: [.processor(processor), .transition(.fade(1)), .cacheOriginalImage]) { result in
+                switch result {
+                case.failure(let error):
+                    imageView.image = Resources.Images.wrongURL
+                    print(error)
+                default:
+                    return
+                }
+            }
         
         imageView.layer.cornerRadius = UIConstants.largeCornerRadius
         imageView.layer.masksToBounds = true
@@ -53,8 +61,8 @@ final class CustomPresenterScrollView: UIScrollView {
 }
 
 // MARK: - Setup Views:
-extension CustomPresenterScrollView {
-    private func setupViews() {
+private extension CustomPresenterScrollView {
+    func setupViews() {
         isPagingEnabled = true
         showsHorizontalScrollIndicator = false
         
