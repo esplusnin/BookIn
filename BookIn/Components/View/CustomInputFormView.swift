@@ -1,7 +1,7 @@
 import UIKit
 
 final class CustomInputFormView: UIView {
-    
+
     // MARK: - Constants and Variables:
     enum ViewState {
         case number
@@ -58,16 +58,16 @@ final class CustomInputFormView: UIView {
     }
     
     // MARK: - Public Methods:
-    func isViewFilled() -> Bool {
+    func getTextFieldValue() -> String? {
         if enterInfoTextField.hasText {
-            return true
+            return enterInfoTextField.text
         } else {
-            
-            return false
+            changeViewState(isError: true)
+            return nil
         }
     }
     
-    func changeViewState(isError: Bool) {
+    private func changeViewState(isError: Bool) {
         backgroundColor = isError ? .universalErrorColor : .universalViewBackground
     }
     
@@ -95,8 +95,18 @@ final class CustomInputFormView: UIView {
 
 // MARK: - UITextFieldDelegate:
 extension CustomInputFormView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        backgroundColor = .universalViewBackground
+
+        if viewState == .number {
+            guard let text = textField.text else { return false }
+            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = format(with: "+7(XXX)XXX-XX-XX", phone: newString)
+            
+            return false
+        }
+
+        return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -109,6 +119,32 @@ extension CustomInputFormView: UITextFieldDelegate {
         } else {
             titleLabel.removeFromSuperview()
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+    func format(with mask: String, phone: String) -> String {
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex
+        
+        for character in mask where index < numbers.endIndex {
+            if index.hashValue == 0 && index.hashValue == 1 {
+                index = numbers.index(after: index)
+                return result
+            }
+            
+            if character == "X" {
+                result.append(numbers[index])
+                index = numbers.index(after: index)
+            } else {
+                result.append(character)
+            }
+        }
+
+        return result
     }
 }
 

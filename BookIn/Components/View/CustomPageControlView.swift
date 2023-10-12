@@ -28,11 +28,13 @@ final class CustomPageControlView: UIView {
     
     // MARK: - Public Methods:
     func setupStackViewPages(with number: Int) {
-        for _ in 0..<number {
-            let pageImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: stackViewHeight, height: stackViewHeight))
-            pageImageView.layer.cornerRadius = stackViewHeight / 2
-            
-            pagesStackView.addArrangedSubview(pageImageView)
+        if pagesStackView.subviews.isEmpty {
+            for _ in 0..<number {
+                let pageImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: stackViewHeight, height: stackViewHeight))
+                pageImageView.layer.cornerRadius = stackViewHeight / 2
+                
+                pagesStackView.addArrangedSubview(pageImageView)
+            }
         }
 
         selectPage(with: 0)

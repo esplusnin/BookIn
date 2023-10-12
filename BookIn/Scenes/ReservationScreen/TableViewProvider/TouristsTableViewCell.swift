@@ -29,6 +29,32 @@ final class TouristsTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public Methods:
+    func getTouristInfo() -> Tourist? {
+        let name = nameInputView.getTextFieldValue()
+        let surname = surnameInputView.getTextFieldValue()
+        let birthday = birthdayInputView.getTextFieldValue()
+        let citizenship = citizenshipInputView.getTextFieldValue()
+        let passportNumber = passportNumberInputView.getTextFieldValue()
+        let passportDuration = passportDurationInputView.getTextFieldValue()
+        
+        if let name,
+           let surname,
+           let birthday,
+           let citizenship,
+           let passportNumber,
+           let passportDuration {
+            return  Tourist(name: name,
+                            surname: surname,
+                            dateOfBirthday: birthday,
+                            citizenship: citizenship,
+                            passportNumber: passportNumber,
+                            passportDuration: passportDuration)
+        } else {
+            return nil
+        }
+    }
 }
 
 // MARK: - Setup Views:

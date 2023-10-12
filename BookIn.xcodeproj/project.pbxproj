@@ -23,6 +23,8 @@
 		7E0980162AC2DA49002CC40A /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0980152AC2DA49002CC40A /* UIConstants.swift */; };
 		7E0980192AC2DDD2002CC40A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E0980182AC2DDD2002CC40A /* Kingfisher */; };
 		7E15C0682AD6A6B700A939D9 /* CustomPageControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C0672AD6A6B700A939D9 /* CustomPageControlView.swift */; };
+		7E15C06A2AD7E0BB00A939D9 /* TouristInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C0692AD7E0BB00A939D9 /* TouristInformation.swift */; };
+		7E15C06C2AD7E15C00A939D9 /* Tourist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C06B2AD7E15C00A939D9 /* Tourist.swift */; };
 		7E2CF7482ACA9B1D008F3BA0 /* CustomHotelRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */; };
 		7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */; };
 		7E2CF74C2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF74B2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift */; };
@@ -87,6 +89,8 @@
 		7E0980132AC2D8D4002CC40A /* CustomPresenterScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresenterScrollView.swift; sourceTree = "<group>"; };
 		7E0980152AC2DA49002CC40A /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		7E15C0672AD6A6B700A939D9 /* CustomPageControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControlView.swift; sourceTree = "<group>"; };
+		7E15C0692AD7E0BB00A939D9 /* TouristInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristInformation.swift; sourceTree = "<group>"; };
+		7E15C06B2AD7E15C00A939D9 /* Tourist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tourist.swift; sourceTree = "<group>"; };
 		7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHotelRateView.swift; sourceTree = "<group>"; };
 		7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundView.swift; sourceTree = "<group>"; };
 		7E2CF74B2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSelfSizeCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 				7E2CF7672ACC55D3008F3BA0 /* Hotel.swift */,
 				7EECCA412ACD51B600883A69 /* Rooms.swift */,
 				7ED1106D2AD005FF00A1D1D6 /* Trip.swift */,
+				7E15C0692AD7E0BB00A939D9 /* TouristInformation.swift */,
+				7E15C06B2AD7E15C00A939D9 /* Tourist.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -620,6 +626,7 @@
 			files = (
 				7E097FE82AC2C2D1002CC40A /* HotelViewController.swift in Sources */,
 				7EF27E462AD457B500D00194 /* NumberTransferService.swift in Sources */,
+				7E15C06C2AD7E15C00A939D9 /* Tourist.swift in Sources */,
 				7EEECA7A2AD580B800F3B089 /* UIResponder + Extension.swift in Sources */,
 				7EF27E482AD45D4A00D00194 /* CurrencyFormatterService.swift in Sources */,
 				7EECCA2F2ACD38C800883A69 /* ViewControllerFactory.swift in Sources */,
@@ -665,6 +672,7 @@
 				7E2CF7522ACAD0D8008F3BA0 /* CustomCollectionViewCell.swift in Sources */,
 				7EFA4B2B2AD2FC500003AA19 /* ExpandableTouristMenu.swift in Sources */,
 				7EECCA4B2ACD6D2200883A69 /* RoomViewModelProtocol.swift in Sources */,
+				7E15C06A2AD7E0BB00A939D9 /* TouristInformation.swift in Sources */,
 				7E0980162AC2DA49002CC40A /* UIConstants.swift in Sources */,
 				7EFA4B2E2AD2FD8E0003AA19 /* ExpandableTableViewHeaderFooterView.swift in Sources */,
 				7EECCA492ACD6D0600883A69 /* RoomViewModel.swift in Sources */,

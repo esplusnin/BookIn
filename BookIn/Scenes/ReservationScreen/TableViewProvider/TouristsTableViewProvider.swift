@@ -6,7 +6,7 @@ final class TouristsTableViewProvider: NSObject {
     // MARK: - Dependencies:
     private var viewModel: ReservationViewModelProtocol? {
         didSet {
-            tourists = viewModel?.getCurrentTouristModel() ?? []
+            tourists = viewModel?.getCurrentTouristMenu() ?? []
             bind()
         }
     }

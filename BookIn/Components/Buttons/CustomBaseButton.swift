@@ -29,6 +29,17 @@ final class CustomBaseButton: UIButton {
         transform = .identity
         alpha = 1
     }
+    
+    // MARK: - Public Methods:
+    func changeButtonState(isEnable: Bool) {
+        if isEnable {
+            alpha = 1
+            isUserInteractionEnabled = true
+        } else {
+            alpha = 0.9
+            isUserInteractionEnabled = false
+        }
+    }
 }
 
 // MARK: - Setup Views:

@@ -6,24 +6,38 @@ final class ReservationViewModel: ReservationViewModelProtocol {
     // MARK: - Dependencies:
     private let networkClient: NetworkClientProtocol?
     
+    // MARK: - Constants and Variables:
+    private var touristInformation: TouristInformation? {
+        didSet {
+            isTouristInfoCompleted()
+        }
+    }
+    
     // MARK: - Publishers:
     var tripPublisher: Published<Trip?>.Publisher {
         $trip
     }
     
     var touristsPublisher: Published<[ExpandableTouristMenu]>.Publisher {
-        $tourists
+        $touristsMenu
+    }
+    
+    var isReadyToPayPublisher: Published<Bool>.Publisher {
+        $isReadyToPay
     }
     
     @Published
     private(set) var trip: Trip?
     
     @Published
-    private(set) var tourists: [ExpandableTouristMenu] = [
+    private(set) var touristsMenu: [ExpandableTouristMenu] = [
         ExpandableTouristMenu(name: L10n.Numbers._1 + L10n.ReservationScreen.Customer.tourist, status: .unwrapped),
         ExpandableTouristMenu(name: L10n.Numbers._2 + L10n.ReservationScreen.Customer.tourist, status: .wrapped),
         ExpandableTouristMenu(name: L10n.ReservationScreen.Customer.addTourist, status: .created)
     ]
+    
+    @Published
+    private(set) var isReadyToPay: Bool = false
     
     // MARK: - Lifecycle:
     init(networkClient: NetworkClientProtocol?) {
@@ -31,7 +45,7 @@ final class ReservationViewModel: ReservationViewModelProtocol {
     }
     
     // MARK: - Public Methods:
-    func fetchTripData() {        
+    func fetchTripData() {
         networkClient?.fetchData(with: Resources.Network.tripLink,
                                  model: Trip.self) { [weak self] result in
             guard let self else { return }
@@ -44,19 +58,65 @@ final class ReservationViewModel: ReservationViewModelProtocol {
         }
     }
     
+    // Header views:
     func changeTouristHeaderViewStatus(from section: Int, to status: ExpandableMenuStatus) {
-        tourists[section].changeStatus(to: status)
+        touristsMenu[section].changeStatus(to: status)
     }
     
     func appendNewHeaderView() {
-        let numberString = NumberTransferService().numberToAdjective(tourists.count)
-        let indexToInsert = tourists.count - 1
+        let numberString = NumberTransferService().numberToAdjective(touristsMenu.count)
+        let indexToInsert = touristsMenu.count - 1
         
-        tourists.insert(ExpandableTouristMenu(name: numberString + L10n.ReservationScreen.Customer.tourist,
-                                              status: .wrapped), at: indexToInsert)
+        touristsMenu.insert(ExpandableTouristMenu(name: numberString + L10n.ReservationScreen.Customer.tourist,
+                                                  status: .wrapped), at: indexToInsert)
     }
     
-    func getCurrentTouristModel() -> [ExpandableTouristMenu] {
-        tourists
+    func getCurrentTouristMenu() -> [ExpandableTouristMenu] {
+        touristsMenu
+    }
+    
+    // CRUD Tourist information:
+    func setCustomerPhoneNumber(with numberString: String?) {
+        let newTouristInformation = TouristInformation(customerPhoneNumber: numberString,
+                                                       customerEmail: touristInformation?.customerEmail,
+                                                       tourists: touristInformation?.tourists)
+        touristInformation = newTouristInformation
+    }
+    
+    func setCustomerEmail(with emailString: String?) {
+        let newTouristInformation = TouristInformation(customerPhoneNumber: touristInformation?.customerPhoneNumber,
+                                                       customerEmail: emailString,
+                                                       tourists: touristInformation?.tourists)
+        touristInformation = newTouristInformation
+    }
+    
+    func setTouristInformation(with model: Tourist?) {
+        if model == nil {
+            touristInformation = TouristInformation(customerPhoneNumber: touristInformation?.customerPhoneNumber,
+                                                    customerEmail: touristInformation?.customerEmail,
+                                                    tourists: nil)
+        } else if let tourist = touristInformation?.tourists,
+                  let model {
+            var newTourists = tourist
+            newTourists.append(model)
+            
+            touristInformation = TouristInformation(customerPhoneNumber: touristInformation?.customerPhoneNumber,
+                                                    customerEmail: touristInformation?.customerEmail,
+                                                    tourists: newTourists)
+        } else if let model {
+            touristInformation = TouristInformation(customerPhoneNumber: nil,
+                                                    customerEmail: nil,
+                                                    tourists: [model])
+        }
+    }
+    
+    func isTouristInfoCompleted() {
+        if touristInformation?.customerPhoneNumber != nil &&
+            touristInformation?.customerEmail != nil &&
+            touristInformation?.tourists != nil {
+            isReadyToPay = true
+        } else {
+            isReadyToPay = false
+        }
     }
 }

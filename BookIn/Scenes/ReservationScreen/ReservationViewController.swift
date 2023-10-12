@@ -160,6 +160,20 @@ final class ReservationViewController: UIViewController {
                 }
             }
             .store(in: &cancellable)
+        
+        viewModel?.isReadyToPayPublisher
+            .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
+            .sink { [weak self] value in
+                guard let self else { return }
+                DispatchQueue.main.async {
+                    self.toPayButton.changeButtonState(isEnable: true)
+                    
+                    if value == true {
+                        self.goToPaymentSuccesScreen()
+                    }
+                }
+            }
+            .store(in: &cancellable)
     }
     
     private func updateTripInfo(with model: Trip) {
@@ -170,9 +184,23 @@ final class ReservationViewController: UIViewController {
         customTotalSumOfTripStackView.setupTripCostInfo(from: model)
     }
     
-    // MARK: - Objc Methods:
-    @objc private func goToPaymentSuccesScreen() {
+    private func goToPaymentSuccesScreen() {
         coordinator?.goToPaymentSuccesViewController()
+    }
+    
+    // MARK: - Objc Methods:
+    @objc private func checkTouristInfo() {
+        let phoneNumber = customerPhoneNumberView.getTextFieldValue()
+        let email = customerEmailView.getTextFieldValue()
+        
+        viewModel?.setCustomerPhoneNumber(with: phoneNumber)
+        viewModel?.setCustomerEmail(with: email)
+        
+        guard let cell = touristsTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TouristsTableViewCell else { return }
+        let touristModel = cell.getTouristInfo()
+        
+        viewModel?.setTouristInformation(with: touristModel)
+        toPayButton.changeButtonState(isEnable: false)
     }
 }
 
@@ -189,6 +217,10 @@ extension ReservationViewController: ExpandableTableViewHeaderViewDelegate {
             viewModel?.changeTouristHeaderViewStatus(from: section, to: .wrapped)
         }
         
+        updateTableView(with: section)
+    }
+        
+    func updateTableView(with section: Int) {
         touristsTableView.performBatchUpdates { [weak self] in
             guard let self,
                   let headerView = self.touristsTableView.headerView(
@@ -351,6 +383,6 @@ private extension ReservationViewController {
 // MARK: - Add Targets:
 extension ReservationViewController {
     private func setupTargets() {
-        toPayButton.addTarget(self, action: #selector(goToPaymentSuccesScreen), for: .touchUpInside)
+        toPayButton.addTarget(self, action: #selector(checkTouristInfo), for: .touchUpInside)
     }
 }

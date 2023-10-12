@@ -154,9 +154,11 @@ private extension RoomTableViewCell {
     }
     
     func setupCustomPageControlViewConstraints(with number: Int) {
+        let customPageSpace = CGFloat(number) * UIConstants.customPageWidhtWithInset
+
         NSLayoutConstraint.activate([
-            customPageControlView.heightAnchor.constraint(equalToConstant: 17),
-            customPageControlView.widthAnchor.constraint(equalToConstant: CGFloat(number * (7 + 5) + 15)),
+            customPageControlView.heightAnchor.constraint(equalToConstant: UIConstants.customPageHeight),
+            customPageControlView.widthAnchor.constraint(equalToConstant: customPageSpace + UIConstants.customPageSidesInset),
             customPageControlView.centerXAnchor.constraint(equalTo: centerXAnchor),
             customPageControlView.bottomAnchor.constraint(equalTo: customPresenterScrollView.bottomAnchor, constant: -UIConstants.mediumInset)
         ])

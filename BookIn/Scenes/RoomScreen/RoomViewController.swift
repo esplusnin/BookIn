@@ -19,6 +19,7 @@ final class RoomViewController: UIViewController {
         tableView.register(RoomTableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.roomTableViewCell)
         tableView.dataSource = roomTableViewProvider
         tableView.delegate = roomTableViewProvider
+        tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
         
         return tableView
