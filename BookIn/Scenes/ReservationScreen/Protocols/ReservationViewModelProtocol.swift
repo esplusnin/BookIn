@@ -3,7 +3,8 @@ import Foundation
 protocol ReservationViewModelProtocol: AnyObject {
     var tripPublisher: Published<Trip?>.Publisher { get }
     var touristsPublisher: Published<[ExpandableTouristMenu]>.Publisher { get }
-    var isReadyToPayPublisher: Published<Bool>.Publisher { get }
+    var isReadyToPayPublisher: Published<Bool?>.Publisher { get }
+    var errorStringPublisher: Published<String?>.Publisher { get }
     func fetchTripData()
     func changeTouristHeaderViewStatus(from section: Int, to status: ExpandableMenuStatus)
     func appendNewHeaderView()
@@ -11,5 +12,4 @@ protocol ReservationViewModelProtocol: AnyObject {
     func setCustomerPhoneNumber(with numberString: String?)
     func setCustomerEmail(with emailString: String?)
     func setTouristInformation(with model: Tourist?)
-    func isTouristInfoCompleted()
 }

@@ -22,22 +22,29 @@ final class ReservationViewModel: ReservationViewModelProtocol {
         $touristsMenu
     }
     
-    var isReadyToPayPublisher: Published<Bool>.Publisher {
+    var isReadyToPayPublisher: Published<Bool?>.Publisher {
         $isReadyToPay
     }
     
-    @Published
-    private(set) var trip: Trip?
+    var errorStringPublisher: Published<String?>.Publisher {
+        $errorString
+    }
     
     @Published
-    private(set) var touristsMenu: [ExpandableTouristMenu] = [
+    private var trip: Trip?
+    
+    @Published
+    private var touristsMenu: [ExpandableTouristMenu] = [
         ExpandableTouristMenu(name: L10n.Numbers._1 + L10n.ReservationScreen.Customer.tourist, status: .unwrapped),
         ExpandableTouristMenu(name: L10n.Numbers._2 + L10n.ReservationScreen.Customer.tourist, status: .wrapped),
         ExpandableTouristMenu(name: L10n.ReservationScreen.Customer.addTourist, status: .created)
     ]
     
     @Published
-    private(set) var isReadyToPay: Bool = false
+    private var isReadyToPay: Bool?
+    
+    @Published
+    private var errorString: String?
     
     // MARK: - Lifecycle:
     init(networkClient: NetworkClientProtocol?) {
@@ -53,7 +60,8 @@ final class ReservationViewModel: ReservationViewModelProtocol {
             case .success(let trip):
                 self.trip = trip
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.errorString = errorString
             }
         }
     }
@@ -104,13 +112,14 @@ final class ReservationViewModel: ReservationViewModelProtocol {
                                                     customerEmail: touristInformation?.customerEmail,
                                                     tourists: newTourists)
         } else if let model {
-            touristInformation = TouristInformation(customerPhoneNumber: nil,
-                                                    customerEmail: nil,
+            touristInformation = TouristInformation(customerPhoneNumber: touristInformation?.customerPhoneNumber,
+                                                    customerEmail: touristInformation?.customerEmail,
                                                     tourists: [model])
         }
     }
     
-    func isTouristInfoCompleted() {
+    // MARK: - Private Methods:
+    private func isTouristInfoCompleted() {
         if touristInformation?.customerPhoneNumber != nil &&
             touristInformation?.customerEmail != nil &&
             touristInformation?.tourists != nil {

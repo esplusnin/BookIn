@@ -6,6 +6,9 @@ final class CustomInputFormView: UIView {
     enum ViewState {
         case number
         case email
+        case birthday
+        case passportNumber
+        case passportDuration
         case standart
     }
     
@@ -51,6 +54,7 @@ final class CustomInputFormView: UIView {
         setupNewPlaceholder(with: text)
         setupViews()
         setupConstraints()
+        setupTextFieldKeyboardType()
     }
     
     required init?(coder: NSCoder) {
@@ -64,6 +68,22 @@ final class CustomInputFormView: UIView {
         } else {
             changeViewState(isError: true)
             return nil
+        }
+    }
+    
+    // MARK: - Private Methods:
+    private func setupTextFieldKeyboardType() {
+        switch viewState {
+        case .number:
+            enterInfoTextField.keyboardType = .numberPad
+        case .birthday:
+            enterInfoTextField.keyboardType = .numberPad
+        case .passportNumber:
+            enterInfoTextField.keyboardType = .numberPad
+        case .passportDuration:
+            enterInfoTextField.keyboardType = .numberPad
+        default:
+            enterInfoTextField.keyboardType = .default
         }
     }
     
@@ -95,32 +115,48 @@ final class CustomInputFormView: UIView {
 
 // MARK: - UITextFieldDelegate:
 extension CustomInputFormView: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        backgroundColor = .universalViewBackground
-
-        if viewState == .number {
-            guard let text = textField.text else { return false }
-            let newString = (text as NSString).replacingCharacters(in: range, with: string)
-            textField.text = format(with: "+7(XXX)XXX-XX-XX", phone: newString)
-            
-            return false
-        }
-
-        return true
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        changeViewState(isError: false)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return false }
+        
+        if viewState == .number {
+            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = format(with: "X (XXX) XXX-XX-XX", phone: newString)
+        } else if viewState == .birthday || viewState == .passportDuration {
+            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = format(with: "XX.XX.XXXX", phone: newString)
+        } else if viewState == .passportNumber {
+            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = format(with: "XX XXXXXXX", phone: newString)
+        } else {
+            textField.text = text
+            return true
+        }
+        
+        return false
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text?.count != 0 {
-            addTitleToStackView()
-            
             if viewState == .email {
-                enterInfoTextField.text = enterInfoTextField.text?.lowercased() ?? ""
+                if isValidEmail(textField.text ?? "") {
+                    addTitleToStackView()
+                    enterInfoTextField.text = enterInfoTextField.text?.lowercased() ?? ""
+                    return true
+                } else {
+                    return false
+                }
             }
         } else {
             titleLabel.removeFromSuperview()
         }
+        
+        return true
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
@@ -129,13 +165,8 @@ extension CustomInputFormView: UITextFieldDelegate {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
-        
+
         for character in mask where index < numbers.endIndex {
-            if index.hashValue == 0 && index.hashValue == 1 {
-                index = numbers.index(after: index)
-                return result
-            }
-            
             if character == "X" {
                 result.append(numbers[index])
                 index = numbers.index(after: index)
@@ -143,8 +174,27 @@ extension CustomInputFormView: UITextFieldDelegate {
                 result.append(character)
             }
         }
-
+        
         return result
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let popularHosts = ["@mail.ru", "@mail.com", "@gmail.com", "@rambler.com", "@yandex.ru"]
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        let isFormatValid = emailPredicate.evaluate(with: email)
+        let lowercaseEmail = email.lowercased()
+        
+        for host in popularHosts {
+            if isFormatValid && lowercaseEmail.contains(host) {
+                changeViewState(isError: false)
+                return true
+            } else {
+                changeViewState(isError: true)
+            }
+        }
+        
+        return false
     }
 }
 

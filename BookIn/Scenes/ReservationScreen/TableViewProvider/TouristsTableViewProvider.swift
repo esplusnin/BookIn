@@ -43,7 +43,7 @@ final class TouristsTableViewProvider: NSObject {
 // MARK: - UITableViewDataSource:
 extension TouristsTableViewProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        tourists.count
+        return tourists.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1

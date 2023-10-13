@@ -30,6 +30,28 @@ internal enum L10n {
       internal static let notIncludes = L10n.tr("Localizable", "hotelScreen.tableView.notIncludes", fallback: "Что не включено")
     }
   }
+  internal enum NetworkError {
+    /// Не удалось получить данные
+    internal static let anotherError = L10n.tr("Localizable", "networkError.anotherError", fallback: "Не удалось получить данные")
+    /// Не удалось конвертировать полученные данные
+    internal static let parsingError = L10n.tr("Localizable", "networkError.parsingError", fallback: "Не удалось конвертировать полученные данные")
+    /// Ошибка выполнения запроса
+    internal static let requestError = L10n.tr("Localizable", "networkError.requestError", fallback: "Ошибка выполнения запроса")
+    /// Пожалуйста, попробуйте позже
+    internal static let tryLater = L10n.tr("Localizable", "networkError.tryLater", fallback: "Пожалуйста, попробуйте позже")
+    /// Проверьте интернет - соединение
+    internal static let urlSessionError = L10n.tr("Localizable", "networkError.URLSessionError", fallback: "Проверьте интернет - соединение")
+    internal enum Http {
+      /// По запросу ничего не найдено
+      internal static let _404 = L10n.tr("Localizable", "networkError.http.404", fallback: "По запросу ничего не найдено")
+      /// Ошибка обновления ресурса
+      internal static let _409 = L10n.tr("Localizable", "networkError.http.409", fallback: "Ошибка обновления ресурса")
+      /// Запрошенный ресурс больше недоступен
+      internal static let _410 = L10n.tr("Localizable", "networkError.http.410", fallback: "Запрошенный ресурс больше недоступен")
+      /// Ошибка на стороне сервера
+      internal static let _5Хх = L10n.tr("Localizable", "networkError.http.5хх", fallback: "Ошибка на стороне сервера")
+    }
+  }
   internal enum Numbers {
     /// Первый 
     internal static let _1 = L10n.tr("Localizable", "numbers.1", fallback: "Первый ")

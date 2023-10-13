@@ -4,7 +4,7 @@ enum NetworkError: Error {
     case httpStatusCode(Int)
     case parsingError
     case urlSessionError
-    case requestError(Error)
+    case requestError
 }
 
 final class NetworkClient: NetworkClientProtocol {
@@ -16,7 +16,8 @@ final class NetworkClient: NetworkClientProtocol {
     func fetchData<T: Decodable>(with urlString: String, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: urlString) else { return }
 
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5
         
         urlSession.dataTask(with: request) { data, response, error in
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
@@ -33,8 +34,8 @@ final class NetworkClient: NetworkClientProtocol {
                 self.pars(to: model, with: data, completion: completion)
             }
             
-            if let error {
-                completion(.failure(NetworkError.requestError(error)))
+            if error != nil {
+                completion(.failure(NetworkError.requestError))
             }
         }
         .resume()

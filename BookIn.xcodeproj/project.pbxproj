@@ -25,6 +25,8 @@
 		7E15C0682AD6A6B700A939D9 /* CustomPageControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C0672AD6A6B700A939D9 /* CustomPageControlView.swift */; };
 		7E15C06A2AD7E0BB00A939D9 /* TouristInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C0692AD7E0BB00A939D9 /* TouristInformation.swift */; };
 		7E15C06C2AD7E15C00A939D9 /* Tourist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C06B2AD7E15C00A939D9 /* Tourist.swift */; };
+		7E15C0732AD8729A00A939D9 /* HandlingErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15C0722AD8729A00A939D9 /* HandlingErrorService.swift */; };
+		7E15C0762AD873FB00A939D9 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E15C0752AD873FB00A939D9 /* NotificationBannerSwift */; };
 		7E2CF7482ACA9B1D008F3BA0 /* CustomHotelRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */; };
 		7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */; };
 		7E2CF74C2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CF74B2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift */; };
@@ -91,6 +93,7 @@
 		7E15C0672AD6A6B700A939D9 /* CustomPageControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControlView.swift; sourceTree = "<group>"; };
 		7E15C0692AD7E0BB00A939D9 /* TouristInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristInformation.swift; sourceTree = "<group>"; };
 		7E15C06B2AD7E15C00A939D9 /* Tourist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tourist.swift; sourceTree = "<group>"; };
+		7E15C0722AD8729A00A939D9 /* HandlingErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorService.swift; sourceTree = "<group>"; };
 		7E2CF7472ACA9B1D008F3BA0 /* CustomHotelRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHotelRateView.swift; sourceTree = "<group>"; };
 		7E2CF7492ACAA114008F3BA0 /* CustomBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundView.swift; sourceTree = "<group>"; };
 		7E2CF74B2ACACCA8008F3BA0 /* CustomSelfSizeCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSelfSizeCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E0980192AC2DDD2002CC40A /* Kingfisher in Frameworks */,
+				7E15C0762AD873FB00A939D9 /* NotificationBannerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +304,7 @@
 			children = (
 				7E2CF7662ACC5566008F3BA0 /* Protocols */,
 				7E2CF7602ACC2960008F3BA0 /* NetworkClient.swift */,
+				7E15C0722AD8729A00A939D9 /* HandlingErrorService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 			name = BookIn;
 			packageProductDependencies = (
 				7E0980182AC2DDD2002CC40A /* Kingfisher */,
+				7E15C0752AD873FB00A939D9 /* NotificationBannerSwift */,
 			);
 			productName = BookIn;
 			productReference = 7E097FE02AC2C2D1002CC40A /* BookIn.app */;
@@ -557,6 +563,7 @@
 			mainGroup = 7E097FD72AC2C2D1002CC40A;
 			packageReferences = (
 				7E0980172AC2DDD2002CC40A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7E15C0742AD873FB00A939D9 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 7E097FE12AC2C2D1002CC40A /* Products */;
 			projectDirPath = "";
@@ -647,6 +654,7 @@
 				7E2CF76D2ACC5724008F3BA0 /* HotelViewModel.swift in Sources */,
 				7E2CF74A2ACAA114008F3BA0 /* CustomBackgroundView.swift in Sources */,
 				7EFA4B312AD300A00003AA19 /* ExpandableTableViewHeaderViewDelegate.swift in Sources */,
+				7E15C0732AD8729A00A939D9 /* HandlingErrorService.swift in Sources */,
 				7EFA4B342AD311EA0003AA19 /* TouristsTableViewProvider.swift in Sources */,
 				7EECCA352ACD393200883A69 /* AppCoordinator.swift in Sources */,
 				7E2CF7722ACC7352008F3BA0 /* UIViewController + Extension.swift in Sources */,
@@ -915,6 +923,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		7E15C0742AD873FB00A939D9 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -922,6 +938,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E0980172AC2DDD2002CC40A /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		7E15C0752AD873FB00A939D9 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E15C0742AD873FB00A939D9 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

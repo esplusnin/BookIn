@@ -11,8 +11,15 @@ final class RoomViewModel: RoomViewModelProtocol {
         $accomodation
     }
     
+    var errorStringPublisher: Published<String?>.Publisher {
+        $errorString
+    }
+    
     @Published
     private(set) var accomodation: Accomodation?
+    
+    @Published
+    private var errorString: String?
     
     // MARK: - Lifecycle:
     init(networkClient: NetworkClientProtocol) {
@@ -29,7 +36,8 @@ final class RoomViewModel: RoomViewModelProtocol {
             case .success(let accomodation):
                 self.accomodation = accomodation
             case .failure(let error):
-                print("error")
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.errorString = errorString
             }
         }
     }

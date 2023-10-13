@@ -11,8 +11,15 @@ final class HotelViewModel: HotelViewModelProtocol {
         $hotelModel
     }
     
+    var errorStringPublisher: Published<String?>.Publisher {
+        $errorString
+    }
+    
     @Published
     private var hotelModel: Hotel?
+    
+    @Published
+    private var errorString: String?
     
     // MARK: - Constants and Variables:
     private(set) var aboutTheHotel: AboutTheHotel?
@@ -45,7 +52,8 @@ final class HotelViewModel: HotelViewModelProtocol {
                 self.hotelModel = model
                 self.aboutTheHotel = model.aboutTheHotel
             case .failure(let error):
-                print("error")
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.errorString = errorString
             }
         }
     }

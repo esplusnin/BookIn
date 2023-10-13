@@ -25,6 +25,7 @@ final class ReservationViewController: UIViewController {
     private lazy var mainScreenScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.refreshControl = refreshControl
         
         return scrollView
     }()
@@ -117,6 +118,7 @@ final class ReservationViewController: UIViewController {
     private lazy var customerEmailView = CustomInputFormView(state: .email, with: L10n.ReservationScreen.Customer.email)
     private lazy var customTotalSumOfTripStackView = CustomTotalSumOfTripStackView()
     private lazy var toPayButton = CustomBaseButton(with: L10n.ReservationScreen.TotalSum.pay)
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle:
     init(coordinator: CoordinatorProtocol?, viewModel: ReservationViewModelProtocol?) {
@@ -157,6 +159,7 @@ final class ReservationViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.updateTripInfo(with: trip)
                     self.unblockUI()
+                    self.refreshControl.endRefreshing()
                 }
             }
             .store(in: &cancellable)
@@ -170,7 +173,21 @@ final class ReservationViewController: UIViewController {
                     
                     if value == true {
                         self.goToPaymentSuccesScreen()
+                    } else if value == false {
+                        self.mainScreenScrollView.setContentOffset(CGPoint(x: 0, y: self.aboutCustomerLabel.frame.minY), animated: true)
                     }
+                }
+            }
+            .store(in: &cancellable)
+        
+        viewModel?.errorStringPublisher
+            .sink { [weak self] errorString in
+                guard let self,
+                      let errorString else { return }
+                DispatchQueue.main.async {
+                    self.unblockUI()
+                    self.refreshControl.endRefreshing()
+                    self.showNotificationBanner(with: errorString)
                 }
             }
             .store(in: &cancellable)
@@ -189,6 +206,10 @@ final class ReservationViewController: UIViewController {
     }
     
     // MARK: - Objc Methods:
+    @objc private func updateHotelInfo() {
+        viewModel?.fetchTripData()
+    }
+    
     @objc private func checkTouristInfo() {
         let phoneNumber = customerPhoneNumberView.getTextFieldValue()
         let email = customerEmailView.getTextFieldValue()
@@ -383,6 +404,7 @@ private extension ReservationViewController {
 // MARK: - Add Targets:
 extension ReservationViewController {
     private func setupTargets() {
+        refreshControl.addTarget(self, action: #selector(updateHotelInfo), for: .valueChanged)
         toPayButton.addTarget(self, action: #selector(checkTouristInfo), for: .touchUpInside)
     }
 }

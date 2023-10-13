@@ -19,6 +19,7 @@ final class RoomViewController: UIViewController {
         tableView.register(RoomTableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.roomTableViewCell)
         tableView.dataSource = roomTableViewProvider
         tableView.delegate = roomTableViewProvider
+        tableView.refreshControl = refreshControl
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
         
@@ -26,6 +27,7 @@ final class RoomViewController: UIViewController {
     }()
     
     private var customNavigationBar: CustomNavigationBar
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle:
     init(coordinator: CoordinatorProtocol?, viewModel: RoomViewModelProtocol, hotelName: String) {
@@ -43,6 +45,7 @@ final class RoomViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupTargets()
         
         blockUI()
         bind()
@@ -58,15 +61,33 @@ final class RoomViewController: UIViewController {
                 self.updateRoomsInfo(with: accomodation)
             }
             .store(in: &cancellable)
+        
+        viewModel.errorStringPublisher
+            .sink { [weak self] errorString in
+                guard let self,
+                      let errorString else { return }
+                DispatchQueue.main.async {
+                    self.showNotificationBanner(with: errorString)
+                    self.unblockUI()
+                    self.refreshControl.endRefreshing()
+                }
+            }
+            .store(in: &cancellable)
     }
     
     private func updateRoomsInfo(with model: Accomodation) {
         DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
             self.roomTableViewProvider.setupAccomodation(model: model)
             self.roomTableViewProvider.setupCoordinator(from: self.coordinator)
             self.roomsTableView.reloadData()
             self.unblockUI()
         }
+    }
+    
+    // MARK: - Objc Methods:
+    @objc private func updateHotelInfo() {
+        viewModel.getAccomodationData()
     }
 }
 
@@ -87,5 +108,12 @@ private extension RoomViewController {
             roomsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             roomsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+}
+
+// MARK: - Setup Targets:
+extension RoomViewController {
+    private func setupTargets() {
+        refreshControl.addTarget(self, action: #selector(updateHotelInfo), for: .valueChanged)
     }
 }

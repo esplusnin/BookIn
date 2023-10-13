@@ -12,6 +12,7 @@ enum Resources {
         static let tableViewTickImage = UIImage(named: "tick-square") ?? UIImage()
         static let tableViewCancelImage = UIImage(named: "close-square") ?? UIImage()
         static let wrongURL = UIImage(named: "WrongURL") ?? UIImage()
+        static let notificationBannerImage = UIImage(systemName: "antenna.radiowaves.left.and.right.slash")
         
         static let wrappedHeaderViewImage = UIImage(systemName: "chevron.down")?.withTintColor(
             .universalBlue,

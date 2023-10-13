@@ -62,3 +62,13 @@
 "paymentSuccesScreen.orderText" = " может занять некоторое время (от 1 часа до суток).\nКак только мы получим ответ от туроперетора, вам на почту придет уведомление";
 "paymentSuccesScreen.completeButton" = "Супер!";
 
+// MARK: - Netword Errors:
+"networkError.http.404" = "По запросу ничего не найдено";
+"networkError.http.409" = "Ошибка обновления ресурса";
+"networkError.http.410" = "Запрошенный ресурс больше недоступен";
+"networkError.http.5хх" = "Ошибка на стороне сервера";
+"networkError.URLSessionError" = "Проверьте интернет - соединение";
+"networkError.parsingError" = "Не удалось конвертировать полученные данные";
+"networkError.anotherError" = "Не удалось получить данные";
+"networkError.requestError" = "Ошибка выполнения запроса";
+"networkError.tryLater" = "Пожалуйста, попробуйте позже";

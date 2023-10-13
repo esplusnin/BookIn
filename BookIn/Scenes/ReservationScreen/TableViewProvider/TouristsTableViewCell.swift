@@ -14,10 +14,10 @@ final class TouristsTableViewCell: UITableViewCell {
     
     private lazy var nameInputView = CustomInputFormView(state: .standart, with: L10n.ReservationScreen.Customer.name)
     private lazy var surnameInputView = CustomInputFormView(state: .standart, with: L10n.ReservationScreen.Customer.surname)
-    private lazy var birthdayInputView = CustomInputFormView(state: .standart, with: L10n.ReservationScreen.Customer.dateOfBirhtday)
+    private lazy var birthdayInputView = CustomInputFormView(state: .birthday, with: L10n.ReservationScreen.Customer.dateOfBirhtday)
     private lazy var citizenshipInputView = CustomInputFormView(state: .standart, with: L10n.ReservationScreen.Customer.citizenship)
-    private lazy var passportNumberInputView = CustomInputFormView(state: .standart, with: L10n.ReservationScreen.Customer.passportNumber)
-    private lazy var passportDurationInputView = CustomInputFormView(state: .standart, with: L10n.ReservationScreen.Customer.passportDuration)
+    private lazy var passportNumberInputView = CustomInputFormView(state: .passportNumber, with: L10n.ReservationScreen.Customer.passportNumber)
+    private lazy var passportDurationInputView = CustomInputFormView(state: .passportDuration, with: L10n.ReservationScreen.Customer.passportDuration)
     
     // MARK: - Lifecycle:
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -141,6 +141,11 @@ class HotelViewController: UIViewController {
         viewModel.fetchHotelData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainScreenScrollView.setContentOffset(CGPoint(x: 0, y: customNavigationBar.frame.minY), animated: true)
+    }
+    
     // MARK: - Private Methods:
     private func bind() {
         viewModel.hotelModelPublisher
@@ -148,6 +153,18 @@ class HotelViewController: UIViewController {
                 guard let self,
                       let model else { return }
                 self.setHotelInfo(with: model)
+            }
+            .store(in: &cancellable)
+        
+        viewModel.errorStringPublisher
+            .sink { [weak self] errorString in
+                guard let self,
+                      let errorString else { return }
+                DispatchQueue.main.async {
+                    self.showNotificationBanner(with: errorString)
+                    self.unblockUI()
+                    self.refreshControl.endRefreshing()
+                }
             }
             .store(in: &cancellable)
     }
