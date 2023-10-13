@@ -14,11 +14,11 @@ final class TouristsTableViewProvider: NSObject {
     private var viewController: ReservationViewController?
     
     // MARK: - Constants and Variables:
-    private(set) var tourists: [ExpandableTouristMenu] = []
-    private var cancellable = Set<AnyCancellable>()
-    
     private let headerViewHeight: CGFloat = 58
     private let cellHeight: CGFloat = 368
+    
+    private(set) var tourists: [ExpandableTouristMenu] = []
+    private var cancellable = Set<AnyCancellable>()
     
     // MARK: - Public Methods:
     func setupViewModel(from model: ReservationViewModelProtocol?) {

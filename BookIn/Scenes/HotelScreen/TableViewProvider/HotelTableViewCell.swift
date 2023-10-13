@@ -9,6 +9,8 @@ final class HotelTableViewCell: UITableViewCell {
         static let leftCellInset: CGFloat = 12
         static let imageSide: CGFloat = 24
         static let insetBetweenLables: CGFloat = 2
+        static let accessoryWidht: CGFloat = 12
+        static let accessoryHeight: CGFloat = 20
     }
     
     // MARK: - UI:
@@ -98,8 +100,8 @@ private extension HotelTableViewCell {
     
     func setupAccessoryImageView() {
         NSLayoutConstraint.activate([
-            accessoryImageView.heightAnchor.constraint(equalToConstant: 20),
-            accessoryImageView.widthAnchor.constraint(equalToConstant: 12),
+            accessoryImageView.heightAnchor.constraint(equalToConstant: LocalUIConstants.accessoryHeight),
+            accessoryImageView.widthAnchor.constraint(equalToConstant: LocalUIConstants.accessoryWidht),
             accessoryImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -LocalUIConstants.sideCellInset)
         ])
