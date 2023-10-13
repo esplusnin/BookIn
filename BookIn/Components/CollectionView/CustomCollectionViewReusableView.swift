@@ -31,6 +31,7 @@ final class CustomCollectionViewReusableView: UICollectionReusableView {
     }
 }
 
+// MARK: - Setup Views:
 private extension CustomCollectionViewReusableView {
     func setupViews() {
         setupView(titleLabel)

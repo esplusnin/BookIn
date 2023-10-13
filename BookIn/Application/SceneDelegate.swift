@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         let networkClient = NetworkClient()
         let viewControllerFactory = ViewControllerFactory(networkClient: networkClient)
+        
         coordinator = AppCoordinator(navigationController: navigationController, viewControllerFactory: viewControllerFactory)
         viewControllerFactory.coordinator = coordinator
        

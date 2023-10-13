@@ -2,6 +2,9 @@ import UIKit
 
 final class TouristsTableViewCell: UITableViewCell {
     
+    // MARK: - Constants and Variables:
+    private let cellHeight: CGFloat = 52
+    
     // MARK: - UI:
     private lazy var cellStackView: UIStackView = {
         let stackView = UIStackView()
@@ -79,7 +82,7 @@ private extension TouristsTableViewCell {
         
         [nameInputView, surnameInputView, birthdayInputView, citizenshipInputView, passportNumberInputView,
          passportDurationInputView].forEach { viewElement in
-            viewElement.heightAnchor.constraint(equalToConstant: 52).isActive = true
+            viewElement.heightAnchor.constraint(equalToConstant: cellHeight).isActive = true
         }
     }
 }

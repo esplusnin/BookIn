@@ -3,8 +3,12 @@ import UIKit
 final class CustomCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Constants and Variables:
-    private let cellInset: CGFloat = 2
-    private let titleTrailingInset: CGFloat = 28
+    private enum LocalUIConstants {
+        static let cellInset: CGFloat = 2
+        static let titleTrailingInset: CGFloat = 28
+        static let accessoryHeight: CGFloat = 20
+        static let accessoryWidht: CGFloat = 12
+    }
     
     // MARK: - UI:
     private lazy var titleLabel: UILabel = {
@@ -54,8 +58,8 @@ final class CustomCollectionViewCell: UICollectionViewCell {
         accessoryImageView.image?.withTintColor(.universalBlue, renderingMode: .alwaysOriginal)
         
         NSLayoutConstraint.activate([
-            accessoryImageView.heightAnchor.constraint(equalToConstant: 20),
-            accessoryImageView.widthAnchor.constraint(equalToConstant: 12),
+            accessoryImageView.heightAnchor.constraint(equalToConstant: LocalUIConstants.accessoryHeight),
+            accessoryImageView.widthAnchor.constraint(equalToConstant: LocalUIConstants.accessoryWidht),
             accessoryImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIConstants.largeInset)
         ])
@@ -78,7 +82,7 @@ private extension CustomCollectionViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIConstants.largeInset),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIConstants.smallInset),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                 constant: isLastCell ? -titleTrailingInset : -UIConstants.largeInset)
+                                                 constant: isLastCell ? -LocalUIConstants.titleTrailingInset : -UIConstants.largeInset)
         ])
     }
 }

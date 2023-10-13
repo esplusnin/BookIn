@@ -15,7 +15,7 @@ class HotelViewController: UIViewController {
     private enum LocalUIConstants {
         static let priceLabelsInset: CGFloat = 3
         static let collectionHeight: CGFloat = 250
-        static let tableHeight: CGFloat = 180
+        static let tableHeight: CGFloat = 210
         static let buttonBackgroundViewTopInset: CGFloat = 12
         static let buttonBackgroundViewHeight: CGFloat = 500
         static let buttonBackgroundViewOutInset: CGFloat = 88
@@ -134,7 +134,7 @@ class HotelViewController: UIViewController {
         setupConstraints()
         setupTargets()
         setupCollectionView()
-        setupViewModelInProviders()
+        injectViewModelInProviders()
         
         blockUI()
         bind()
@@ -190,7 +190,7 @@ class HotelViewController: UIViewController {
         }
     }
     
-    private func setupViewModelInProviders() {
+    private func injectViewModelInProviders() {
         hotelCollectionViewProvider.setupViewModel(from: viewModel)
         hotelTableViewProvider.setViewModel(from: viewModel)
     }

@@ -6,7 +6,7 @@ final class HotelTableViewProvider: NSObject {
     private var viewModel: HotelViewModelProtocol?
     
     // MARK: - Constants and Variables:
-    private let cellHeight: CGFloat = 60
+    private let cellHeight: CGFloat = 70
     private let viewWidth: CGFloat = 400
     
     // MARK: - Public Methods:
