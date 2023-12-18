@@ -39,7 +39,7 @@
 "reservationScreen.customerInfo" = "Информация о покупателе";
 "reservationScreen.customer.tourist" = "турист";
 "reservationScreen.customer.phoneNumber" = "Номер телефона";
-"reservationScreen.customer.privacy" = "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту";
+"reservationScreen.customer.privacy" = "Эти данные никому не передаются. После оплаты мы вышлем чек на указанный вами номер и почту";
 "reservationScreen.customer.email" = "Почта";
 "reservationScreen.customer.name" = "Имя";
 "reservationScreen.customer.surname" = "Фамилия";

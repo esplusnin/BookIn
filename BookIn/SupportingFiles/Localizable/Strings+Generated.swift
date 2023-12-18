@@ -127,8 +127,8 @@ internal enum L10n {
       internal static let passportNumber = L10n.tr("Localizable", "reservationScreen.customer.passportNumber", fallback: "Номер загранпаспорта")
       /// Номер телефона
       internal static let phoneNumber = L10n.tr("Localizable", "reservationScreen.customer.phoneNumber", fallback: "Номер телефона")
-      /// Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту
-      internal static let privacy = L10n.tr("Localizable", "reservationScreen.customer.privacy", fallback: "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту")
+      /// Эти данные никому не передаются. После оплаты мы вышлем чек на указанный вами номер и почту
+      internal static let privacy = L10n.tr("Localizable", "reservationScreen.customer.privacy", fallback: "Эти данные никому не передаются. После оплаты мы вышлем чек на указанный вами номер и почту")
       /// Фамилия
       internal static let surname = L10n.tr("Localizable", "reservationScreen.customer.surname", fallback: "Фамилия")
       /// турист
